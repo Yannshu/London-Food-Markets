@@ -32,6 +32,8 @@ dependencies {
     implementation "com.android.support:appcompat-v7:$android_support_version"
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
 
+    implementation 'com.jakewharton.timber:timber:4.6.0'
+
     implementation "com.google.dagger:dagger:$dagger_version"
     implementation "com.google.dagger:dagger-android-support:$dagger_version"
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
