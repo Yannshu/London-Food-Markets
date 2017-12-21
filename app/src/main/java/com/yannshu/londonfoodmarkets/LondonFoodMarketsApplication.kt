@@ -20,7 +20,6 @@ class LondonFoodMarketsApplication : Application(), HasActivitySubComponentBuild
 
     override fun onCreate() {
         super.onCreate()
-        Timber.d("LondonFoodMarketsApplication.onCreate")
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
         }
