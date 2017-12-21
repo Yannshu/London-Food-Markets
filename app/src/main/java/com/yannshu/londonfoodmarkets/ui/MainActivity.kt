@@ -1,7 +1,8 @@
-package com.yannshu.londonfoodmarkets
+package com.yannshu.londonfoodmarkets.ui
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
+import com.yannshu.londonfoodmarkets.R
 
 class MainActivity : AppCompatActivity() {
 
