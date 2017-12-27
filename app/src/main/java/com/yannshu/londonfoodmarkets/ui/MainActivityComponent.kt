@@ -1,5 +1,6 @@
 package com.yannshu.londonfoodmarkets.ui
 
+import com.yannshu.londonfoodmarkets.data.FoodMarketsDataSource
 import com.yannshu.londonfoodmarkets.di.activity.ActivityComponent
 import com.yannshu.londonfoodmarkets.di.activity.ActivityComponentBuilder
 import com.yannshu.londonfoodmarkets.di.activity.ActivityModule
@@ -20,8 +21,8 @@ interface MainActivityComponent : ActivityComponent<MainActivity> {
     class MainActivityModule(activity: MainActivity) : ActivityModule<MainActivity>(activity) {
 
         @Provides
-        fun provideMainActivityPresenter(): MainActivityPresenter {
-            return MainActivityPresenter()
+        fun provideMainActivityPresenter(foodMarketsDataSource: FoodMarketsDataSource): MainActivityPresenter {
+            return MainActivityPresenter(foodMarketsDataSource)
         }
     }
 }

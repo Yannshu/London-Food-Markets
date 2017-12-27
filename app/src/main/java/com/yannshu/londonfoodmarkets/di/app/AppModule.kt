@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 import android.content.res.Resources
+import com.google.firebase.firestore.FirebaseFirestore
 import dagger.Module
 import dagger.Provides
 
@@ -16,17 +17,14 @@ class AppModule(private val application: Application) {
     }
 
     @Provides
-    fun provideSharedPreferences(): SharedPreferences {
-        return application.getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE)
-    }
+    fun provideSharedPreferences(): SharedPreferences = application.getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE)
 
     @Provides
-    fun provideAppContext(): Context {
-        return application.applicationContext
-    }
+    fun provideAppContext(): Context = application.applicationContext
 
     @Provides
-    fun provideResources(): Resources {
-        return application.resources
-    }
+    fun provideResources(): Resources = application.resources
+
+    @Provides
+    fun provideFirestore(): FirebaseFirestore = FirebaseFirestore.getInstance()
 }

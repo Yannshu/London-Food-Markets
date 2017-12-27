@@ -1,10 +1,11 @@
 package com.yannshu.londonfoodmarkets.presenters
 
 import com.yannshu.londonfoodmarkets.contracts.MainActivityContract
-import timber.log.Timber
+import com.yannshu.londonfoodmarkets.data.FoodMarketsDataSource
 
-class MainActivityPresenter : BasePresenter<MainActivityContract.View>() {
-    fun present() {
-        Timber.d("MainActivityPresenter")
+class MainActivityPresenter(private val foodMarketDataSource: FoodMarketsDataSource) : BasePresenter<MainActivityContract.View>() {
+
+    fun loadData() {
+        foodMarketDataSource.getFoodMarkets()
     }
 }
