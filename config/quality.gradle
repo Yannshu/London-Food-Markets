@@ -1,0 +1,33 @@
+//
+// Code style static check using ktlint:
+// https://github.com/shyiko/ktlint
+//
+// Rules can be found here:
+// https://github.com/shyiko/ktlint#standard-rules
+//
+
+allprojects {
+    configurations {
+        ktlint
+    }
+
+    dependencies {
+        ktlint 'com.github.shyiko:ktlint:0.14.0'
+    }
+}
+
+// task to perform code style checks
+task ktlint(type: JavaExec) {
+    main = "com.github.shyiko.ktlint.Main"
+    classpath = configurations.ktlint
+    args "src/**/*.kt"
+}
+
+preBuild.dependsOn ktlint
+
+// task to perform auto format
+task ktlintFormat(type: JavaExec) {
+    main = "com.github.shyiko.ktlint.Main"
+    classpath = configurations.ktlint
+    args "-F", "src/**/*.kt"
+}
