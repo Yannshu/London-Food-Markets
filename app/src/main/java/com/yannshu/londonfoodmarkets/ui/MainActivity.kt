@@ -30,6 +30,7 @@ class MainActivity : BaseActivity(), MainActivityContract.View {
 
     override fun onDestroy() {
         super.onDestroy()
+        presenter.destroyData()
         presenter.detachView()
     }
 }
