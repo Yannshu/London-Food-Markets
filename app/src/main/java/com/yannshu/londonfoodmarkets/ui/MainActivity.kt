@@ -17,11 +17,7 @@ class MainActivity : BaseActivity(), MainActivityContract.View {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         presenter.attachView(this)
-    }
-
-    override fun onResume() {
-        super.onResume()
-        presenter.present()
+        presenter.loadData()
     }
 
     override fun injectMembers(hasActivitySubComponentBuilders: HasActivitySubComponentBuilders) {
@@ -34,6 +30,7 @@ class MainActivity : BaseActivity(), MainActivityContract.View {
 
     override fun onDestroy() {
         super.onDestroy()
+        presenter.destroyData()
         presenter.detachView()
     }
 }
