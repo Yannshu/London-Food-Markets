@@ -5,11 +5,13 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.NavUtils
 import android.view.MenuItem
+import com.yannshu.londonfoodmarkets.R
 import com.yannshu.londonfoodmarkets.contracts.FoodMarketActivityContract
 import com.yannshu.londonfoodmarkets.data.model.FoodMarket
 import com.yannshu.londonfoodmarkets.di.activity.HasActivitySubComponentBuilders
 import com.yannshu.londonfoodmarkets.presenters.FoodMarketActivityPresenter
 import com.yannshu.londonfoodmarkets.ui.base.BaseActivity
+import kotlinx.android.synthetic.main.activity_food_market.*
 import org.parceler.Parcels
 import javax.inject.Inject
 
@@ -32,6 +34,7 @@ class FoodMarketActivity : BaseActivity(), FoodMarketActivityContract.View {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_food_market)
         initActionBar()
         presenter.attachView(this)
         presenter.displayMarket()
@@ -51,6 +54,7 @@ class FoodMarketActivity : BaseActivity(), FoodMarketActivityContract.View {
     }
 
     private fun initActionBar() {
+        setSupportActionBar(toolbar)
         supportActionBar?.title = market.name
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
