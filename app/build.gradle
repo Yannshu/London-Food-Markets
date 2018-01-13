@@ -27,6 +27,7 @@ ext {
     android_support_version = '26.1.0'
     firebase_version = '11.8.0'
     jackson_version = '2.7.2'
+    google_play_services_version = '11.8.0'
 
 }
 
@@ -43,6 +44,7 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
 
     implementation "com.google.firebase:firebase-firestore:$firebase_version"
+    implementation "com.google.android.gms:play-services-maps:$google_play_services_version"
 
     implementation "com.fasterxml.jackson.core:jackson-core:$jackson_version"
     implementation "com.fasterxml.jackson.core:jackson-annotations:$jackson_version"
