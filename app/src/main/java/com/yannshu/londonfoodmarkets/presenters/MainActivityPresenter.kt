@@ -7,6 +7,12 @@ import timber.log.Timber
 
 class MainActivityPresenter(private val foodMarketDataSource: FoodMarketsDataSource) : BasePresenter<MainActivityContract.View>() {
 
+    companion object {
+        private val LONDON_LAT = 51.507354
+        private val LONDON_LNG = -0.127758
+        private val DEFAULT_ZOOM = 10.0f
+    }
+
     private val foodMarketListener = object : FoodMarketsDataSource.Listener {
         override fun onFailure() {
             Timber.e("Failed to load food markets")
@@ -27,5 +33,6 @@ class MainActivityPresenter(private val foodMarketDataSource: FoodMarketsDataSou
     }
 
     fun onMapLoaded() {
+        mvpView?.moveMapCenterTo(LONDON_LAT, LONDON_LNG, DEFAULT_ZOOM)
     }
 }
