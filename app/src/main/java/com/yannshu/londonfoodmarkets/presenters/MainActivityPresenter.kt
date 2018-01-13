@@ -25,4 +25,7 @@ class MainActivityPresenter(private val foodMarketDataSource: FoodMarketsDataSou
     fun destroyData() {
         foodMarketDataSource.listener = null
     }
+
+    fun onMapLoaded() {
+    }
 }
