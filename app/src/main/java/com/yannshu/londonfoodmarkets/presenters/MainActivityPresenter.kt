@@ -3,7 +3,6 @@ package com.yannshu.londonfoodmarkets.presenters
 import com.yannshu.londonfoodmarkets.contracts.MainActivityContract
 import com.yannshu.londonfoodmarkets.data.FoodMarketsDataSource
 import com.yannshu.londonfoodmarkets.data.model.FoodMarket
-import timber.log.Timber
 
 class MainActivityPresenter(private val foodMarketDataSource: FoodMarketsDataSource) : BasePresenter<MainActivityContract.View>() {
 
@@ -13,13 +12,19 @@ class MainActivityPresenter(private val foodMarketDataSource: FoodMarketsDataSou
         private val DEFAULT_ZOOM = 10.0f
     }
 
+    private var mapLoaded: Boolean = false
+
+    private var foodMarkets: List<FoodMarket>? = null
+
     private val foodMarketListener = object : FoodMarketsDataSource.Listener {
         override fun onFailure() {
-            Timber.e("Failed to load food markets")
         }
 
         override fun onComplete(foodMarkets: List<FoodMarket>) {
-            Timber.d("Food markets loaded: " + foodMarkets.size)
+            this@MainActivityPresenter.foodMarkets = foodMarkets
+            if (mapLoaded && !foodMarkets.isEmpty()) {
+                displayFoodMarkets(foodMarkets)
+            }
         }
     }
 
@@ -30,9 +35,21 @@ class MainActivityPresenter(private val foodMarketDataSource: FoodMarketsDataSou
 
     fun destroyData() {
         foodMarketDataSource.listener = null
+        mapLoaded = false
     }
 
     fun onMapLoaded() {
+        mapLoaded = true
         mvpView?.moveMapCenterTo(LONDON_LAT, LONDON_LNG, DEFAULT_ZOOM)
+        val foodMarkets = this.foodMarkets
+        if (foodMarkets != null && !foodMarkets.isEmpty()) {
+            displayFoodMarkets(foodMarkets)
+        }
+    }
+
+    private fun displayFoodMarkets(foodMarkets: List<FoodMarket>) {
+        foodMarkets.forEach({ market: FoodMarket ->
+            mvpView?.addMarket(market)
+        })
     }
 }

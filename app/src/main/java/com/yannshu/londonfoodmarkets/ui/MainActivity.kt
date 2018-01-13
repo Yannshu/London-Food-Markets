@@ -5,8 +5,10 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 import com.yannshu.londonfoodmarkets.R
 import com.yannshu.londonfoodmarkets.contracts.MainActivityContract
+import com.yannshu.londonfoodmarkets.data.model.FoodMarket
 import com.yannshu.londonfoodmarkets.di.activity.HasActivitySubComponentBuilders
 import com.yannshu.londonfoodmarkets.presenters.MainActivityPresenter
 import com.yannshu.londonfoodmarkets.ui.base.BaseActivity
@@ -59,5 +61,13 @@ class MainActivity : BaseActivity(), MainActivityContract.View {
 
     override fun moveMapCenterTo(lat: Double, lng: Double, zoom: Float) {
         map?.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(lat, lng), zoom))
+    }
+
+    override fun addMarket(market: FoodMarket) {
+        val markerOptions = MarkerOptions()
+                .title(market.name)
+                .position(LatLng(market.coordinates!!.latitude, market.coordinates!!.longitude))
+
+        map?.addMarker(markerOptions)
     }
 }
