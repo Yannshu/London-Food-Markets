@@ -5,6 +5,7 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.yannshu.londonfoodmarkets.R
 import com.yannshu.londonfoodmarkets.contracts.MainActivityContract
@@ -50,6 +51,10 @@ class MainActivity : BaseActivity(), MainActivityContract.View {
         mapFragment = supportFragmentManager.findFragmentById(R.id.map_fragment) as SupportMapFragment
         mapFragment?.getMapAsync { map: GoogleMap ->
             this.map = map
+            map.setOnMarkerClickListener { marker: Marker ->
+                onMarkerClick(marker)
+                true
+            }
             presenter.onMapLoaded()
         }
     }
@@ -67,7 +72,12 @@ class MainActivity : BaseActivity(), MainActivityContract.View {
         val markerOptions = MarkerOptions()
                 .title(market.name)
                 .position(LatLng(market.coordinates!!.latitude, market.coordinates!!.longitude))
+        val marker = map?.addMarker(markerOptions)
+        marker?.tag = market
+    }
 
-        map?.addMarker(markerOptions)
+    private fun onMarkerClick(marker: Marker) {
+        val intent = FoodMarketActivity.getStartingIntent(this, marker.tag as FoodMarket)
+        startActivity(intent)
     }
 }
