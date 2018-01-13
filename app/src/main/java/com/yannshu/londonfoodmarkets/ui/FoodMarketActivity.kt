@@ -3,6 +3,8 @@ package com.yannshu.londonfoodmarkets.ui
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.support.v4.app.NavUtils
+import android.view.MenuItem
 import com.yannshu.londonfoodmarkets.contracts.FoodMarketActivityContract
 import com.yannshu.londonfoodmarkets.data.model.FoodMarket
 import com.yannshu.londonfoodmarkets.di.activity.HasActivitySubComponentBuilders
@@ -30,6 +32,7 @@ class FoodMarketActivity : BaseActivity(), FoodMarketActivityContract.View {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        initActionBar()
         presenter.attachView(this)
         presenter.displayMarket()
     }
@@ -45,5 +48,20 @@ class FoodMarketActivity : BaseActivity(), FoodMarketActivityContract.View {
     override fun retrieveIntentBundle(extras: Bundle?) {
         super.retrieveIntentBundle(extras)
         market = Parcels.unwrap(extras?.getParcelable(KEY_MARKET))
+    }
+
+    private fun initActionBar() {
+        supportActionBar?.title = market.name
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                NavUtils.navigateUpFromSameTask(this)
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
