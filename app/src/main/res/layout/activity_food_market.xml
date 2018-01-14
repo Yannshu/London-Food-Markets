@@ -19,12 +19,11 @@
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <ImageView
-                android:id="@+id/image_view"
+                android:id="@+id/foodMarketImageView"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/food_market_image_view_height"
                 android:fitsSystemWindows="true"
                 android:scaleType="centerCrop"
-                android:src="@drawable/universe"
                 app:layout_collapseMode="parallax" />
 
             <android.support.v7.widget.Toolbar

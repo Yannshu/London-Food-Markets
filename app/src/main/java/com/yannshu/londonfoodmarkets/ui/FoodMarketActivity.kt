@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.v4.app.NavUtils
 import android.view.MenuItem
 import com.yannshu.londonfoodmarkets.R
+import com.yannshu.londonfoodmarkets.config.GlideApp
 import com.yannshu.londonfoodmarkets.contracts.FoodMarketActivityContract
 import com.yannshu.londonfoodmarkets.data.model.FoodMarket
 import com.yannshu.londonfoodmarkets.di.activity.HasActivitySubComponentBuilders
@@ -67,5 +68,12 @@ class FoodMarketActivity : BaseActivity(), FoodMarketActivityContract.View {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun displayPhoto(url: String) {
+        GlideApp.with(this)
+                .load(url)
+                .placeholder(R.drawable.placeholder_food_market)
+                .into(foodMarketImageView)
     }
 }

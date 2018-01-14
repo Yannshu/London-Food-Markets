@@ -1,5 +1,7 @@
 package com.yannshu.londonfoodmarkets.contracts
 
 interface FoodMarketActivityContract {
-    interface View : MvpView
+    interface View : MvpView {
+        fun displayPhoto(url: String)
+    }
 }

@@ -35,8 +35,11 @@ class FoodMarket() {
     @JsonProperty("website")
     var website: String? = null
 
+    @JsonProperty("photos")
+    var photos: List<String>? = null
+
     @ParcelConstructor
-    constructor(name: String?, address: Address?, categories: List<String>?, coordinates: GeoPoint?, description: String?, openingTimes: List<OpeningTime>?, website: String?) : this() {
+    constructor(name: String?, address: Address?, categories: List<String>?, coordinates: GeoPoint?, description: String?, openingTimes: List<OpeningTime>?, website: String?, photos: List<String>?) : this() {
         this.name = name
         this.address = address
         this.categories = categories
@@ -44,5 +47,6 @@ class FoodMarket() {
         this.description = description
         this.openingTimes = openingTimes
         this.website = website
+        this.photos = photos
     }
 }
