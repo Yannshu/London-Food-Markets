@@ -5,13 +5,15 @@ import com.yannshu.londonfoodmarkets.di.activity.ActivityComponent
 import com.yannshu.londonfoodmarkets.di.activity.ActivityComponentBuilder
 import com.yannshu.londonfoodmarkets.di.activity.ActivityModule
 import com.yannshu.londonfoodmarkets.di.activity.ActivityScope
+import com.yannshu.londonfoodmarkets.di.app.TimeModule.Companion.NAME_DAY_OF_WEEK_STRING
 import com.yannshu.londonfoodmarkets.presenters.FoodMarketActivityPresenter
 import dagger.Module
 import dagger.Provides
 import dagger.Subcomponent
+import javax.inject.Named
 
 @ActivityScope
-@Subcomponent(modules = arrayOf(FoodMarketActivityComponent.FoodMarketActivityModule::class))
+@Subcomponent(modules = [FoodMarketActivityComponent.FoodMarketActivityModule::class])
 interface FoodMarketActivityComponent : ActivityComponent<FoodMarketActivity> {
 
     @Subcomponent.Builder
@@ -21,8 +23,8 @@ interface FoodMarketActivityComponent : ActivityComponent<FoodMarketActivity> {
     class FoodMarketActivityModule(activity: FoodMarketActivity, private val market: FoodMarket) : ActivityModule<FoodMarketActivity>(activity) {
 
         @Provides
-        fun provideFoodMarketActivityPresenter(): FoodMarketActivityPresenter {
-            return FoodMarketActivityPresenter(market)
+        fun provideFoodMarketActivityPresenter(@Named(NAME_DAY_OF_WEEK_STRING) dayOfWeek: String): FoodMarketActivityPresenter {
+            return FoodMarketActivityPresenter(market, dayOfWeek)
         }
     }
 }

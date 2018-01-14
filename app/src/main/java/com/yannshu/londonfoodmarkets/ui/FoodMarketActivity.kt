@@ -74,6 +74,30 @@ class FoodMarketActivity : BaseActivity(), FoodMarketActivityContract.View {
         GlideApp.with(this)
                 .load(url)
                 .placeholder(R.drawable.placeholder_food_market)
-                .into(foodMarketImageView)
+                .into(photoImageView)
+    }
+
+    override fun displayAddress(name: String) {
+        addressTextView.text = name
+    }
+
+    override fun getFormattedAddress(street: String, city: String, postcode: String): String {
+        return getString(R.string.address_format, street, city, postcode)
+    }
+
+    override fun getUnknownAddress(): String {
+        return getString(R.string.address_unknown)
+    }
+
+    override fun displayOpeningHours(openingHours: String) {
+        openingHoursTextView.text = openingHours
+    }
+
+    override fun getFormattedOpeningHours(openingHour: String, closingHour: String): String {
+        return getString(R.string.opening_hours_format, openingHour, closingHour)
+    }
+
+    override fun getClosed(): String {
+        return getString(R.string.opening_hours_closed)
     }
 }
