@@ -87,6 +87,7 @@
                 android:id="@+id/websiteLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/food_market_content_spacing"
                 android:background="?attr/selectableItemBackground"
                 android:gravity="center_vertical">
 
@@ -97,7 +98,6 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
-                    android:layout_marginBottom="@dimen/food_market_content_spacing"
                     android:layout_marginEnd="@dimen/food_market_content_spacing"
                     android:layout_marginRight="@dimen/food_market_content_spacing"
                     android:layout_toLeftOf="@+id/websiteChevronRightImageView"

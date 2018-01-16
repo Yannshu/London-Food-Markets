@@ -2,6 +2,7 @@ package com.yannshu.londonfoodmarkets.ui
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.NavUtils
 import android.view.MenuItem
@@ -108,10 +109,17 @@ class FoodMarketActivity : BaseActivity(), FoodMarketActivityContract.View {
 
     override fun displayWebsite(url: String) {
         websiteLayout.visibility = View.VISIBLE
+        websiteLayout.setOnClickListener { openBrowser(url) }
         websiteTextView.text = url
     }
 
     override fun hideWebsite() {
         websiteLayout.visibility = View.GONE
+    }
+
+    private fun openBrowser(url: String) {
+        val intent = Intent(Intent.ACTION_VIEW)
+        intent.data = Uri.parse(url)
+        startActivity(intent)
     }
 }
