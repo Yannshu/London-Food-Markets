@@ -60,7 +60,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/food_market_description_spacing"
-                android:layout_marginTop="@dimen/food_market_content_spacing"
+                android:layout_marginTop="@dimen/food_market_description_spacing"
                 android:gravity="center_horizontal" />
 
             <TextView
@@ -68,6 +68,7 @@
                 style="@style/Content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/food_market_content_spacing"
                 android:layout_marginBottom="@dimen/food_market_content_spacing"
                 android:drawableLeft="@drawable/ic_address"
                 android:drawablePadding="@dimen/food_market_content_drawable_padding"
@@ -78,6 +79,7 @@
                 style="@style/Content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/food_market_content_spacing"
                 android:layout_marginBottom="@dimen/food_market_content_spacing"
                 android:drawableLeft="@drawable/ic_clock"
                 android:drawablePadding="@dimen/food_market_content_drawable_padding"
@@ -87,7 +89,8 @@
                 android:id="@+id/websiteLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/food_market_content_spacing"
+                android:paddingTop="@dimen/food_market_content_spacing"
+                android:paddingBottom="@dimen/food_market_content_spacing"
                 android:background="?attr/selectableItemBackground"
                 android:gravity="center_vertical">
 
