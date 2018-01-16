@@ -10,5 +10,7 @@ interface FoodMarketActivityContract {
         fun displayOpeningHours(openingHours: String)
         fun getFormattedOpeningHours(openingHour: String, closingHour: String): String
         fun getClosed(): String
+        fun displayWebsite(url: String)
+        fun hideWebsite()
     }
 }

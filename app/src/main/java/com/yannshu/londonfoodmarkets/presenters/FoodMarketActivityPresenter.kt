@@ -14,6 +14,7 @@ class FoodMarketActivityPresenter(private val market: FoodMarket, private val da
         displayPhoto()
         displayAddress()
         displayOpeningHours()
+        displayWebsite()
     }
 
     private fun displayDescription() {
@@ -63,6 +64,15 @@ class FoodMarketActivityPresenter(private val market: FoodMarket, private val da
             if (openingHours != null) {
                 mvpView?.displayOpeningHours(openingHours)
             }
+        }
+    }
+
+    private fun displayWebsite() {
+        val website = market.website
+        if (website != null) {
+            mvpView?.displayWebsite(website)
+        } else {
+            mvpView?.hideWebsite()
         }
     }
 }

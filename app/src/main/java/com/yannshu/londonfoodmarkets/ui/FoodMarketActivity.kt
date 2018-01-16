@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.NavUtils
 import android.view.MenuItem
+import android.view.View
 import com.yannshu.londonfoodmarkets.R
 import com.yannshu.londonfoodmarkets.config.GlideApp
 import com.yannshu.londonfoodmarkets.contracts.FoodMarketActivityContract
@@ -103,5 +104,14 @@ class FoodMarketActivity : BaseActivity(), FoodMarketActivityContract.View {
 
     override fun getClosed(): String {
         return getString(R.string.opening_hours_closed)
+    }
+
+    override fun displayWebsite(url: String) {
+        websiteLayout.visibility = View.VISIBLE
+        websiteTextView.text = url
+    }
+
+    override fun hideWebsite() {
+        websiteLayout.visibility = View.GONE
     }
 }
