@@ -19,17 +19,12 @@ class TimeModule {
     @Provides
     @Named(NAME_DAY_OF_WEEK_STRING)
     fun provideDayOfWeek(@Named(NAME_DAY_OF_WEEK_FORMAT) format: SimpleDateFormat): String {
-        return format.format(Date())
+        return format.format(Date()).toLowerCase()
     }
 
     @Provides
     @Named(NAME_DAY_OF_WEEK_FORMAT)
-    fun provideDayOfWeekDateFormat(locale: Locale): SimpleDateFormat {
-        return SimpleDateFormat(DAY_OF_WEEK_STRING, locale)
-    }
-
-    @Provides
-    fun provideLocale(): Locale {
-        return Locale.getDefault()
+    fun provideDayOfWeekDateFormat(): SimpleDateFormat {
+        return SimpleDateFormat(DAY_OF_WEEK_STRING, Locale.UK)
     }
 }
