@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="content_padding_horizontal">16dp</dimen>
+    <dimen name="food_market_image_view_height">300dp</dimen>
+    <dimen name="food_market_content_drawable_padding">10dp</dimen>
+    <dimen name="food_market_description_spacing">10dp</dimen>
+    <dimen name="food_market_content_spacing">5dp</dimen>
+
+</resources>

@@ -5,11 +5,11 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion 27
     defaultConfig {
         applicationId "com.yannshu.londonfoodmarkets"
         minSdkVersion 14
-        targetSdkVersion 26
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -24,17 +24,19 @@ android {
 
 ext {
     dagger_version = '2.14.1'
-    android_support_version = '26.1.0'
+    android_support_version = '27.0.2'
     firebase_version = '11.8.0'
     jackson_version = '2.7.2'
     google_play_services_version = '11.8.0'
-
+    parceler_version = '1.1.9'
+    glide_version = '4.5.0'
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     implementation "com.android.support:appcompat-v7:$android_support_version"
+    implementation "com.android.support:design:$android_support_version"
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
 
     implementation 'com.jakewharton.timber:timber:4.6.0'
@@ -43,12 +45,18 @@ dependencies {
     implementation "com.google.dagger:dagger-android-support:$dagger_version"
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
 
+    implementation "org.parceler:parceler-api:$parceler_version"
+    kapt "org.parceler:parceler:$parceler_version"
+
     implementation "com.google.firebase:firebase-firestore:$firebase_version"
     implementation "com.google.android.gms:play-services-maps:$google_play_services_version"
 
     implementation "com.fasterxml.jackson.core:jackson-core:$jackson_version"
     implementation "com.fasterxml.jackson.core:jackson-annotations:$jackson_version"
     implementation "com.fasterxml.jackson.core:jackson-databind:$jackson_version"
+
+    implementation "com.github.bumptech.glide:glide:$glide_version"
+    kapt "com.github.bumptech.glide:compiler:$glide_version"
 
     testImplementation 'junit:junit:4.12'
 

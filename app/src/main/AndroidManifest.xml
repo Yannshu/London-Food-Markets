@@ -18,6 +18,9 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".ui.FoodMarketActivity"
+            android:parentActivityName=".ui.MainActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
