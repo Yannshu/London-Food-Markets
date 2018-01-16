@@ -42,13 +42,26 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clipToPadding="false"
-        android:padding="10dp"
+        android:paddingEnd="@dimen/content_padding_horizontal"
+        android:paddingHorizontal="@dimen/content_padding_horizontal"
+        android:paddingLeft="@dimen/content_padding_horizontal"
+        android:paddingRight="@dimen/content_padding_horizontal"
+        android:paddingStart="@dimen/content_padding_horizontal"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/descriptionTextView"
+                style="@style/Content.Italic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/food_market_content_spacing"
+                android:layout_marginBottom="@dimen/food_market_description_spacing"
+                android:gravity="center_horizontal" />
 
             <TextView
                 android:id="@+id/addressTextView"

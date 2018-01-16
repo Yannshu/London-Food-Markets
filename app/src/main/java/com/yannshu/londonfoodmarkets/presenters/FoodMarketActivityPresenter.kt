@@ -10,9 +10,16 @@ class FoodMarketActivityPresenter(private val market: FoodMarket, private val da
     }
 
     fun displayMarket() {
+        displayDescription()
         displayPhoto()
         displayAddress()
         displayOpeningHours()
+    }
+
+    private fun displayDescription() {
+        market.description?.let {
+            mvpView?.displayDescription(it)
+        }
     }
 
     private fun displayPhoto() {

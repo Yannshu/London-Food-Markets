@@ -70,6 +70,10 @@ class FoodMarketActivity : BaseActivity(), FoodMarketActivityContract.View {
         return super.onOptionsItemSelected(item)
     }
 
+    override fun displayDescription(description: String) {
+        descriptionTextView.text = description
+    }
+
     override fun displayPhoto(url: String) {
         GlideApp.with(this)
                 .load(url)
