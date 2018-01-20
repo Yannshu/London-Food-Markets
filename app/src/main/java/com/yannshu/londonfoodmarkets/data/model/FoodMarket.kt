@@ -14,6 +14,10 @@ import org.parceler.ParcelConstructor
 )
 class FoodMarket() {
 
+    companion object {
+        val FIRST_PHOTO_INDEX = 0
+    }
+
     @JsonProperty("name")
     var name: String? = null
 

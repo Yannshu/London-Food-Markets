@@ -4,6 +4,8 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -23,12 +25,16 @@ import com.yannshu.londonfoodmarkets.data.model.FoodMarket
 import com.yannshu.londonfoodmarkets.di.activity.HasActivitySubComponentBuilders
 import com.yannshu.londonfoodmarkets.presenters.MainActivityPresenter
 import com.yannshu.londonfoodmarkets.ui.base.BaseActivity
+import kotlinx.android.synthetic.main.activity_main.foodMarketsRecyclerView
 import javax.inject.Inject
 
 class MainActivity : BaseActivity(), MainActivityContract.View {
 
     @Inject
     internal lateinit var presenter: MainActivityPresenter
+
+    @Inject
+    internal lateinit var foodMarketAdapter: FoodMarketsAdapter
 
     private var mapFragment: SupportMapFragment? = null
 
@@ -44,6 +50,7 @@ class MainActivity : BaseActivity(), MainActivityContract.View {
         presenter.attachView(this)
         presenter.loadData()
         requestLocationPermission()
+        initFoodMarketRecyclerView()
         initMap()
     }
 
@@ -62,12 +69,24 @@ class MainActivity : BaseActivity(), MainActivityContract.View {
         destroyMap()
     }
 
+    private fun initFoodMarketRecyclerView() {
+        foodMarketAdapter.listener = object : FoodMarketsAdapter.Listener {
+            override fun onClick(foodMarket: FoodMarket) {
+                onFoodMarketClick(foodMarket)
+            }
+        }
+
+        foodMarketsRecyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
+        foodMarketsRecyclerView.setHasFixedSize(true)
+        foodMarketsRecyclerView.adapter = foodMarketAdapter
+    }
+
     private fun initMap() {
-        mapFragment = supportFragmentManager.findFragmentById(R.id.map_fragment) as SupportMapFragment
+        mapFragment = supportFragmentManager.findFragmentById(R.id.mapFragment) as SupportMapFragment
         mapFragment?.getMapAsync { map: GoogleMap ->
             this.map = map
             map.setOnMarkerClickListener { marker: Marker ->
-                onMarkerClick(marker)
+                onFoodMarketClick(marker.tag as FoodMarket)
                 true
             }
             presenter.onMapLoaded()
@@ -141,8 +160,13 @@ class MainActivity : BaseActivity(), MainActivityContract.View {
         marker?.tag = market
     }
 
-    private fun onMarkerClick(marker: Marker) {
-        val intent = FoodMarketActivity.getStartingIntent(this, marker.tag as FoodMarket)
+    override fun displayFoodMarketList(foodMarkets: List<FoodMarket>) {
+        foodMarketAdapter.foodMarkets = foodMarkets
+        foodMarketAdapter.notifyDataSetChanged()
+    }
+
+    private fun onFoodMarketClick(foodMarket: FoodMarket) {
+        val intent = FoodMarketActivity.getStartingIntent(this, foodMarket)
         startActivity(intent)
     }
 }
