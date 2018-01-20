@@ -21,8 +21,10 @@ interface MainActivityComponent : ActivityComponent<MainActivity> {
     class MainActivityModule(activity: MainActivity) : ActivityModule<MainActivity>(activity) {
 
         @Provides
-        fun provideMainActivityPresenter(foodMarketsDataSource: FoodMarketsDataSource): MainActivityPresenter {
-            return MainActivityPresenter(foodMarketsDataSource)
-        }
+        fun provideMainActivityPresenter(foodMarketsDataSource: FoodMarketsDataSource): MainActivityPresenter =
+                MainActivityPresenter(foodMarketsDataSource)
+
+        @Provides
+        fun provideFoodMarketsAdapter(): FoodMarketsAdapter = FoodMarketsAdapter(activity)
     }
 }

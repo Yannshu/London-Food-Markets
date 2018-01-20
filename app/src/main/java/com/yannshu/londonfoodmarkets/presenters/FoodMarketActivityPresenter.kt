@@ -5,10 +5,6 @@ import com.yannshu.londonfoodmarkets.data.model.FoodMarket
 
 class FoodMarketActivityPresenter(private val market: FoodMarket, private val dayOfWeek: String) : BasePresenter<FoodMarketActivityContract.View>() {
 
-    companion object {
-        val FIRST_PHOTO_INDEX = 0
-    }
-
     fun displayMarket() {
         displayDescription()
         displayPhoto()
@@ -26,7 +22,7 @@ class FoodMarketActivityPresenter(private val market: FoodMarket, private val da
     private fun displayPhoto() {
         val photos = market.photos
         if (photos != null && !photos.isEmpty()) {
-            mvpView?.displayPhoto(photos[FIRST_PHOTO_INDEX])
+            mvpView?.displayPhoto(photos[FoodMarket.FIRST_PHOTO_INDEX])
         }
     }
 

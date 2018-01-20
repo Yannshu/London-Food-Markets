@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="@dimen/food_market_recycler_view_item_width"
+    android:layout_height="@dimen/food_market_recycler_view_item_height"
+    android:foreground="?attr/selectableItemBackground"
+    android:padding="@dimen/food_market_recycler_view_item_padding">
+
+    <ImageView
+        android:id="@+id/foodMarketPhotoImageView"
+        android:layout_width="@dimen/food_market_recycler_view_item_image_width"
+        android:layout_height="@dimen/food_market_recycler_view_item_image_height"
+        android:scaleType="centerCrop"
+        tools:background="@color/colorAccent" />
+
+    <TextView
+        android:id="@+id/foodMarketNameTextView"
+        style="@style/Content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/food_markets_recycler_view_item_name_background"
+        android:padding="@dimen/food_market_recycler_view_item_name_padding"
+        tools:text="Borough Market" />
+
+</RelativeLayout>

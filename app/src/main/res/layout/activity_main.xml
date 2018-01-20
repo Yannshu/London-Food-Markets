@@ -7,9 +7,16 @@
     tools:context="com.yannshu.londonfoodmarkets.ui.MainActivity">
 
     <fragment
-        android:id="@+id/map_fragment"
+        android:id="@+id/mapFragment"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/foodMarketsRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/food_market_recycler_view_height"
+        android:layout_alignParentBottom="true"
+        android:background="@color/food_markets_recycler_view_background"/>
 
 </RelativeLayout>

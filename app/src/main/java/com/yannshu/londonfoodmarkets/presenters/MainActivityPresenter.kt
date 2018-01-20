@@ -51,9 +51,9 @@ class MainActivityPresenter(private val foodMarketDataSource: FoodMarketsDataSou
         foodMarkets.forEach({ market: FoodMarket ->
             mvpView?.addMarket(market)
         })
+        mvpView?.displayFoodMarketList(foodMarkets)
     }
 
     fun onLocationLoaded(latitude: Double, longitude: Double) {
-
     }
 }
