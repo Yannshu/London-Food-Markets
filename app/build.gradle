@@ -51,6 +51,7 @@ dependencies {
 
     implementation "com.google.firebase:firebase-firestore:$firebase_version"
     implementation "com.google.android.gms:play-services-maps:$google_play_services_version"
+    implementation "com.google.android.gms:play-services-location:$google_play_services_version"
 
     implementation "com.fasterxml.jackson.core:jackson-core:$jackson_version"
     implementation "com.fasterxml.jackson.core:jackson-annotations:$jackson_version"

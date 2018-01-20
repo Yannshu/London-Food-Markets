@@ -1,8 +1,11 @@
 package com.yannshu.londonfoodmarkets.ui
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
@@ -20,7 +23,6 @@ import com.yannshu.londonfoodmarkets.data.model.FoodMarket
 import com.yannshu.londonfoodmarkets.di.activity.HasActivitySubComponentBuilders
 import com.yannshu.londonfoodmarkets.presenters.MainActivityPresenter
 import com.yannshu.londonfoodmarkets.ui.base.BaseActivity
-import timber.log.Timber
 import javax.inject.Inject
 
 class MainActivity : BaseActivity(), MainActivityContract.View {
@@ -31,6 +33,10 @@ class MainActivity : BaseActivity(), MainActivityContract.View {
     private var mapFragment: SupportMapFragment? = null
 
     private var map: GoogleMap? = null
+
+    private var locationClient: FusedLocationProviderClient? = null
+
+    private var locationPermissionGranted = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,6 +71,10 @@ class MainActivity : BaseActivity(), MainActivityContract.View {
                 true
             }
             presenter.onMapLoaded()
+
+            if (locationPermissionGranted) {
+                showUserLocationOnMap()
+            }
         }
     }
 
@@ -76,7 +86,8 @@ class MainActivity : BaseActivity(), MainActivityContract.View {
     private fun requestLocationPermission() {
         val permissionListener = object : BasePermissionListener() {
             override fun onPermissionGranted(response: PermissionGrantedResponse?) {
-                Timber.d("Permission granted")
+                locationPermissionGranted = true
+                initLocation()
             }
 
             override fun onPermissionRationaleShouldBeShown(permission: PermissionRequest?, token: PermissionToken?) {
@@ -98,6 +109,18 @@ class MainActivity : BaseActivity(), MainActivityContract.View {
                 .setNegativeButton(R.string.cancel, { _, _ -> token?.cancelPermissionRequest() })
                 .setPositiveButton(R.string.ok, { _, _ -> token?.continuePermissionRequest() })
                 .show()
+    }
+
+    private fun initLocation() {
+        showUserLocationOnMap()
+        locationClient = LocationServices.getFusedLocationProviderClient(this)
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun showUserLocationOnMap() {
+        map?.let {
+            it.isMyLocationEnabled = true
+        }
     }
 
     override fun moveMapCenterTo(lat: Double, lng: Double, zoom: Float) {
