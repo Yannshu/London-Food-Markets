@@ -76,6 +76,8 @@ class FoodMarketActivity : BaseActivity(), FoodMarketActivityContract.View {
         descriptionTextView.text = description
     }
 
+    override fun getUnknownDescription(): String = getString(R.string.unknown_description)
+
     override fun displayPhoto(url: String) {
         GlideApp.with(this)
                 .load(url)

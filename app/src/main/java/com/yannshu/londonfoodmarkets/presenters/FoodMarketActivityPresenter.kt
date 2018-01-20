@@ -14,9 +14,8 @@ class FoodMarketActivityPresenter(private val market: FoodMarket, private val da
     }
 
     private fun displayDescription() {
-        market.description?.let {
-            mvpView?.displayDescription(it)
-        }
+        val description = market.description ?: mvpView?.getUnknownDescription()
+        description?.let { mvpView?.displayDescription(it) }
     }
 
     private fun displayPhoto() {

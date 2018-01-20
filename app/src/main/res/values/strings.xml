@@ -9,4 +9,6 @@
     <string name="permission_location_rationale_message">Location permission is needed to display your position on the map.</string>
     <string name="cancel">Cancel</string>
     <string name="ok">OK</string>
+
+    <string name="unknown_description">Just another food market</string>
 </resources>
