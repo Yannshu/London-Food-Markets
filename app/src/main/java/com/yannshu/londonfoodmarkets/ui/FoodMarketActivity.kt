@@ -14,7 +14,13 @@ import com.yannshu.londonfoodmarkets.data.model.FoodMarket
 import com.yannshu.londonfoodmarkets.di.activity.HasActivitySubComponentBuilders
 import com.yannshu.londonfoodmarkets.presenters.FoodMarketActivityPresenter
 import com.yannshu.londonfoodmarkets.ui.base.BaseActivity
-import kotlinx.android.synthetic.main.activity_food_market.*
+import kotlinx.android.synthetic.main.activity_food_market.addressTextView
+import kotlinx.android.synthetic.main.activity_food_market.descriptionTextView
+import kotlinx.android.synthetic.main.activity_food_market.openingHoursTextView
+import kotlinx.android.synthetic.main.activity_food_market.photoImageView
+import kotlinx.android.synthetic.main.activity_food_market.toolbar
+import kotlinx.android.synthetic.main.activity_food_market.websiteLayout
+import kotlinx.android.synthetic.main.activity_food_market.websiteTextView
 import org.parceler.Parcels
 import javax.inject.Inject
 
@@ -76,7 +82,7 @@ class FoodMarketActivity : BaseActivity(), FoodMarketActivityContract.View {
         descriptionTextView.text = description
     }
 
-    override fun getUnknownDescription(): String = getString(R.string.unknown_description)
+    override fun getUnknownDescription(): String = getString(R.string.description_unknown)
 
     override fun displayPhoto(url: String) {
         GlideApp.with(this)
@@ -107,6 +113,10 @@ class FoodMarketActivity : BaseActivity(), FoodMarketActivityContract.View {
 
     override fun getClosed(): String {
         return getString(R.string.opening_hours_closed)
+    }
+
+    override fun getUnknownOpeningHours(): String {
+        return getString(R.string.opening_hours_unknown)
     }
 
     override fun displayWebsite(url: String) {

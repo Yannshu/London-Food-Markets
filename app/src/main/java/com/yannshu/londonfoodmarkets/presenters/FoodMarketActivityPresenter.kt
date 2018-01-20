@@ -26,39 +26,43 @@ class FoodMarketActivityPresenter(private val market: FoodMarket, private val da
     }
 
     private fun displayAddress() {
-        market.address?.let {
-            val street = it.street
-            val city = it.city
-            val postcode = it.postcode
+        var formattedAddress: String? = null
+        val address = market.address
+        if (address != null) {
+            val street = address.street
+            val city = address.city
+            val postcode = address.postcode
 
-            val address: String? = if (street != null && city != null && postcode != null) {
-                mvpView?.getFormattedAddress(street, city, postcode)
-            } else {
-                mvpView?.getUnknownAddress()
+            if (street != null && city != null && postcode != null) {
+                formattedAddress = mvpView?.getFormattedAddress(street, city, postcode)
             }
-            address?.let {
-                mvpView?.displayAddress(it)
-            }
+        }
+        if (formattedAddress == null) {
+            formattedAddress = mvpView?.getUnknownAddress()
+        }
+        formattedAddress?.let {
+            mvpView?.displayAddress(it)
         }
     }
 
     private fun displayOpeningHours() {
         val openingTimes = market.openingTimes
-        if (openingTimes != null) {
+        val formattedOpeningHours = if (openingTimes != null) {
             val todayOpeningTimes = openingTimes.find { it.day.equals(dayOfWeek) }
 
             val openingHour = todayOpeningTimes?.openingHour
             val closingHour = todayOpeningTimes?.closingHour
 
-            val openingHours: String?
-            openingHours = if (openingHour != null && closingHour != null) {
+            if (openingHour != null && closingHour != null) {
                 mvpView?.getFormattedOpeningHours(openingHour, closingHour)
             } else {
                 mvpView?.getClosed()
             }
-            if (openingHours != null) {
-                mvpView?.displayOpeningHours(openingHours)
-            }
+        } else {
+            mvpView?.getUnknownOpeningHours()
+        }
+        formattedOpeningHours?.let {
+            mvpView?.displayOpeningHours(it)
         }
     }
 
