@@ -4,9 +4,12 @@
     <string name="address_unknown">Unknown address</string>
     <string name="opening_hours_format">%1$s - %2$s</string>
     <string name="opening_hours_closed">Closed today</string>
+    <string name="opening_hours_unknown">Unknown opening hours</string>
+    <string name="description_unknown">Just another food market</string>
 
     <string name="permission_location_rationale_title">Location permission</string>
     <string name="permission_location_rationale_message">Location permission is needed to display your position on the map.</string>
     <string name="cancel">Cancel</string>
     <string name="ok">OK</string>
+
 </resources>
