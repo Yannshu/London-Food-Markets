@@ -3,8 +3,10 @@ package com.yannshu.londonfoodmarkets.presenters
 import com.yannshu.londonfoodmarkets.contracts.MainActivityContract
 import com.yannshu.londonfoodmarkets.data.FoodMarketsDataSource
 import com.yannshu.londonfoodmarkets.data.model.FoodMarket
+import com.yannshu.londonfoodmarkets.utils.MapsUtils
 
-class MainActivityPresenter(private val foodMarketDataSource: FoodMarketsDataSource) : BasePresenter<MainActivityContract.View>() {
+class MainActivityPresenter(private val foodMarketDataSource: FoodMarketsDataSource, private val mapsUtils: MapsUtils) :
+        BasePresenter<MainActivityContract.View>() {
 
     companion object {
         private val LONDON_LAT = 51.507354
@@ -16,14 +18,20 @@ class MainActivityPresenter(private val foodMarketDataSource: FoodMarketsDataSou
 
     private var foodMarkets: List<FoodMarket>? = null
 
+    private var userLat: Double = LONDON_LAT
+
+    private var userLng: Double = LONDON_LNG
+
     private val foodMarketListener = object : FoodMarketsDataSource.Listener {
         override fun onFailure() {
         }
 
         override fun onComplete(foodMarkets: List<FoodMarket>) {
-            this@MainActivityPresenter.foodMarkets = foodMarkets
-            if (mapLoaded && !foodMarkets.isEmpty()) {
-                displayFoodMarkets(foodMarkets)
+            this@MainActivityPresenter.foodMarkets = sortFoodMarketByDistanceTo(foodMarkets, userLat, userLng)
+            if (mapLoaded) {
+                this@MainActivityPresenter.foodMarkets?.let {
+                    displayFoodMarkets(it)
+                }
             }
         }
     }
@@ -41,9 +49,8 @@ class MainActivityPresenter(private val foodMarketDataSource: FoodMarketsDataSou
     fun onMapLoaded() {
         mapLoaded = true
         mvpView?.moveMapCenterTo(LONDON_LAT, LONDON_LNG, DEFAULT_ZOOM)
-        val foodMarkets = this.foodMarkets
-        if (foodMarkets != null && !foodMarkets.isEmpty()) {
-            displayFoodMarkets(foodMarkets)
+        foodMarkets?.let {
+            displayFoodMarkets(it)
         }
     }
 
@@ -55,5 +62,18 @@ class MainActivityPresenter(private val foodMarketDataSource: FoodMarketsDataSou
     }
 
     fun onLocationLoaded(latitude: Double, longitude: Double) {
+        userLat = latitude
+        userLng = longitude
+        foodMarkets?.let {
+            val sortedFoodMarkets = sortFoodMarketByDistanceTo(it, userLat, userLng)
+            mvpView?.displayFoodMarketList(sortedFoodMarkets)
+            foodMarkets = sortedFoodMarkets
+        }
+    }
+
+    private fun sortFoodMarketByDistanceTo(foodMarkets: List<FoodMarket>, latitude: Double, longitude: Double): List<FoodMarket> {
+        return ArrayList(foodMarkets.sortedWith(compareBy({
+            mapsUtils.computeDistance(it.coordinates!!.latitude, it.coordinates!!.longitude, latitude, longitude)
+        })))
     }
 }

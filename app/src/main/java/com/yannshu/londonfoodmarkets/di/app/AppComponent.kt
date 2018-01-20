@@ -10,7 +10,8 @@ import javax.inject.Singleton
     AppModule::class,
     ActivityBindingModule::class,
     DataSourcesModule::class,
-    TimeModule::class
+    TimeModule::class,
+    UtilsModule::class
 ])
 interface AppComponent {
     fun inject(application: LondonFoodMarketsApplication): LondonFoodMarketsApplication
