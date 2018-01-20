@@ -86,6 +86,7 @@ class MainActivity : BaseActivity(), MainActivityContract.View {
         mapFragment = supportFragmentManager.findFragmentById(R.id.mapFragment) as SupportMapFragment
         mapFragment?.getMapAsync { map: GoogleMap ->
             this.map = map
+            map.setPadding(0, 0, 0, resources.getDimensionPixelSize(R.dimen.food_market_recycler_view_height))
             map.setOnMarkerClickListener { marker: Marker ->
                 onFoodMarketClick(marker.tag as FoodMarket)
                 true
