@@ -17,6 +17,8 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/food_market_recycler_view_height"
         android:layout_alignParentBottom="true"
-        android:background="@color/food_markets_recycler_view_background"/>
+        android:animateLayoutChanges="true"
+        android:background="@color/food_markets_recycler_view_background"
+        android:visibility="gone" />
 
 </RelativeLayout>

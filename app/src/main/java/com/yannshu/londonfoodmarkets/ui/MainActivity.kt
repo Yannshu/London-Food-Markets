@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.view.View
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -163,6 +164,7 @@ class MainActivity : BaseActivity(), MainActivityContract.View {
     override fun displayFoodMarketList(foodMarkets: List<FoodMarket>) {
         foodMarketAdapter.foodMarkets = foodMarkets
         foodMarketAdapter.notifyDataSetChanged()
+        foodMarketsRecyclerView.visibility = View.VISIBLE
     }
 
     private fun onFoodMarketClick(foodMarket: FoodMarket) {
