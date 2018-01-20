@@ -111,9 +111,15 @@ class MainActivity : BaseActivity(), MainActivityContract.View {
                 .show()
     }
 
+    @SuppressLint("MissingPermission")
     private fun initLocation() {
         showUserLocationOnMap()
         locationClient = LocationServices.getFusedLocationProviderClient(this)
+        locationClient?.lastLocation?.addOnSuccessListener { location ->
+            location?.let {
+                presenter.onLocationLoaded(it.latitude, it.longitude)
+            }
+        }
     }
 
     @SuppressLint("MissingPermission")
