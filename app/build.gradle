@@ -30,6 +30,7 @@ ext {
     google_play_services_version = '11.8.0'
     parceler_version = '1.1.9'
     glide_version = '4.5.0'
+    dexter_version = '4.2.0'
 }
 
 dependencies {
@@ -50,6 +51,7 @@ dependencies {
 
     implementation "com.google.firebase:firebase-firestore:$firebase_version"
     implementation "com.google.android.gms:play-services-maps:$google_play_services_version"
+    implementation "com.google.android.gms:play-services-location:$google_play_services_version"
 
     implementation "com.fasterxml.jackson.core:jackson-core:$jackson_version"
     implementation "com.fasterxml.jackson.core:jackson-annotations:$jackson_version"
@@ -57,6 +59,8 @@ dependencies {
 
     implementation "com.github.bumptech.glide:glide:$glide_version"
     kapt "com.github.bumptech.glide:compiler:$glide_version"
+
+    implementation "com.karumi:dexter:$dexter_version"
 
     testImplementation 'junit:junit:4.12'
 

@@ -52,4 +52,8 @@ class MainActivityPresenter(private val foodMarketDataSource: FoodMarketsDataSou
             mvpView?.addMarket(market)
         })
     }
+
+    fun onLocationLoaded(latitude: Double, longitude: Double) {
+
+    }
 }
