@@ -1,18 +1,26 @@
 package com.yannshu.londonfoodmarkets.ui
 
+import android.Manifest
 import android.os.Bundle
+import android.support.v7.app.AlertDialog
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import com.karumi.dexter.Dexter
+import com.karumi.dexter.PermissionToken
+import com.karumi.dexter.listener.PermissionGrantedResponse
+import com.karumi.dexter.listener.PermissionRequest
+import com.karumi.dexter.listener.single.BasePermissionListener
 import com.yannshu.londonfoodmarkets.R
 import com.yannshu.londonfoodmarkets.contracts.MainActivityContract
 import com.yannshu.londonfoodmarkets.data.model.FoodMarket
 import com.yannshu.londonfoodmarkets.di.activity.HasActivitySubComponentBuilders
 import com.yannshu.londonfoodmarkets.presenters.MainActivityPresenter
 import com.yannshu.londonfoodmarkets.ui.base.BaseActivity
+import timber.log.Timber
 import javax.inject.Inject
 
 class MainActivity : BaseActivity(), MainActivityContract.View {
@@ -29,6 +37,7 @@ class MainActivity : BaseActivity(), MainActivityContract.View {
         setContentView(R.layout.activity_main)
         presenter.attachView(this)
         presenter.loadData()
+        requestLocationPermission()
         initMap()
     }
 
@@ -62,6 +71,33 @@ class MainActivity : BaseActivity(), MainActivityContract.View {
     private fun destroyMap() {
         mapFragment = null
         map = null
+    }
+
+    private fun requestLocationPermission() {
+        val permissionListener = object : BasePermissionListener() {
+            override fun onPermissionGranted(response: PermissionGrantedResponse?) {
+                Timber.d("Permission granted")
+            }
+
+            override fun onPermissionRationaleShouldBeShown(permission: PermissionRequest?, token: PermissionToken?) {
+                showLocationPermissionRationale(token)
+            }
+        }
+
+        Dexter.withActivity(this)
+                .withPermission(Manifest.permission.ACCESS_FINE_LOCATION)
+                .withListener(permissionListener)
+                .check()
+    }
+
+    private fun showLocationPermissionRationale(token: PermissionToken?) {
+        AlertDialog.Builder(this)
+                .setTitle(R.string.permission_location_rationale_title)
+                .setMessage(R.string.permission_location_rationale_message)
+                .setOnDismissListener { _ -> token?.cancelPermissionRequest() }
+                .setNegativeButton(R.string.cancel, { _, _ -> token?.cancelPermissionRequest() })
+                .setPositiveButton(R.string.ok, { _, _ -> token?.continuePermissionRequest() })
+                .show()
     }
 
     override fun moveMapCenterTo(lat: Double, lng: Double, zoom: Float) {
