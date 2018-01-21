@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/food_market_image_view_height"
         android:fitsSystemWindows="true"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <android.support.design.widget.CollapsingToolbarLayout
             android:layout_width="match_parent"
@@ -30,8 +30,7 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                app:layout_collapseMode="pin"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+                app:layout_collapseMode="pin" />
 
         </android.support.design.widget.CollapsingToolbarLayout>
 
@@ -43,7 +42,6 @@
         android:layout_height="wrap_content"
         android:clipToPadding="false"
         android:paddingEnd="@dimen/content_padding_horizontal"
-        android:paddingHorizontal="@dimen/content_padding_horizontal"
         android:paddingLeft="@dimen/content_padding_horizontal"
         android:paddingRight="@dimen/content_padding_horizontal"
         android:paddingStart="@dimen/content_padding_horizontal"
@@ -138,9 +136,9 @@
                     style="@style/Content.Small"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/ic_cow"
                     android:drawableLeft="@drawable/ic_cow"
                     android:drawablePadding="@dimen/food_market_content_drawable_padding"
+                    android:drawableStart="@drawable/ic_cow"
                     android:text="@string/farmers_stalls" />
 
                 <TextView
@@ -148,9 +146,9 @@
                     style="@style/Content.Small"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/ic_hot_dog"
                     android:drawableLeft="@drawable/ic_hot_dog"
                     android:drawablePadding="@dimen/food_market_content_drawable_padding"
+                    android:drawableStart="@drawable/ic_hot_dog"
                     android:text="@string/street_food_stands" />
 
             </LinearLayout>

@@ -27,6 +27,7 @@ import com.yannshu.londonfoodmarkets.di.activity.HasActivitySubComponentBuilders
 import com.yannshu.londonfoodmarkets.presenters.MainActivityPresenter
 import com.yannshu.londonfoodmarkets.ui.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_main.foodMarketsRecyclerView
+import kotlinx.android.synthetic.main.activity_main.toolbar
 import javax.inject.Inject
 
 class MainActivity : BaseActivity(), MainActivityContract.View {
@@ -48,6 +49,7 @@ class MainActivity : BaseActivity(), MainActivityContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        initToolbar()
         presenter.attachView(this)
         presenter.loadData()
         requestLocationPermission()
@@ -68,6 +70,10 @@ class MainActivity : BaseActivity(), MainActivityContract.View {
         presenter.destroyData()
         presenter.detachView()
         destroyMap()
+    }
+
+    private fun initToolbar() {
+        setSupportActionBar(toolbar)
     }
 
     private fun initFoodMarketRecyclerView() {
