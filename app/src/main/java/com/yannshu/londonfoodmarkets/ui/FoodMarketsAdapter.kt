@@ -21,20 +21,20 @@ class FoodMarketsAdapter(private val context: Context) : RecyclerView.Adapter<Fo
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): FoodMarketViewHolder {
         val view = layoutInflater.inflate(R.layout.item_food_market, parent, false)
-        return FoodMarketViewHolder(context, listener, view)
+        return FoodMarketViewHolder(context, view)
     }
 
     override fun onBindViewHolder(holder: FoodMarketViewHolder?, position: Int) {
-        holder?.bind(foodMarkets!![position])
+        holder?.bind(foodMarkets!![position], listener)
     }
 
     override fun getItemCount(): Int {
         return foodMarkets?.size ?: 0
     }
 
-    class FoodMarketViewHolder(private val context: Context, private val listener: Listener?, view: View) : RecyclerView.ViewHolder(view) {
+    class FoodMarketViewHolder(private val context: Context, view: View) : RecyclerView.ViewHolder(view) {
 
-        fun bind(foodMarket: FoodMarket) {
+        fun bind(foodMarket: FoodMarket, listener: Listener?) {
             itemView.foodMarketNameTextView.text = foodMarket.name
             val photos = foodMarket.photos
             if (photos != null && !photos.isEmpty()) {
@@ -46,7 +46,9 @@ class FoodMarketsAdapter(private val context: Context) : RecyclerView.Adapter<Fo
                 itemView.foodMarketPhotoImageView.setImageResource(R.drawable.placeholder_food_market)
             }
 
-            itemView.setOnClickListener { listener?.onClick(foodMarket) }
+            if (listener != null) {
+                itemView.setOnClickListener { listener.onClick(foodMarket) }
+            }
         }
     }
 
