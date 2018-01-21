@@ -6,6 +6,7 @@ import com.yannshu.londonfoodmarkets.di.activity.ActivityComponentBuilder
 import com.yannshu.londonfoodmarkets.di.activity.ActivityModule
 import com.yannshu.londonfoodmarkets.di.activity.ActivityScope
 import com.yannshu.londonfoodmarkets.presenters.MainActivityPresenter
+import com.yannshu.londonfoodmarkets.ui.adapters.FoodMarketsAdapter
 import com.yannshu.londonfoodmarkets.utils.MapsUtils
 import dagger.Module
 import dagger.Provides
