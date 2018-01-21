@@ -14,5 +14,11 @@ interface FoodMarketActivityContract {
         fun getUnknownOpeningHours(): String
         fun displayWebsite(url: String)
         fun hideWebsite()
+        fun hideDetails()
+        fun showDetails()
+        fun showFarmersStalls()
+        fun hideFarmersStalls()
+        fun showStreetFoodStands()
+        fun hideStreetFoodStands()
     }
 }

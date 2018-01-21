@@ -120,6 +120,7 @@
             </RelativeLayout>
 
             <LinearLayout
+                android:id="@+id/detailsLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/food_market_content_spacing"
@@ -133,7 +134,7 @@
                     android:text="@string/on_the_market" />
 
                 <TextView
-                    android:id="@+id/farmers_stalls_text_view"
+                    android:id="@+id/farmersStallsTextView"
                     style="@style/Content.Small"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -143,7 +144,7 @@
                     android:text="@string/farmers_stalls" />
 
                 <TextView
-                    android:id="@+id/street_food_text_view"
+                    android:id="@+id/streetFoodTextView"
                     style="@style/Content.Small"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
