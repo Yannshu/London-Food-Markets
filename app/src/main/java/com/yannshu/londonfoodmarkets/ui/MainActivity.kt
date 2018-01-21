@@ -197,5 +197,7 @@ class MainActivity : BaseActivity(), MainActivityContract.View {
     }
 
     private fun openAboutActivity() {
+        val intent = AboutActivity.getStartingIntent(this)
+        startActivity(intent)
     }
 }
