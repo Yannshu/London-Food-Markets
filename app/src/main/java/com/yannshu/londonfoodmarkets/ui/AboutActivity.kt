@@ -4,13 +4,21 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.NavUtils
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.MenuItem
 import com.yannshu.londonfoodmarkets.R
 import com.yannshu.londonfoodmarkets.di.activity.HasActivitySubComponentBuilders
+import com.yannshu.londonfoodmarkets.ui.adapters.IconsAdapter
 import com.yannshu.londonfoodmarkets.ui.base.BaseActivity
+import kotlinx.android.synthetic.main.activity_about.iconsRecyclerView
 import kotlinx.android.synthetic.main.activity_about.toolbar
+import javax.inject.Inject
 
 class AboutActivity : BaseActivity() {
+
+    @Inject
+    lateinit var iconsAdapter: IconsAdapter
 
     companion object {
         fun getStartingIntent(context: Context): Intent {
@@ -22,6 +30,7 @@ class AboutActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_about)
         initToolbar()
+        initIconsRecyclerView()
     }
 
     override fun injectMembers(hasActivitySubComponentBuilders: HasActivitySubComponentBuilders) {
@@ -45,5 +54,10 @@ class AboutActivity : BaseActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun initIconsRecyclerView() {
+        iconsRecyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
+        iconsRecyclerView.adapter = iconsAdapter
     }
 }

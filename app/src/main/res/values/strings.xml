@@ -16,5 +16,12 @@
     <string name="street_food_stands">Street food stands</string>
 
     <string name="about">About</string>
+    <string name="icons_credits">Icons credits:</string>
+
+    <string name="credit_icon_cow_description">Cow by icon 54 from the Noun Project</string>
+    <string name="credit_icon_cow_url">https://thenounproject.com/icon/357493/</string>
+
+    <string name="credit_icon_hot_dog_description">Hot Dog by icon 54 from the Noun Project</string>
+    <string name="credit_icon_hot_dog_url">https://thenounproject.com/icon/222423/</string>
 
 </resources>
