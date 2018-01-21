@@ -4,12 +4,13 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.NavUtils
-import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import com.yannshu.londonfoodmarkets.R
+import com.yannshu.londonfoodmarkets.di.activity.HasActivitySubComponentBuilders
+import com.yannshu.londonfoodmarkets.ui.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_about.toolbar
 
-class AboutActivity : AppCompatActivity() {
+class AboutActivity : BaseActivity() {
 
     companion object {
         fun getStartingIntent(context: Context): Intent {
@@ -21,6 +22,14 @@ class AboutActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_about)
         initToolbar()
+    }
+
+    override fun injectMembers(hasActivitySubComponentBuilders: HasActivitySubComponentBuilders) {
+        (hasActivitySubComponentBuilders
+                .getActivityComponentBuilder(AboutActivity::class.java) as AboutActivityComponent.Builder)
+                .activityModule(AboutActivityComponent.AboutActivityModule(this))
+                .build()
+                .injectMembers(this)
     }
 
     private fun initToolbar() {
