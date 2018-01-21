@@ -11,6 +11,7 @@ class FoodMarketActivityPresenter(private val market: FoodMarket, private val da
         displayAddress()
         displayOpeningHours()
         displayWebsite()
+        displayDetails()
     }
 
     private fun displayDescription() {
@@ -72,6 +73,22 @@ class FoodMarketActivityPresenter(private val market: FoodMarket, private val da
             mvpView?.displayWebsite(website)
         } else {
             mvpView?.hideWebsite()
+        }
+    }
+
+    private fun displayDetails() {
+        val categories = market.categories
+        if (categories != null && !categories.isEmpty()) {
+            mvpView?.hideFarmersStalls()
+            mvpView?.hideStreetFoodStands()
+            categories.forEach {
+                when (it) {
+                    FoodMarket.CATEGORY_FARMERS_MARKET -> mvpView?.showFarmersStalls()
+                    FoodMarket.CATEGORY_STREET_FOOD -> mvpView?.showStreetFoodStands()
+                }
+            }
+        } else {
+            mvpView?.hideDetails()
         }
     }
 }

@@ -8,10 +8,8 @@
 
     <dimen name="food_market_recycler_view_height">200dp</dimen>
 
-    <dimen name="food_market_recycler_view_item_width">260dp</dimen>
-    <dimen name="food_market_recycler_view_item_height">200dp</dimen>
-    <dimen name="food_market_recycler_view_item_image_width">240dp</dimen>
-    <dimen name="food_market_recycler_view_item_image_height">180dp</dimen>
+    <dimen name="food_market_recycler_view_item_width">240dp</dimen>
+    <dimen name="food_market_recycler_view_item_height">180dp</dimen>
     <dimen name="food_market_recycler_view_item_name_padding">5dp</dimen>
     <dimen name="food_market_recycler_view_item_padding">10dp</dimen>
 

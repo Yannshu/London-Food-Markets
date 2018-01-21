@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.view.View
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -26,6 +27,7 @@ import com.yannshu.londonfoodmarkets.di.activity.HasActivitySubComponentBuilders
 import com.yannshu.londonfoodmarkets.presenters.MainActivityPresenter
 import com.yannshu.londonfoodmarkets.ui.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_main.foodMarketsRecyclerView
+import kotlinx.android.synthetic.main.activity_main.toolbar
 import javax.inject.Inject
 
 class MainActivity : BaseActivity(), MainActivityContract.View {
@@ -47,6 +49,7 @@ class MainActivity : BaseActivity(), MainActivityContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        initToolbar()
         presenter.attachView(this)
         presenter.loadData()
         requestLocationPermission()
@@ -69,6 +72,10 @@ class MainActivity : BaseActivity(), MainActivityContract.View {
         destroyMap()
     }
 
+    private fun initToolbar() {
+        setSupportActionBar(toolbar)
+    }
+
     private fun initFoodMarketRecyclerView() {
         foodMarketAdapter.listener = object : FoodMarketsAdapter.Listener {
             override fun onClick(foodMarket: FoodMarket) {
@@ -85,6 +92,7 @@ class MainActivity : BaseActivity(), MainActivityContract.View {
         mapFragment = supportFragmentManager.findFragmentById(R.id.mapFragment) as SupportMapFragment
         mapFragment?.getMapAsync { map: GoogleMap ->
             this.map = map
+            map.setPadding(0, 0, 0, resources.getDimensionPixelSize(R.dimen.food_market_recycler_view_height))
             map.setOnMarkerClickListener { marker: Marker ->
                 onFoodMarketClick(marker.tag as FoodMarket)
                 true
@@ -163,6 +171,7 @@ class MainActivity : BaseActivity(), MainActivityContract.View {
     override fun displayFoodMarketList(foodMarkets: List<FoodMarket>) {
         foodMarketAdapter.foodMarkets = foodMarkets
         foodMarketAdapter.notifyDataSetChanged()
+        foodMarketsRecyclerView.visibility = View.VISIBLE
     }
 
     private fun onFoodMarketClick(foodMarket: FoodMarket) {

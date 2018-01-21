@@ -16,8 +16,11 @@ import com.yannshu.londonfoodmarkets.presenters.FoodMarketActivityPresenter
 import com.yannshu.londonfoodmarkets.ui.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_food_market.addressTextView
 import kotlinx.android.synthetic.main.activity_food_market.descriptionTextView
+import kotlinx.android.synthetic.main.activity_food_market.detailsLayout
+import kotlinx.android.synthetic.main.activity_food_market.farmersStallsTextView
 import kotlinx.android.synthetic.main.activity_food_market.openingHoursTextView
 import kotlinx.android.synthetic.main.activity_food_market.photoImageView
+import kotlinx.android.synthetic.main.activity_food_market.streetFoodTextView
 import kotlinx.android.synthetic.main.activity_food_market.toolbar
 import kotlinx.android.synthetic.main.activity_food_market.websiteLayout
 import kotlinx.android.synthetic.main.activity_food_market.websiteTextView
@@ -133,5 +136,29 @@ class FoodMarketActivity : BaseActivity(), FoodMarketActivityContract.View {
         val intent = Intent(Intent.ACTION_VIEW)
         intent.data = Uri.parse(url)
         startActivity(intent)
+    }
+
+    override fun showDetails() {
+        detailsLayout.visibility = View.VISIBLE
+    }
+
+    override fun hideDetails() {
+        detailsLayout.visibility = View.GONE
+    }
+
+    override fun showFarmersStalls() {
+        farmersStallsTextView.visibility = View.VISIBLE
+    }
+
+    override fun hideFarmersStalls() {
+        farmersStallsTextView.visibility = View.GONE
+    }
+
+    override fun showStreetFoodStands() {
+        streetFoodTextView.visibility = View.VISIBLE
+    }
+
+    override fun hideStreetFoodStands() {
+        streetFoodTextView.visibility = View.GONE
     }
 }
