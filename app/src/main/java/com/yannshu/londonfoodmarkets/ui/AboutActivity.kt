@@ -13,6 +13,7 @@ import com.yannshu.londonfoodmarkets.data.model.Icon
 import com.yannshu.londonfoodmarkets.di.activity.HasActivitySubComponentBuilders
 import com.yannshu.londonfoodmarkets.ui.adapters.IconsAdapter
 import com.yannshu.londonfoodmarkets.ui.base.BaseActivity
+import kotlinx.android.synthetic.main.activity_about.authorLayout
 import kotlinx.android.synthetic.main.activity_about.iconsRecyclerView
 import kotlinx.android.synthetic.main.activity_about.toolbar
 import javax.inject.Inject
@@ -32,6 +33,7 @@ class AboutActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_about)
         initToolbar()
+        initAuthorLayout()
         initIconsRecyclerView()
     }
 
@@ -56,6 +58,10 @@ class AboutActivity : BaseActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun initAuthorLayout() {
+        authorLayout.setOnClickListener { openBrowser(getString(R.string.author_website)) }
     }
 
     private fun initIconsRecyclerView() {

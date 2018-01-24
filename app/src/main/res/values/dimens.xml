@@ -17,4 +17,7 @@
     <dimen name="icon_recycler_view_item_image_margin_end">10dp</dimen>
     <dimen name="icon_recycler_view_item_vertical_padding">5dp</dimen>
 
+    <dimen name="separator_line_thickness">1dp</dimen>
+    <dimen name="separator_line_vertical_spacing">10dp</dimen>
+
 </resources>

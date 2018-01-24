@@ -16,6 +16,9 @@
     <string name="street_food_stands">Street food stands</string>
 
     <string name="about">About</string>
+    <string name="author">Created by Yann Viens</string>
+    <string name="author_website">http://yannshu.com</string>
+    <string name="data_origin">Markets information come from the markets\' websites &amp; from Google searches. It may change according to the time of the year and bank holidays.</string>
     <string name="icons_credits">Icons credits:</string>
 
     <string name="credit_icon_cow_description">Cow by icon 54 from the Noun Project</string>
