@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -25,6 +27,7 @@ import com.yannshu.londonfoodmarkets.contracts.MainActivityContract
 import com.yannshu.londonfoodmarkets.data.model.FoodMarket
 import com.yannshu.londonfoodmarkets.di.activity.HasActivitySubComponentBuilders
 import com.yannshu.londonfoodmarkets.presenters.MainActivityPresenter
+import com.yannshu.londonfoodmarkets.ui.adapters.FoodMarketsAdapter
 import com.yannshu.londonfoodmarkets.ui.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_main.foodMarketsRecyclerView
 import kotlinx.android.synthetic.main.activity_main.toolbar
@@ -70,6 +73,21 @@ class MainActivity : BaseActivity(), MainActivityContract.View {
         presenter.destroyData()
         presenter.detachView()
         destroyMap()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_activity_main, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            R.id.about -> {
+                openAboutActivity()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun initToolbar() {
@@ -176,6 +194,11 @@ class MainActivity : BaseActivity(), MainActivityContract.View {
 
     private fun onFoodMarketClick(foodMarket: FoodMarket) {
         val intent = FoodMarketActivity.getStartingIntent(this, foodMarket)
+        startActivity(intent)
+    }
+
+    private fun openAboutActivity() {
+        val intent = AboutActivity.getStartingIntent(this)
         startActivity(intent)
     }
 }
