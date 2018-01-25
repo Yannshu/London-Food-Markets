@@ -19,12 +19,24 @@
     <string name="author">Created by Yann Viens</string>
     <string name="author_website">http://yannshu.com</string>
     <string name="data_origin">Markets information come from the markets\' websites &amp; from Google searches. It may change according to the time of the year and bank holidays.</string>
-    <string name="icons_credits">Icons credits:</string>
+    <string name="icons_credits">Credits: Icons from the Noun Project:</string>
 
-    <string name="credit_icon_cow_description">Cow by icon 54 from the Noun Project</string>
+    <string name="credit_icon_cow_description">Cow by icon 54</string>
     <string name="credit_icon_cow_url">https://thenounproject.com/icon/357493/</string>
 
-    <string name="credit_icon_hot_dog_description">Hot Dog by icon 54 from the Noun Project</string>
+    <string name="credit_icon_hot_dog_description">Hot Dog by icon 54</string>
     <string name="credit_icon_hot_dog_url">https://thenounproject.com/icon/222423/</string>
+
+    <string name="credit_icon_fishes_description">seafood by Made</string>
+    <string name="credit_icon_fishes_url">https://thenounproject.com/icon/1530738/</string>
+
+    <string name="credit_icon_sausages_description">Meat Market by Made</string>
+    <string name="credit_icon_sausages_url">https://thenounproject.com/icon/1497302/</string>
+
+    <string name="credit_icon_stall_description">Farmers Market by Made by Made</string>
+    <string name="credit_icon_stall_url">https://thenounproject.com/icon/725160/</string>
+
+    <string name="credit_icon_vegetables_description">vegetables by Chanut is Industries</string>
+    <string name="credit_icon_vegetables_url">https://thenounproject.com/icon/1519764/</string>
 
 </resources>
