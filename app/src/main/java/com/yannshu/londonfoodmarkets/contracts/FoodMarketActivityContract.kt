@@ -5,6 +5,7 @@ interface FoodMarketActivityContract {
         fun displayDescription(description: String)
         fun getUnknownDescription(): String
         fun displayPhoto(url: String)
+        fun displayPlaceholder()
         fun displayAddress(address: String)
         fun getFormattedAddress(street: String, city: String, postcode: String): String
         fun getUnknownAddress(): String

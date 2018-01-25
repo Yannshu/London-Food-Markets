@@ -8,10 +8,12 @@ import android.view.ViewGroup
 import com.yannshu.londonfoodmarkets.R
 import com.yannshu.londonfoodmarkets.config.GlideApp
 import com.yannshu.londonfoodmarkets.data.model.FoodMarket
+import com.yannshu.londonfoodmarkets.utils.FoodMarketPlaceholderProvider
 import kotlinx.android.synthetic.main.item_food_market.view.foodMarketNameTextView
 import kotlinx.android.synthetic.main.item_food_market.view.foodMarketPhotoImageView
 
-class FoodMarketsAdapter(private val context: Context) : RecyclerView.Adapter<FoodMarketsAdapter.FoodMarketViewHolder>() {
+class FoodMarketsAdapter(private val context: Context, private val foodMarketPlaceholderProvider: FoodMarketPlaceholderProvider) :
+        RecyclerView.Adapter<FoodMarketsAdapter.FoodMarketViewHolder>() {
 
     private val layoutInflater = LayoutInflater.from(context)
 
@@ -21,7 +23,7 @@ class FoodMarketsAdapter(private val context: Context) : RecyclerView.Adapter<Fo
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): FoodMarketViewHolder {
         val view = layoutInflater.inflate(R.layout.item_food_market, parent, false)
-        return FoodMarketViewHolder(context, view)
+        return FoodMarketViewHolder(context, foodMarketPlaceholderProvider, view)
     }
 
     override fun onBindViewHolder(holder: FoodMarketViewHolder?, position: Int) {
@@ -32,18 +34,21 @@ class FoodMarketsAdapter(private val context: Context) : RecyclerView.Adapter<Fo
         return foodMarkets?.size ?: 0
     }
 
-    class FoodMarketViewHolder(private val context: Context, view: View) : RecyclerView.ViewHolder(view) {
+    class FoodMarketViewHolder(private val context: Context, private val foodMarketPlaceholderProvider: FoodMarketPlaceholderProvider, view: View) :
+            RecyclerView.ViewHolder(view) {
 
         fun bind(foodMarket: FoodMarket, listener: Listener?) {
             itemView.foodMarketNameTextView.text = foodMarket.name
             val photos = foodMarket.photos
+            val placeholder = foodMarketPlaceholderProvider.getRandomPlaceHolder()
             if (photos != null && !photos.isEmpty()) {
                 GlideApp.with(context)
                         .load(photos[FoodMarket.FIRST_PHOTO_INDEX])
-                        .placeholder(R.drawable.placeholder_food_market)
+                        .placeholder(placeholder)
+                        .error(placeholder)
                         .into(itemView.foodMarketPhotoImageView)
             } else {
-                itemView.foodMarketPhotoImageView.setImageResource(R.drawable.placeholder_food_market)
+                itemView.foodMarketPhotoImageView.setImageResource(placeholder)
             }
 
             if (listener != null) {

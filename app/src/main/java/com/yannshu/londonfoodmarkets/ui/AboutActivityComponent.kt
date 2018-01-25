@@ -29,6 +29,10 @@ interface AboutActivityComponent : ActivityComponent<AboutActivity> {
             val icons = ArrayList<Icon>()
             icons.add(Icon(R.string.credit_icon_cow_description, R.string.credit_icon_cow_url, R.drawable.ic_cow))
             icons.add(Icon(R.string.credit_icon_hot_dog_description, R.string.credit_icon_hot_dog_url, R.drawable.ic_hot_dog))
+            icons.add(Icon(R.string.credit_icon_fishes_description, R.string.credit_icon_fishes_url, R.drawable.ic_fishes))
+            icons.add(Icon(R.string.credit_icon_sausages_description, R.string.credit_icon_sausages_url, R.drawable.ic_sausages))
+            icons.add(Icon(R.string.credit_icon_stall_description, R.string.credit_icon_stall_url, R.drawable.ic_stall))
+            icons.add(Icon(R.string.credit_icon_vegetables_description, R.string.credit_icon_vegetables_url, R.drawable.ic_vegetables))
             return icons
         }
     }

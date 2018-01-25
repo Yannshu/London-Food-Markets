@@ -6,4 +6,5 @@
 
     <color name="food_markets_recycler_view_background">#aaffffff</color>
     <color name="food_markets_recycler_view_item_name_background">#ccffffff</color>
+
 </resources>
