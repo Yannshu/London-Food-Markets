@@ -14,6 +14,7 @@ import com.yannshu.londonfoodmarkets.data.model.FoodMarket
 import com.yannshu.londonfoodmarkets.di.activity.HasActivitySubComponentBuilders
 import com.yannshu.londonfoodmarkets.presenters.FoodMarketActivityPresenter
 import com.yannshu.londonfoodmarkets.ui.base.BaseActivity
+import com.yannshu.londonfoodmarkets.utils.FoodMarketPlaceholderProvider
 import kotlinx.android.synthetic.main.activity_food_market.addressTextView
 import kotlinx.android.synthetic.main.activity_food_market.descriptionTextView
 import kotlinx.android.synthetic.main.activity_food_market.detailsLayout
@@ -31,6 +32,9 @@ class FoodMarketActivity : BaseActivity(), FoodMarketActivityContract.View {
 
     @Inject
     internal lateinit var presenter: FoodMarketActivityPresenter
+
+    @Inject
+    internal lateinit var foodMarketPlaceholderProvider: FoodMarketPlaceholderProvider
 
     private lateinit var market: FoodMarket
 
@@ -88,14 +92,20 @@ class FoodMarketActivity : BaseActivity(), FoodMarketActivityContract.View {
     override fun getUnknownDescription(): String = getString(R.string.description_unknown)
 
     override fun displayPhoto(url: String) {
+        val placeholder = foodMarketPlaceholderProvider.getRandomPlaceHolder()
         GlideApp.with(this)
                 .load(url)
-                .placeholder(R.drawable.placeholder_food_market)
+                .placeholder(placeholder)
+                .error(placeholder)
                 .into(photoImageView)
     }
 
-    override fun displayAddress(name: String) {
-        addressTextView.text = name
+    override fun displayPlaceholder() {
+        photoImageView.setImageResource(foodMarketPlaceholderProvider.getRandomPlaceHolder())
+    }
+
+    override fun displayAddress(address: String) {
+        addressTextView.text = address
     }
 
     override fun getFormattedAddress(street: String, city: String, postcode: String): String {

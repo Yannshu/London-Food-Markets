@@ -23,6 +23,8 @@ class FoodMarketActivityPresenter(private val market: FoodMarket, private val da
         val photos = market.photos
         if (photos != null && !photos.isEmpty()) {
             mvpView?.displayPhoto(photos[FoodMarket.FIRST_PHOTO_INDEX])
+        } else {
+            mvpView?.displayPlaceholder()
         }
     }
 

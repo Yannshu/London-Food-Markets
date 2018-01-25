@@ -7,6 +7,7 @@ import com.yannshu.londonfoodmarkets.di.activity.ActivityModule
 import com.yannshu.londonfoodmarkets.di.activity.ActivityScope
 import com.yannshu.londonfoodmarkets.presenters.MainActivityPresenter
 import com.yannshu.londonfoodmarkets.ui.adapters.FoodMarketsAdapter
+import com.yannshu.londonfoodmarkets.utils.FoodMarketPlaceholderProvider
 import com.yannshu.londonfoodmarkets.utils.MapsUtils
 import dagger.Module
 import dagger.Provides
@@ -27,6 +28,6 @@ interface MainActivityComponent : ActivityComponent<MainActivity> {
                 MainActivityPresenter(foodMarketsDataSource, mapsUtils)
 
         @Provides
-        fun provideFoodMarketsAdapter(): FoodMarketsAdapter = FoodMarketsAdapter(activity)
+        fun provideFoodMarketsAdapter(foodMarketPlaceholderProvider: FoodMarketPlaceholderProvider): FoodMarketsAdapter = FoodMarketsAdapter(activity, foodMarketPlaceholderProvider)
     }
 }
