@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply from: '../config/quality.gradle'
+apply from: '../config/secrets.gradle'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
@@ -13,9 +14,21 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        resValue 'string', 'google_maps_api_key', "$google_maps_api_key"
+        buildConfigField 'String', 'google_admob_app_id', "$google_admob_app_id"
     }
     buildTypes {
+
+        debug {
+            // test ad id
+            resValue 'string', 'google_admob_ad_maps_id', "$google_admob_ad_test_id"
+        }
+
         release {
+            // real app id
+            resValue 'string', 'google_admob_ad_maps_id', "$google_admob_ad_maps_id"
+
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }

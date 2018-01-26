@@ -14,7 +14,7 @@
         android:layout_below="@+id/toolbar"
         android:layout_centerHorizontal="true"
         ads:adSize="SMART_BANNER"
-        ads:adUnitId="@string/google_admob_ad_id_test" />
+        ads:adUnitId="@string/google_admob_ad_maps_id" />
 
     <fragment
         android:id="@+id/mapFragment"
