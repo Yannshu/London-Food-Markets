@@ -29,6 +29,8 @@ import com.yannshu.londonfoodmarkets.di.activity.HasActivitySubComponentBuilders
 import com.yannshu.londonfoodmarkets.presenters.MainActivityPresenter
 import com.yannshu.londonfoodmarkets.ui.adapters.FoodMarketsAdapter
 import com.yannshu.londonfoodmarkets.ui.base.BaseActivity
+import com.yannshu.londonfoodmarkets.utils.AdsWrapper
+import kotlinx.android.synthetic.main.activity_main.adView
 import kotlinx.android.synthetic.main.activity_main.foodMarketsRecyclerView
 import kotlinx.android.synthetic.main.activity_main.toolbar
 import javax.inject.Inject
@@ -40,6 +42,9 @@ class MainActivity : BaseActivity(), MainActivityContract.View {
 
     @Inject
     internal lateinit var foodMarketAdapter: FoodMarketsAdapter
+
+    @Inject
+    internal lateinit var adsWrapper: AdsWrapper
 
     private var mapFragment: SupportMapFragment? = null
 
@@ -58,6 +63,7 @@ class MainActivity : BaseActivity(), MainActivityContract.View {
         requestLocationPermission()
         initFoodMarketRecyclerView()
         initMap()
+        initAds()
     }
 
     override fun injectMembers(hasActivitySubComponentBuilders: HasActivitySubComponentBuilders) {
@@ -200,5 +206,10 @@ class MainActivity : BaseActivity(), MainActivityContract.View {
     private fun openAboutActivity() {
         val intent = AboutActivity.getStartingIntent(this)
         startActivity(intent)
+    }
+
+    private fun initAds() {
+        adsWrapper.init(this)
+        adsWrapper.loadAd(adView)
     }
 }

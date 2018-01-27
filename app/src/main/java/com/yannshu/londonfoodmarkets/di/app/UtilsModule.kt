@@ -1,5 +1,6 @@
 package com.yannshu.londonfoodmarkets.di.app
 
+import com.yannshu.londonfoodmarkets.utils.AdsWrapper
 import com.yannshu.londonfoodmarkets.utils.FoodMarketPlaceholderProvider
 import com.yannshu.londonfoodmarkets.utils.MapsUtils
 import dagger.Module
@@ -12,4 +13,7 @@ class UtilsModule {
 
     @Provides
     fun provideFoodMarketPlaceholder(): FoodMarketPlaceholderProvider = FoodMarketPlaceholderProvider()
+
+    @Provides
+    fun provideAdsWrapper(): AdsWrapper = AdsWrapper()
 }
