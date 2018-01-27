@@ -21,6 +21,8 @@ android {
     buildTypes {
 
         debug {
+            applicationIdSuffix ".debug"
+
             // test ad id
             resValue 'string', 'google_admob_ad_maps_id', "$google_admob_ad_test_id"
         }
