@@ -21,6 +21,7 @@ import kotlinx.android.synthetic.main.activity_food_market.detailsLayout
 import kotlinx.android.synthetic.main.activity_food_market.farmersStallsTextView
 import kotlinx.android.synthetic.main.activity_food_market.openingHoursTextView
 import kotlinx.android.synthetic.main.activity_food_market.photoImageView
+import kotlinx.android.synthetic.main.activity_food_market.sizeTextView
 import kotlinx.android.synthetic.main.activity_food_market.streetFoodTextView
 import kotlinx.android.synthetic.main.activity_food_market.toolbar
 import kotlinx.android.synthetic.main.activity_food_market.websiteLayout
@@ -170,5 +171,14 @@ class FoodMarketActivity : BaseActivity(), FoodMarketActivityContract.View {
 
     override fun hideStreetFoodStands() {
         streetFoodTextView.visibility = View.GONE
+    }
+
+    override fun hideSize() {
+        sizeTextView.visibility = View.GONE
+    }
+
+    override fun showSize(resId: Int) {
+        sizeTextView.visibility = View.VISIBLE
+        sizeTextView.setText(resId)
     }
 }

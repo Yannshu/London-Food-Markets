@@ -1,9 +1,16 @@
 package com.yannshu.londonfoodmarkets.presenters
 
+import com.yannshu.londonfoodmarkets.R
 import com.yannshu.londonfoodmarkets.contracts.FoodMarketActivityContract
 import com.yannshu.londonfoodmarkets.data.model.FoodMarket
 
 class FoodMarketActivityPresenter(private val market: FoodMarket, private val dayOfWeek: String) : BasePresenter<FoodMarketActivityContract.View>() {
+
+    companion object {
+        const val SIZE_SMALL = 20
+        const val SIZE_MEDIUM = 50
+        const val SIZE_BIG = 100
+    }
 
     fun displayMarket() {
         displayDescription()
@@ -11,7 +18,10 @@ class FoodMarketActivityPresenter(private val market: FoodMarket, private val da
         displayAddress()
         displayOpeningHours()
         displayWebsite()
-        displayDetails()
+
+        displayDetailsLayout()
+        displaySize()
+        displayCategories()
     }
 
     private fun displayDescription() {
@@ -78,19 +88,47 @@ class FoodMarketActivityPresenter(private val market: FoodMarket, private val da
         }
     }
 
-    private fun displayDetails() {
+    private fun displayDetailsLayout() {
+        val size = market.size
+        val categories = market.categories
+
+        if (size > 0 || (categories != null && !categories.isEmpty())) {
+            mvpView?.showDetails()
+        } else {
+            mvpView?.hideDetails()
+        }
+    }
+
+    private fun displaySize() {
+        val size = market.size
+
+        if (size > 0) {
+            mvpView?.showDetails()
+            when {
+                size < SIZE_SMALL -> mvpView?.showSize(R.string.size_small)
+                size < SIZE_MEDIUM -> mvpView?.showSize(R.string.size_medium)
+                size < SIZE_BIG -> mvpView?.showSize(R.string.size_big)
+                else -> mvpView?.showSize(R.string.size_very_big)
+            }
+        } else {
+            mvpView?.hideSize()
+        }
+    }
+
+    private fun displayCategories() {
+        mvpView?.hideFarmersStalls()
+        mvpView?.hideStreetFoodStands()
+
         val categories = market.categories
         if (categories != null && !categories.isEmpty()) {
-            mvpView?.hideFarmersStalls()
-            mvpView?.hideStreetFoodStands()
+            mvpView?.showDetails()
+
             categories.forEach {
                 when (it) {
                     FoodMarket.CATEGORY_FARMERS_MARKET -> mvpView?.showFarmersStalls()
                     FoodMarket.CATEGORY_STREET_FOOD -> mvpView?.showStreetFoodStands()
                 }
             }
-        } else {
-            mvpView?.hideDetails()
         }
     }
 }

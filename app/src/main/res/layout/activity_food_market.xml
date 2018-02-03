@@ -132,6 +132,16 @@
                     android:text="@string/on_the_market" />
 
                 <TextView
+                    android:id="@+id/sizeTextView"
+                    style="@style/Content.Small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/ic_size"
+                    android:drawablePadding="@dimen/food_market_content_drawable_padding"
+                    android:drawableStart="@drawable/ic_size"
+                    android:text="@string/size_small" />
+
+                <TextView
                     android:id="@+id/farmersStallsTextView"
                     style="@style/Content.Small"
                     android:layout_width="wrap_content"

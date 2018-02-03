@@ -14,6 +14,10 @@
     <string name="on_the_market">The market:</string>
     <string name="farmers_stalls">Farmers stalls</string>
     <string name="street_food_stands">Street food stands</string>
+    <string name="size_very_big">Very big: over 100 traders, cafes and restaurants</string>
+    <string name="size_big">Big: over 50 traders, cafes and restaurants</string>
+    <string name="size_medium">Medium: over 20 traders, cafes and restaurants</string>
+    <string name="size_small">Small: less than 20 traders, cafes and restaurants</string>
 
     <string name="about">About</string>
     <string name="author">Created by Yann Viens</string>
@@ -38,5 +42,8 @@
 
     <string name="credit_icon_vegetables_description">vegetables by Chanut is Industries</string>
     <string name="credit_icon_vegetables_url">https://thenounproject.com/icon/1519764/</string>
+
+    <string name="credit_icon_size_description">sizes by Arthur Shlain</string>
+    <string name="credit_icon_size_url">https://thenounproject.com/icon/844736/</string>
 
 </resources>

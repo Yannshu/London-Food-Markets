@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 import android.content.res.Resources
+import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.module.SimpleModule
 import com.google.firebase.firestore.FirebaseFirestore
@@ -37,6 +38,7 @@ class AppModule(private val application: Application) {
     @Singleton
     fun provideObjectMapper(module: com.fasterxml.jackson.databind.Module): ObjectMapper {
         val objectMapper = ObjectMapper()
+        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
         objectMapper.registerModule(module)
         return objectMapper
     }
