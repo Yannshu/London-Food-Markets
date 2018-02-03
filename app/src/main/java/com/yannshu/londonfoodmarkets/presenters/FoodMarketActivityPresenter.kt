@@ -19,7 +19,7 @@ class FoodMarketActivityPresenter(private val market: FoodMarket, private val da
         displayOpeningHours()
         displayWebsite()
 
-        mvpView?.hideDetails()
+        displayDetailsLayout()
         displaySize()
         displayCategories()
     }
@@ -88,6 +88,17 @@ class FoodMarketActivityPresenter(private val market: FoodMarket, private val da
         }
     }
 
+    private fun displayDetailsLayout() {
+        val size = market.size
+        val categories = market.categories
+
+        if (size > 0 || (categories != null && !categories.isEmpty())) {
+            mvpView?.showDetails()
+        } else {
+            mvpView?.hideDetails()
+        }
+    }
+
     private fun displaySize() {
         val size = market.size
 
@@ -105,20 +116,19 @@ class FoodMarketActivityPresenter(private val market: FoodMarket, private val da
     }
 
     private fun displayCategories() {
+        mvpView?.hideFarmersStalls()
+        mvpView?.hideStreetFoodStands()
+
         val categories = market.categories
         if (categories != null && !categories.isEmpty()) {
             mvpView?.showDetails()
 
-            mvpView?.hideFarmersStalls()
-            mvpView?.hideStreetFoodStands()
             categories.forEach {
                 when (it) {
                     FoodMarket.CATEGORY_FARMERS_MARKET -> mvpView?.showFarmersStalls()
                     FoodMarket.CATEGORY_STREET_FOOD -> mvpView?.showStreetFoodStands()
                 }
             }
-        } else {
-            mvpView?.hideDetails()
         }
     }
 }
