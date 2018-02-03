@@ -7,7 +7,7 @@ import com.yannshu.londonfoodmarkets.data.model.FoodMarket
 class FoodMarketsDataSource(private val databases: FirebaseFirestore, private val objectMapper: ObjectMapper) {
 
     companion object {
-        val FOOD_MARKETS = "food-markets"
+        const val FOOD_MARKETS = "food-markets"
     }
 
     var listener: Listener? = null
