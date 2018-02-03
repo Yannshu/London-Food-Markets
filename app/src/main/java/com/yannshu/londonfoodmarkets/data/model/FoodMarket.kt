@@ -44,11 +44,11 @@ class FoodMarket() {
     @JsonProperty("photos")
     var photos: List<String>? = null
 
-    @JsonProperty("market_size")
-    var marketSize: Int = 0
+    @JsonProperty("size")
+    var size: Int = 0
 
     @ParcelConstructor
-    constructor(name: String?, address: Address?, categories: List<String>?, coordinates: GeoPoint?, description: String?, openingTimes: List<OpeningTime>?, website: String?, photos: List<String>?, marketSize: Int) : this() {
+    constructor(name: String?, address: Address?, categories: List<String>?, coordinates: GeoPoint?, description: String?, openingTimes: List<OpeningTime>?, website: String?, photos: List<String>?, size: Int) : this() {
         this.name = name
         this.address = address
         this.categories = categories
@@ -57,6 +57,6 @@ class FoodMarket() {
         this.openingTimes = openingTimes
         this.website = website
         this.photos = photos
-        this.marketSize = marketSize
+        this.size = size
     }
 }

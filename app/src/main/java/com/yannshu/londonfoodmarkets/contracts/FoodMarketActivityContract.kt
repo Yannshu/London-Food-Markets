@@ -21,5 +21,7 @@ interface FoodMarketActivityContract {
         fun hideFarmersStalls()
         fun showStreetFoodStands()
         fun hideStreetFoodStands()
+        fun hideSize()
+        fun showSize(resId: Int)
     }
 }

@@ -1,9 +1,16 @@
 package com.yannshu.londonfoodmarkets.presenters
 
+import com.yannshu.londonfoodmarkets.R
 import com.yannshu.londonfoodmarkets.contracts.FoodMarketActivityContract
 import com.yannshu.londonfoodmarkets.data.model.FoodMarket
 
 class FoodMarketActivityPresenter(private val market: FoodMarket, private val dayOfWeek: String) : BasePresenter<FoodMarketActivityContract.View>() {
+
+    companion object {
+        const val SIZE_SMALL = 20
+        const val SIZE_MEDIUM = 50
+        const val SIZE_BIG = 100
+    }
 
     fun displayMarket() {
         displayDescription()
@@ -11,7 +18,10 @@ class FoodMarketActivityPresenter(private val market: FoodMarket, private val da
         displayAddress()
         displayOpeningHours()
         displayWebsite()
-        displayDetails()
+
+        mvpView?.hideDetails()
+        displaySize()
+        displayCategories()
     }
 
     private fun displayDescription() {
@@ -78,9 +88,27 @@ class FoodMarketActivityPresenter(private val market: FoodMarket, private val da
         }
     }
 
-    private fun displayDetails() {
+    private fun displaySize() {
+        val size = market.size
+
+        if (size > 0) {
+            mvpView?.showDetails()
+            when {
+                size < SIZE_SMALL -> mvpView?.showSize(R.string.size_small)
+                size < SIZE_MEDIUM -> mvpView?.showSize(R.string.size_medium)
+                size < SIZE_BIG -> mvpView?.showSize(R.string.size_big)
+                else -> mvpView?.showSize(R.string.size_very_big)
+            }
+        } else {
+            mvpView?.hideSize()
+        }
+    }
+
+    private fun displayCategories() {
         val categories = market.categories
         if (categories != null && !categories.isEmpty()) {
+            mvpView?.showDetails()
+
             mvpView?.hideFarmersStalls()
             mvpView?.hideStreetFoodStands()
             categories.forEach {
