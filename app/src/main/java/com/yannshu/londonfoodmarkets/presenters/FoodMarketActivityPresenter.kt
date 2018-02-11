@@ -125,7 +125,7 @@ class FoodMarketActivityPresenter(private val market: FoodMarket, private val da
 
             categories.forEach {
                 when (it) {
-                    FoodMarket.CATEGORY_FARMERS_MARKET -> mvpView?.showFarmersStalls()
+                    FoodMarket.CATEGORY_FARMERS -> mvpView?.showFarmersStalls()
                     FoodMarket.CATEGORY_STREET_FOOD -> mvpView?.showStreetFoodStands()
                 }
             }
