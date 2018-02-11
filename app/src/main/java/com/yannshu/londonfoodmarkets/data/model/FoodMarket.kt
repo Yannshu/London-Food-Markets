@@ -16,7 +16,7 @@ class FoodMarket() {
 
     companion object {
         val FIRST_PHOTO_INDEX = 0
-        val CATEGORY_FARMERS_MARKET = "farmers-market"
+        val CATEGORY_FARMERS = "farmers"
         val CATEGORY_STREET_FOOD = "street-food"
     }
 
