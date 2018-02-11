@@ -14,10 +14,10 @@
     <string name="on_the_market">The market:</string>
     <string name="farmers_stalls">Farmers stalls</string>
     <string name="street_food_stands">Street food stands</string>
-    <string name="size_very_big">Very big: over 100 traders, cafes and restaurants</string>
-    <string name="size_big">Big: over 50 traders, cafes and restaurants</string>
-    <string name="size_medium">Medium: over 20 traders, cafes and restaurants</string>
-    <string name="size_small">Small: less than 20 traders, cafes and restaurants</string>
+    <string name="size_very_big">Over 100 traders, cafes and restaurants</string>
+    <string name="size_big">Between 50 and 100 traders, cafes and restaurants</string>
+    <string name="size_medium">Between 20 and 50 traders, cafes and restaurants</string>
+    <string name="size_small">Less than 20 traders, cafes and restaurants</string>
 
     <string name="about">About</string>
     <string name="author">Created by Yann Viens</string>
