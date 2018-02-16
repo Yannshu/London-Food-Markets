@@ -74,6 +74,15 @@ class MainActivity : BaseActivity(), MainActivityContract.View {
                 .injectMembers(this)
     }
 
+    override fun onPause() {
+        super.onPause()
+        map?.let {
+            val cameraPosition = it.cameraPosition
+            presenter.saveMapCameraPosition(cameraPosition.target.latitude.toFloat(), cameraPosition.target.longitude.toFloat(),
+                    cameraPosition.zoom, cameraPosition.bearing, cameraPosition.tilt)
+        }
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         presenter.destroyData()

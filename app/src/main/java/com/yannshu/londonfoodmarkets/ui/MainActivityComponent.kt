@@ -8,6 +8,7 @@ import com.yannshu.londonfoodmarkets.di.activity.ActivityScope
 import com.yannshu.londonfoodmarkets.presenters.MainActivityPresenter
 import com.yannshu.londonfoodmarkets.ui.adapters.FoodMarketsAdapter
 import com.yannshu.londonfoodmarkets.utils.FoodMarketPlaceholderProvider
+import com.yannshu.londonfoodmarkets.utils.MapCameraPositionSaver
 import com.yannshu.londonfoodmarkets.utils.MapsUtils
 import dagger.Module
 import dagger.Provides
@@ -24,8 +25,8 @@ interface MainActivityComponent : ActivityComponent<MainActivity> {
     class MainActivityModule(activity: MainActivity) : ActivityModule<MainActivity>(activity) {
 
         @Provides
-        fun provideMainActivityPresenter(foodMarketsDataSource: FoodMarketsDataSource, mapsUtils: MapsUtils): MainActivityPresenter =
-                MainActivityPresenter(foodMarketsDataSource, mapsUtils)
+        fun provideMainActivityPresenter(foodMarketsDataSource: FoodMarketsDataSource, mapsUtils: MapsUtils, mapCameraPositionSaver: MapCameraPositionSaver): MainActivityPresenter =
+                MainActivityPresenter(foodMarketsDataSource, mapsUtils, mapCameraPositionSaver)
 
         @Provides
         fun provideFoodMarketsAdapter(foodMarketPlaceholderProvider: FoodMarketPlaceholderProvider): FoodMarketsAdapter = FoodMarketsAdapter(activity, foodMarketPlaceholderProvider)
