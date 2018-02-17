@@ -5,7 +5,7 @@ import android.content.Context
 class SharedPreferencesWrapper(context: Context, name: String = APP_SHARED_PREFERENCES) {
 
     companion object {
-        private const val APP_SHARED_PREFERENCES = ""
+        private const val APP_SHARED_PREFERENCES = "london-food-markets"
     }
 
     private val sharedPreferences = context.getSharedPreferences(APP_SHARED_PREFERENCES, Context.MODE_PRIVATE)
