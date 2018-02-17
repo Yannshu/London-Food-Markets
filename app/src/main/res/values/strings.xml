@@ -2,7 +2,6 @@
     <string name="app_name">London Food Markets</string>
     <string name="address_format">%1$s\n%2$s %3$s</string>
     <string name="address_unknown">Unknown address</string>
-    <string name="opening_hours_day_format">%1$s: %2$s</string>
     <string name="opening_hours_format">%1$s - %2$s</string>
     <string name="opening_hours_closed">Closed</string>
     <string name="opening_hours_closed_today">Closed today</string>

@@ -22,20 +22,27 @@ import kotlinx.android.synthetic.main.activity_food_market.addressTextView
 import kotlinx.android.synthetic.main.activity_food_market.descriptionTextView
 import kotlinx.android.synthetic.main.activity_food_market.detailsLayout
 import kotlinx.android.synthetic.main.activity_food_market.farmersStallsTextView
+import kotlinx.android.synthetic.main.activity_food_market.fridayDayTextView
 import kotlinx.android.synthetic.main.activity_food_market.fridayHoursTextView
+import kotlinx.android.synthetic.main.activity_food_market.mondayDayTextView
 import kotlinx.android.synthetic.main.activity_food_market.mondayHoursTextView
 import kotlinx.android.synthetic.main.activity_food_market.openingHoursExpandableLayout
 import kotlinx.android.synthetic.main.activity_food_market.photoImageView
+import kotlinx.android.synthetic.main.activity_food_market.saturdayDayTextView
 import kotlinx.android.synthetic.main.activity_food_market.saturdayHoursTextView
 import kotlinx.android.synthetic.main.activity_food_market.sizeTextView
 import kotlinx.android.synthetic.main.activity_food_market.streetFoodTextView
+import kotlinx.android.synthetic.main.activity_food_market.sundayDayTextView
 import kotlinx.android.synthetic.main.activity_food_market.sundayHoursTextView
+import kotlinx.android.synthetic.main.activity_food_market.thursdayDayTextView
 import kotlinx.android.synthetic.main.activity_food_market.thursdayHoursTextView
 import kotlinx.android.synthetic.main.activity_food_market.todayHoursTextView
 import kotlinx.android.synthetic.main.activity_food_market.toolbar
+import kotlinx.android.synthetic.main.activity_food_market.tuesdayDayTextView
 import kotlinx.android.synthetic.main.activity_food_market.tuesdayHoursTextView
 import kotlinx.android.synthetic.main.activity_food_market.websiteLayout
 import kotlinx.android.synthetic.main.activity_food_market.websiteTextView
+import kotlinx.android.synthetic.main.activity_food_market.wednesdayDayTextView
 import kotlinx.android.synthetic.main.activity_food_market.wednesdayHoursTextView
 import org.parceler.Parcels
 import javax.inject.Inject
@@ -50,7 +57,7 @@ class FoodMarketActivity : BaseActivity(), FoodMarketActivityContract.View {
 
     private lateinit var market: FoodMarket
 
-    private val dayOfWeekViews = HashMap<String, TextView>()
+    private val dayOfWeekViews = HashMap<String, Pair<TextView, TextView>>()
 
     companion object {
         private const val KEY_MARKET = "market"
@@ -91,13 +98,13 @@ class FoodMarketActivity : BaseActivity(), FoodMarketActivityContract.View {
     }
 
     private fun initDayOfWeekViewsMap() {
-        dayOfWeekViews[TimeConstants.MONDAY] = mondayHoursTextView
-        dayOfWeekViews[TimeConstants.TUESDAY] = tuesdayHoursTextView
-        dayOfWeekViews[TimeConstants.WEDNESDAY] = wednesdayHoursTextView
-        dayOfWeekViews[TimeConstants.THURSDAY] = thursdayHoursTextView
-        dayOfWeekViews[TimeConstants.FRIDAY] = fridayHoursTextView
-        dayOfWeekViews[TimeConstants.SATURDAY] = saturdayHoursTextView
-        dayOfWeekViews[TimeConstants.SUNDAY] = sundayHoursTextView
+        dayOfWeekViews[TimeConstants.MONDAY] = Pair(mondayDayTextView, mondayHoursTextView)
+        dayOfWeekViews[TimeConstants.TUESDAY] = Pair(tuesdayDayTextView, tuesdayHoursTextView)
+        dayOfWeekViews[TimeConstants.WEDNESDAY] = Pair(wednesdayDayTextView, wednesdayHoursTextView)
+        dayOfWeekViews[TimeConstants.THURSDAY] = Pair(thursdayDayTextView, thursdayHoursTextView)
+        dayOfWeekViews[TimeConstants.FRIDAY] = Pair(fridayDayTextView, fridayHoursTextView)
+        dayOfWeekViews[TimeConstants.SATURDAY] = Pair(saturdayDayTextView, saturdayHoursTextView)
+        dayOfWeekViews[TimeConstants.SUNDAY] = Pair(sundayDayTextView, sundayHoursTextView)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -156,14 +163,16 @@ class FoodMarketActivity : BaseActivity(), FoodMarketActivityContract.View {
     override fun highlightOpeningHoursDay(day: String) {
         val dayTextView = dayOfWeekViews[day]
         dayTextView?.let {
-            it.setTypeface(it.typeface, Typeface.BOLD)
+            it.first.setTypeface(it.first.typeface, Typeface.BOLD)
+            it.second.setTypeface(it.second.typeface, Typeface.BOLD)
         }
     }
 
     override fun displayOpeningHoursForDay(day: String, openingHours: String) {
-        val dayTextView = dayOfWeekViews[day]
-        dayTextView?.let {
-            dayTextView.text = getString(R.string.opening_hours_day_format, day.capitalize(), openingHours)
+        val dayTextViews = dayOfWeekViews[day]
+        dayTextViews?.let {
+            dayTextViews.first.text = day.capitalize()
+            dayTextViews.second.text = openingHours
         }
     }
 
