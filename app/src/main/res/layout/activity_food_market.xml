@@ -87,6 +87,10 @@
                 android:id="@+id/openingHoursExpandableLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingEnd="@dimen/food_market_day_opening_hours_padding"
+                android:paddingLeft="@dimen/food_market_day_opening_hours_padding"
+                android:paddingRight="@dimen/food_market_day_opening_hours_padding"
+                android:paddingStart="@dimen/food_market_day_opening_hours_padding"
                 app:el_duration="1000"
                 app:el_expanded="false"
                 app:el_parallax="0.5">
