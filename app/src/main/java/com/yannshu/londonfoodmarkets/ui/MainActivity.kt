@@ -14,6 +14,7 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
@@ -72,6 +73,15 @@ class MainActivity : BaseActivity(), MainActivityContract.View {
                 .activityModule(MainActivityComponent.MainActivityModule(this))
                 .build()
                 .injectMembers(this)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        map?.let {
+            val cameraPosition = it.cameraPosition
+            presenter.saveMapCameraPosition(cameraPosition.target.latitude.toFloat(), cameraPosition.target.longitude.toFloat(),
+                    cameraPosition.zoom, cameraPosition.bearing, cameraPosition.tilt)
+        }
     }
 
     override fun onDestroy() {
@@ -180,8 +190,14 @@ class MainActivity : BaseActivity(), MainActivityContract.View {
         }
     }
 
-    override fun moveMapCenterTo(lat: Double, lng: Double, zoom: Float) {
-        map?.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(lat, lng), zoom))
+    override fun moveMapCenterTo(lat: Double, lng: Double, zoom: Float, bearing: Float, tilt: Float) {
+        val cameraPosition = CameraPosition.Builder()
+                .target(LatLng(lat, lng))
+                .zoom(zoom)
+                .bearing(bearing)
+                .tilt(tilt)
+                .build()
+        map?.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
     }
 
     override fun addMarket(market: FoodMarket) {

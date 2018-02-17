@@ -3,15 +3,17 @@ package com.yannshu.londonfoodmarkets.presenters
 import com.yannshu.londonfoodmarkets.contracts.MainActivityContract
 import com.yannshu.londonfoodmarkets.data.FoodMarketsDataSource
 import com.yannshu.londonfoodmarkets.data.model.FoodMarket
+import com.yannshu.londonfoodmarkets.utils.MapCameraPositionSaver
 import com.yannshu.londonfoodmarkets.utils.MapsUtils
 
-class MainActivityPresenter(private val foodMarketDataSource: FoodMarketsDataSource, private val mapsUtils: MapsUtils) :
+class MainActivityPresenter(private val foodMarketDataSource: FoodMarketsDataSource, private val mapsUtils: MapsUtils,
+                            private val mapCameraPositionSaver: MapCameraPositionSaver) :
         BasePresenter<MainActivityContract.View>() {
 
     companion object {
-        private val LONDON_LAT = 51.507354
-        private val LONDON_LNG = -0.127758
-        private val DEFAULT_ZOOM = 10.0f
+        private const val LONDON_LAT = 51.507354
+        private const val LONDON_LNG = -0.127758
+        private const val DEFAULT_ZOOM = 10.0f
     }
 
     private var mapLoaded: Boolean = false
@@ -41,6 +43,10 @@ class MainActivityPresenter(private val foodMarketDataSource: FoodMarketsDataSou
         foodMarketDataSource.loadFoodMarkets()
     }
 
+    fun saveMapCameraPosition(latitude: Float, longitude: Float, zoom: Float, bearing: Float, tilt: Float) {
+        mapCameraPositionSaver.saveMapCenterPosition(latitude, longitude, zoom, bearing, tilt)
+    }
+
     fun destroyData() {
         foodMarketDataSource.listener = null
         mapLoaded = false
@@ -48,9 +54,18 @@ class MainActivityPresenter(private val foodMarketDataSource: FoodMarketsDataSou
 
     fun onMapLoaded() {
         mapLoaded = true
-        mvpView?.moveMapCenterTo(LONDON_LAT, LONDON_LNG, DEFAULT_ZOOM)
+        positionMapCenter()
         foodMarkets?.let {
             displayFoodMarkets(it)
+        }
+    }
+
+    private fun positionMapCenter() {
+        if (mapCameraPositionSaver.hasCameraPositionBeenSavedRecently()) {
+            mvpView?.moveMapCenterTo(mapCameraPositionSaver.getLatitude().toDouble(), mapCameraPositionSaver.getLongitude().toDouble(),
+                    mapCameraPositionSaver.getZoom(), mapCameraPositionSaver.getBearing(), mapCameraPositionSaver.getTilt())
+        } else {
+            mvpView?.moveMapCenterTo(LONDON_LAT, LONDON_LNG, DEFAULT_ZOOM)
         }
     }
 
