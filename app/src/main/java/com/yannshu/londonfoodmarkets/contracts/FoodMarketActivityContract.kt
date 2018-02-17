@@ -9,9 +9,11 @@ interface FoodMarketActivityContract {
         fun displayAddress(address: String)
         fun getFormattedAddress(street: String, city: String, postcode: String): String
         fun getUnknownAddress(): String
-        fun displayOpeningHours(openingHours: String)
+        fun displayOpeningHoursForToday(openingHours: String)
+        fun displayOpeningHoursForDay(day: String, openingHours: String)
         fun getFormattedOpeningHours(openingHour: String, closingHour: String): String
         fun getClosed(): String
+        fun getClosedToday(): String
         fun getUnknownOpeningHours(): String
         fun displayWebsite(url: String)
         fun hideWebsite()

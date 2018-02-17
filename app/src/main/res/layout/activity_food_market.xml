@@ -73,7 +73,7 @@
                 android:drawableStart="@drawable/ic_address" />
 
             <TextView
-                android:id="@+id/openingHoursTextView"
+                android:id="@+id/todayHoursTextView"
                 style="@style/Content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -82,6 +82,79 @@
                 android:drawableLeft="@drawable/ic_clock"
                 android:drawablePadding="@dimen/food_market_content_drawable_padding"
                 android:drawableStart="@drawable/ic_clock" />
+
+            <net.cachapa.expandablelayout.ExpandableLayout
+                android:id="@+id/openingHoursExpandableLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:el_duration="1000"
+                app:el_expanded="false"
+                app:el_parallax="0.5">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/mondayHoursTextView"
+                        style="@style/Content"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/content_vertical_spacing"
+                        android:layout_marginTop="@dimen/content_vertical_spacing" />
+
+                    <TextView
+                        android:id="@+id/tuesdayHoursTextView"
+                        style="@style/Content"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/content_vertical_spacing"
+                        android:layout_marginTop="@dimen/content_vertical_spacing" />
+
+                    <TextView
+                        android:id="@+id/wednesdayHoursTextView"
+                        style="@style/Content"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/content_vertical_spacing"
+                        android:layout_marginTop="@dimen/content_vertical_spacing" />
+
+                    <TextView
+                        android:id="@+id/thursdayHoursTextView"
+                        style="@style/Content"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/content_vertical_spacing"
+                        android:layout_marginTop="@dimen/content_vertical_spacing" />
+
+                    <TextView
+                        android:id="@+id/fridayHoursTextView"
+                        style="@style/Content"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/content_vertical_spacing"
+                        android:layout_marginTop="@dimen/content_vertical_spacing" />
+
+                    <TextView
+                        android:id="@+id/saturdayHoursTextView"
+                        style="@style/Content"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/content_vertical_spacing"
+                        android:layout_marginTop="@dimen/content_vertical_spacing" />
+
+                    <TextView
+                        android:id="@+id/sundayHoursTextView"
+                        style="@style/Content"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/content_vertical_spacing"
+                        android:layout_marginTop="@dimen/content_vertical_spacing" />
+
+                </LinearLayout>
+
+            </net.cachapa.expandablelayout.ExpandableLayout>
 
             <RelativeLayout
                 android:id="@+id/websiteLayout"
