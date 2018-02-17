@@ -14,6 +14,7 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
@@ -31,6 +32,7 @@ import com.yannshu.londonfoodmarkets.presenters.MainActivityPresenter
 import com.yannshu.londonfoodmarkets.ui.adapters.FoodMarketsAdapter
 import com.yannshu.londonfoodmarkets.ui.base.BaseActivity
 import com.yannshu.londonfoodmarkets.utils.AdsWrapper
+import com.yannshu.londonfoodmarkets.utils.VectorDescriptorFactory
 import kotlinx.android.synthetic.main.activity_main.adView
 import kotlinx.android.synthetic.main.activity_main.foodMarketsRecyclerView
 import kotlinx.android.synthetic.main.activity_main.toolbar
@@ -54,6 +56,8 @@ class MainActivity : BaseActivity(), MainActivityContract.View {
     private var locationClient: FusedLocationProviderClient? = null
 
     private var locationPermissionGranted = false
+
+    private var bitmapDescriptor: BitmapDescriptor? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -201,9 +205,14 @@ class MainActivity : BaseActivity(), MainActivityContract.View {
     }
 
     override fun addMarket(market: FoodMarket) {
+        if (bitmapDescriptor == null) {
+            bitmapDescriptor = VectorDescriptorFactory.fromVector(this, R.drawable.ic_market_marker)
+        }
+
         val markerOptions = MarkerOptions()
                 .title(market.name)
                 .position(LatLng(market.coordinates!!.latitude, market.coordinates!!.longitude))
+                .icon(bitmapDescriptor)
         val marker = map?.addMarker(markerOptions)
         marker?.tag = market
     }
