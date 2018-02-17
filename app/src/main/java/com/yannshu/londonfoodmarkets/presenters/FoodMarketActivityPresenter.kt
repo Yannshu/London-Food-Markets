@@ -66,6 +66,7 @@ class FoodMarketActivityPresenter(private val market: FoodMarket, private val to
         getOpeningTimesForDay(openingTimes, today, true)?.let {
             mvpView?.displayOpeningHoursForToday(it)
         }
+        mvpView?.highlightOpeningHoursDay(today)
 
         TimeConstants.DAYS_OF_WEEK.forEach { day ->
             getOpeningTimesForDay(openingTimes, day)?.let {

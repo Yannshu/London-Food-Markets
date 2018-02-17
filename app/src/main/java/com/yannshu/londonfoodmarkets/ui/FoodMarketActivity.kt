@@ -2,6 +2,7 @@ package com.yannshu.londonfoodmarkets.ui
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Typeface
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.NavUtils
@@ -152,10 +153,17 @@ class FoodMarketActivity : BaseActivity(), FoodMarketActivityContract.View {
         }
     }
 
+    override fun highlightOpeningHoursDay(day: String) {
+        val dayTextView = dayOfWeekViews[day]
+        dayTextView?.let {
+            it.setTypeface(it.typeface, Typeface.BOLD)
+        }
+    }
+
     override fun displayOpeningHoursForDay(day: String, openingHours: String) {
         val dayTextView = dayOfWeekViews[day]
         dayTextView?.let {
-            dayTextView.text = openingHours
+            dayTextView.text = getString(R.string.opening_hours_day_format, day.capitalize(), openingHours)
         }
     }
 

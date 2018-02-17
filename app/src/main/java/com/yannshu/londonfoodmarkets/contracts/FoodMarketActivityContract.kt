@@ -11,6 +11,7 @@ interface FoodMarketActivityContract {
         fun getUnknownAddress(): String
         fun displayOpeningHoursForToday(openingHours: String)
         fun displayOpeningHoursForDay(day: String, openingHours: String)
+        fun highlightOpeningHoursDay(day: String)
         fun getFormattedOpeningHours(openingHour: String, closingHour: String): String
         fun getClosed(): String
         fun getClosedToday(): String
