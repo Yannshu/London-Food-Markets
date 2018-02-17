@@ -63,7 +63,7 @@ class MainActivityPresenter(private val foodMarketDataSource: FoodMarketsDataSou
     private fun positionMapCenter() {
         if (mapCameraPositionSaver.hasCameraPositionBeenSavedRecently()) {
             mvpView?.moveMapCenterTo(mapCameraPositionSaver.getLatitude().toDouble(), mapCameraPositionSaver.getLongitude().toDouble(),
-                    mapCameraPositionSaver.getZoom())
+                    mapCameraPositionSaver.getZoom(), mapCameraPositionSaver.getBearing(), mapCameraPositionSaver.getTilt())
         } else {
             mvpView?.moveMapCenterTo(LONDON_LAT, LONDON_LNG, DEFAULT_ZOOM)
         }
