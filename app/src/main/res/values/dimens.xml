@@ -5,7 +5,7 @@
     <dimen name="food_market_image_view_height">300dp</dimen>
     <dimen name="food_market_content_drawable_padding">10dp</dimen>
     <dimen name="food_market_description_spacing">10dp</dimen>
-    <dimen name="food_market_day_opening_hours_padding">34dp</dimen>
+    <dimen name="food_market_day_opening_hours_padding">50dp</dimen>
 
     <dimen name="food_market_recycler_view_height">140dp</dimen>
 
