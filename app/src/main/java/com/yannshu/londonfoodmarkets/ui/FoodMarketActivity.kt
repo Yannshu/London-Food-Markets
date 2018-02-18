@@ -21,6 +21,7 @@ import com.yannshu.londonfoodmarkets.utils.TimeConstants
 import kotlinx.android.synthetic.main.activity_food_market.addressTextView
 import kotlinx.android.synthetic.main.activity_food_market.descriptionTextView
 import kotlinx.android.synthetic.main.activity_food_market.detailsLayout
+import kotlinx.android.synthetic.main.activity_food_market.expandHoursImageView
 import kotlinx.android.synthetic.main.activity_food_market.farmersStallsTextView
 import kotlinx.android.synthetic.main.activity_food_market.fridayDayTextView
 import kotlinx.android.synthetic.main.activity_food_market.fridayHoursTextView
@@ -36,6 +37,7 @@ import kotlinx.android.synthetic.main.activity_food_market.sundayDayTextView
 import kotlinx.android.synthetic.main.activity_food_market.sundayHoursTextView
 import kotlinx.android.synthetic.main.activity_food_market.thursdayDayTextView
 import kotlinx.android.synthetic.main.activity_food_market.thursdayHoursTextView
+import kotlinx.android.synthetic.main.activity_food_market.todayHoursLayout
 import kotlinx.android.synthetic.main.activity_food_market.todayHoursTextView
 import kotlinx.android.synthetic.main.activity_food_market.toolbar
 import kotlinx.android.synthetic.main.activity_food_market.tuesdayDayTextView
@@ -60,6 +62,7 @@ class FoodMarketActivity : BaseActivity(), FoodMarketActivityContract.View {
     private val dayOfWeekViews = HashMap<String, Pair<TextView, TextView>>()
 
     companion object {
+        private const val VIEW_ROTATION_180_DEGREE = 180
         private const val KEY_MARKET = "market"
 
         fun getStartingIntent(context: Context, market: FoodMarket): Intent {
@@ -73,7 +76,7 @@ class FoodMarketActivity : BaseActivity(), FoodMarketActivityContract.View {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_food_market)
         initActionBar()
-        initDayOfWeekViewsMap()
+        initDayOfWeekViews()
         presenter.attachView(this)
         presenter.displayMarket()
     }
@@ -97,7 +100,7 @@ class FoodMarketActivity : BaseActivity(), FoodMarketActivityContract.View {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
-    private fun initDayOfWeekViewsMap() {
+    private fun initDayOfWeekViews() {
         dayOfWeekViews[TimeConstants.MONDAY] = Pair(mondayDayTextView, mondayHoursTextView)
         dayOfWeekViews[TimeConstants.TUESDAY] = Pair(tuesdayDayTextView, tuesdayHoursTextView)
         dayOfWeekViews[TimeConstants.WEDNESDAY] = Pair(wednesdayDayTextView, wednesdayHoursTextView)
@@ -105,6 +108,24 @@ class FoodMarketActivity : BaseActivity(), FoodMarketActivityContract.View {
         dayOfWeekViews[TimeConstants.FRIDAY] = Pair(fridayDayTextView, fridayHoursTextView)
         dayOfWeekViews[TimeConstants.SATURDAY] = Pair(saturdayDayTextView, saturdayHoursTextView)
         dayOfWeekViews[TimeConstants.SUNDAY] = Pair(sundayDayTextView, sundayHoursTextView)
+
+        todayHoursLayout.setOnClickListener {
+            expandOrCollapseOpeningHoursExpandableLayout()
+        }
+
+        openingHoursExpandableLayout.setOnClickListener {
+            expandOrCollapseOpeningHoursExpandableLayout()
+        }
+
+        openingHoursExpandableLayout.setOnExpansionUpdateListener { expansionFraction, _ -> expandHoursImageView.rotation = expansionFraction * VIEW_ROTATION_180_DEGREE }
+    }
+
+    private fun expandOrCollapseOpeningHoursExpandableLayout() {
+        if (openingHoursExpandableLayout.isExpanded) {
+            openingHoursExpandableLayout.collapse()
+        } else {
+            openingHoursExpandableLayout.expand()
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -150,14 +171,6 @@ class FoodMarketActivity : BaseActivity(), FoodMarketActivityContract.View {
 
     override fun displayOpeningHoursForToday(openingHours: String) {
         todayHoursTextView.text = openingHours
-
-        todayHoursTextView.setOnClickListener {
-            if (openingHoursExpandableLayout.isExpanded) {
-                openingHoursExpandableLayout.collapse()
-            } else {
-                openingHoursExpandableLayout.expand()
-            }
-        }
     }
 
     override fun highlightOpeningHoursDay(day: String) {
