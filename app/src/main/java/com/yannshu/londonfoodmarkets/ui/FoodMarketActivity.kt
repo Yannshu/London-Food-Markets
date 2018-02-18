@@ -174,18 +174,16 @@ class FoodMarketActivity : BaseActivity(), FoodMarketActivityContract.View {
     }
 
     override fun highlightOpeningHoursDay(day: String) {
-        val dayTextView = dayOfWeekViews[day]
-        dayTextView?.let {
+        dayOfWeekViews[day]?.let {
             it.first.setTypeface(it.first.typeface, Typeface.BOLD)
             it.second.setTypeface(it.second.typeface, Typeface.BOLD)
         }
     }
 
     override fun displayOpeningHoursForDay(day: String, openingHours: String) {
-        val dayTextViews = dayOfWeekViews[day]
-        dayTextViews?.let {
-            dayTextViews.first.text = day.capitalize()
-            dayTextViews.second.text = openingHours
+        dayOfWeekViews[day]?.let {
+            it.first.text = day.capitalize()
+            it.second.text = openingHours
         }
     }
 
