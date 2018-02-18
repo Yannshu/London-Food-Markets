@@ -11,7 +11,7 @@ import javax.inject.Named
 class TimeModule {
 
     companion object {
-        val DAY_OF_WEEK_STRING = "EEEE"
+        const val DAY_OF_WEEK_STRING = "EEEE"
         const val NAME_DAY_OF_WEEK_FORMAT = "day_of_week_format"
         const val NAME_DAY_OF_WEEK_STRING = "day_of_week_string"
     }

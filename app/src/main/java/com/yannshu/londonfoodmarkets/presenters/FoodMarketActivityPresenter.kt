@@ -3,8 +3,10 @@ package com.yannshu.londonfoodmarkets.presenters
 import com.yannshu.londonfoodmarkets.R
 import com.yannshu.londonfoodmarkets.contracts.FoodMarketActivityContract
 import com.yannshu.londonfoodmarkets.data.model.FoodMarket
+import com.yannshu.londonfoodmarkets.data.model.OpeningTime
+import com.yannshu.londonfoodmarkets.utils.TimeConstants
 
-class FoodMarketActivityPresenter(private val market: FoodMarket, private val dayOfWeek: String) : BasePresenter<FoodMarketActivityContract.View>() {
+class FoodMarketActivityPresenter(private val market: FoodMarket, private val today: String) : BasePresenter<FoodMarketActivityContract.View>() {
 
     companion object {
         const val SIZE_SMALL = 20
@@ -60,9 +62,22 @@ class FoodMarketActivityPresenter(private val market: FoodMarket, private val da
 
     private fun displayOpeningHours() {
         val openingTimes = market.openingTimes
-        val formattedOpeningHours = if (openingTimes != null) {
-            val todayOpeningTimes = openingTimes.find { it.day.equals(dayOfWeek) }
 
+        getOpeningTimesForDay(openingTimes, today)?.let {
+            mvpView?.displayOpeningHoursForToday(it)
+        }
+        mvpView?.highlightOpeningHoursDay(today)
+
+        TimeConstants.DAYS_OF_WEEK.forEach { day ->
+            getOpeningTimesForDay(openingTimes, day)?.let {
+                mvpView?.displayOpeningHoursForDay(day, it)
+            }
+        }
+    }
+
+    private fun getOpeningTimesForDay(openingTimes: List<OpeningTime>?, day: String): String? {
+        return if (openingTimes != null) {
+            val todayOpeningTimes = openingTimes.find { it.day.equals(day) }
             val openingHour = todayOpeningTimes?.openingHour
             val closingHour = todayOpeningTimes?.closingHour
 
@@ -73,9 +88,6 @@ class FoodMarketActivityPresenter(private val market: FoodMarket, private val da
             }
         } else {
             mvpView?.getUnknownOpeningHours()
-        }
-        formattedOpeningHours?.let {
-            mvpView?.displayOpeningHours(it)
         }
     }
 

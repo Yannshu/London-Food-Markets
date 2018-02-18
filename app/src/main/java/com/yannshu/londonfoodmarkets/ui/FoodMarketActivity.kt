@@ -2,11 +2,13 @@ package com.yannshu.londonfoodmarkets.ui
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Typeface
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.NavUtils
 import android.view.MenuItem
 import android.view.View
+import android.widget.TextView
 import com.yannshu.londonfoodmarkets.R
 import com.yannshu.londonfoodmarkets.config.GlideApp
 import com.yannshu.londonfoodmarkets.contracts.FoodMarketActivityContract
@@ -15,17 +17,35 @@ import com.yannshu.londonfoodmarkets.di.activity.HasActivitySubComponentBuilders
 import com.yannshu.londonfoodmarkets.presenters.FoodMarketActivityPresenter
 import com.yannshu.londonfoodmarkets.ui.base.BaseActivity
 import com.yannshu.londonfoodmarkets.utils.FoodMarketPlaceholderProvider
+import com.yannshu.londonfoodmarkets.utils.TimeConstants
 import kotlinx.android.synthetic.main.activity_food_market.addressTextView
 import kotlinx.android.synthetic.main.activity_food_market.descriptionTextView
 import kotlinx.android.synthetic.main.activity_food_market.detailsLayout
+import kotlinx.android.synthetic.main.activity_food_market.expandHoursImageView
 import kotlinx.android.synthetic.main.activity_food_market.farmersStallsTextView
-import kotlinx.android.synthetic.main.activity_food_market.openingHoursTextView
+import kotlinx.android.synthetic.main.activity_food_market.fridayDayTextView
+import kotlinx.android.synthetic.main.activity_food_market.fridayHoursTextView
+import kotlinx.android.synthetic.main.activity_food_market.mondayDayTextView
+import kotlinx.android.synthetic.main.activity_food_market.mondayHoursTextView
+import kotlinx.android.synthetic.main.activity_food_market.openingHoursExpandableLayout
 import kotlinx.android.synthetic.main.activity_food_market.photoImageView
+import kotlinx.android.synthetic.main.activity_food_market.saturdayDayTextView
+import kotlinx.android.synthetic.main.activity_food_market.saturdayHoursTextView
 import kotlinx.android.synthetic.main.activity_food_market.sizeTextView
 import kotlinx.android.synthetic.main.activity_food_market.streetFoodTextView
+import kotlinx.android.synthetic.main.activity_food_market.sundayDayTextView
+import kotlinx.android.synthetic.main.activity_food_market.sundayHoursTextView
+import kotlinx.android.synthetic.main.activity_food_market.thursdayDayTextView
+import kotlinx.android.synthetic.main.activity_food_market.thursdayHoursTextView
+import kotlinx.android.synthetic.main.activity_food_market.todayHoursLayout
+import kotlinx.android.synthetic.main.activity_food_market.todayHoursTextView
 import kotlinx.android.synthetic.main.activity_food_market.toolbar
+import kotlinx.android.synthetic.main.activity_food_market.tuesdayDayTextView
+import kotlinx.android.synthetic.main.activity_food_market.tuesdayHoursTextView
 import kotlinx.android.synthetic.main.activity_food_market.websiteLayout
 import kotlinx.android.synthetic.main.activity_food_market.websiteTextView
+import kotlinx.android.synthetic.main.activity_food_market.wednesdayDayTextView
+import kotlinx.android.synthetic.main.activity_food_market.wednesdayHoursTextView
 import org.parceler.Parcels
 import javax.inject.Inject
 
@@ -39,8 +59,11 @@ class FoodMarketActivity : BaseActivity(), FoodMarketActivityContract.View {
 
     private lateinit var market: FoodMarket
 
+    private val dayOfWeekViews = HashMap<String, Pair<TextView, TextView>>()
+
     companion object {
-        private val KEY_MARKET = "market"
+        private const val VIEW_ROTATION_180_DEGREE = 180
+        private const val KEY_MARKET = "market"
 
         fun getStartingIntent(context: Context, market: FoodMarket): Intent {
             val intent = Intent(context, FoodMarketActivity::class.java)
@@ -53,6 +76,7 @@ class FoodMarketActivity : BaseActivity(), FoodMarketActivityContract.View {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_food_market)
         initActionBar()
+        initDayOfWeekViews()
         presenter.attachView(this)
         presenter.displayMarket()
     }
@@ -74,6 +98,34 @@ class FoodMarketActivity : BaseActivity(), FoodMarketActivityContract.View {
         setSupportActionBar(toolbar)
         supportActionBar?.title = market.name
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
+
+    private fun initDayOfWeekViews() {
+        dayOfWeekViews[TimeConstants.MONDAY] = Pair(mondayDayTextView, mondayHoursTextView)
+        dayOfWeekViews[TimeConstants.TUESDAY] = Pair(tuesdayDayTextView, tuesdayHoursTextView)
+        dayOfWeekViews[TimeConstants.WEDNESDAY] = Pair(wednesdayDayTextView, wednesdayHoursTextView)
+        dayOfWeekViews[TimeConstants.THURSDAY] = Pair(thursdayDayTextView, thursdayHoursTextView)
+        dayOfWeekViews[TimeConstants.FRIDAY] = Pair(fridayDayTextView, fridayHoursTextView)
+        dayOfWeekViews[TimeConstants.SATURDAY] = Pair(saturdayDayTextView, saturdayHoursTextView)
+        dayOfWeekViews[TimeConstants.SUNDAY] = Pair(sundayDayTextView, sundayHoursTextView)
+
+        todayHoursLayout.setOnClickListener {
+            expandOrCollapseOpeningHoursExpandableLayout()
+        }
+
+        openingHoursExpandableLayout.setOnClickListener {
+            expandOrCollapseOpeningHoursExpandableLayout()
+        }
+
+        openingHoursExpandableLayout.setOnExpansionUpdateListener { expansionFraction, _ -> expandHoursImageView.rotation = expansionFraction * VIEW_ROTATION_180_DEGREE }
+    }
+
+    private fun expandOrCollapseOpeningHoursExpandableLayout() {
+        if (openingHoursExpandableLayout.isExpanded) {
+            openingHoursExpandableLayout.collapse()
+        } else {
+            openingHoursExpandableLayout.expand()
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -117,8 +169,22 @@ class FoodMarketActivity : BaseActivity(), FoodMarketActivityContract.View {
         return getString(R.string.address_unknown)
     }
 
-    override fun displayOpeningHours(openingHours: String) {
-        openingHoursTextView.text = openingHours
+    override fun displayOpeningHoursForToday(openingHours: String) {
+        todayHoursTextView.text = getString(R.string.opening_hours_today, openingHours)
+    }
+
+    override fun highlightOpeningHoursDay(day: String) {
+        dayOfWeekViews[day]?.let {
+            it.first.setTypeface(it.first.typeface, Typeface.BOLD)
+            it.second.setTypeface(it.second.typeface, Typeface.BOLD)
+        }
+    }
+
+    override fun displayOpeningHoursForDay(day: String, openingHours: String) {
+        dayOfWeekViews[day]?.let {
+            it.first.text = day.capitalize()
+            it.second.text = openingHours
+        }
     }
 
     override fun getFormattedOpeningHours(openingHour: String, closingHour: String): String {
