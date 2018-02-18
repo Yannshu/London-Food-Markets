@@ -75,13 +75,14 @@
             <TextView
                 android:id="@+id/todayHoursTextView"
                 style="@style/Content"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/content_vertical_spacing"
-                android:layout_marginTop="@dimen/content_vertical_spacing"
                 android:drawableLeft="@drawable/ic_clock"
                 android:drawablePadding="@dimen/food_market_content_drawable_padding"
-                android:drawableStart="@drawable/ic_clock" />
+                android:drawableStart="@drawable/ic_clock"
+                android:foreground="?attr/selectableItemBackground"
+                android:paddingBottom="@dimen/content_vertical_spacing"
+                android:paddingTop="@dimen/content_vertical_spacing" />
 
             <net.cachapa.expandablelayout.ExpandableLayout
                 android:id="@+id/openingHoursExpandableLayout"
