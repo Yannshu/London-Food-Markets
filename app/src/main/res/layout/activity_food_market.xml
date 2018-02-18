@@ -109,7 +109,7 @@
                 android:foreground="?attr/selectableItemBackground"
                 android:paddingLeft="@dimen/food_market_day_opening_hours_padding"
                 android:paddingStart="@dimen/food_market_day_opening_hours_padding"
-                app:el_duration="1000"
+                app:el_duration="@android:integer/config_longAnimTime"
                 app:el_expanded="false"
                 app:el_parallax="0.5">
 
