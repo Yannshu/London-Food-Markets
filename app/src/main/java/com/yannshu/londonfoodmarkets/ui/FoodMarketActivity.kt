@@ -170,7 +170,7 @@ class FoodMarketActivity : BaseActivity(), FoodMarketActivityContract.View {
     }
 
     override fun displayOpeningHoursForToday(openingHours: String) {
-        todayHoursTextView.text = openingHours
+        todayHoursTextView.text = getString(R.string.opening_hours_today, openingHours)
     }
 
     override fun highlightOpeningHoursDay(day: String) {
