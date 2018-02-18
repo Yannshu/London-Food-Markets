@@ -195,10 +195,6 @@ class FoodMarketActivity : BaseActivity(), FoodMarketActivityContract.View {
         return getString(R.string.opening_hours_closed)
     }
 
-    override fun getClosedToday(): String {
-        return getString(R.string.opening_hours_closed_today)
-    }
-
     override fun getUnknownOpeningHours(): String {
         return getString(R.string.opening_hours_unknown)
     }

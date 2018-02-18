@@ -63,7 +63,7 @@ class FoodMarketActivityPresenter(private val market: FoodMarket, private val to
     private fun displayOpeningHours() {
         val openingTimes = market.openingTimes
 
-        getOpeningTimesForDay(openingTimes, today, true)?.let {
+        getOpeningTimesForDay(openingTimes, today)?.let {
             mvpView?.displayOpeningHoursForToday(it)
         }
         mvpView?.highlightOpeningHoursDay(today)
@@ -75,7 +75,7 @@ class FoodMarketActivityPresenter(private val market: FoodMarket, private val to
         }
     }
 
-    private fun getOpeningTimesForDay(openingTimes: List<OpeningTime>?, day: String, isToday: Boolean = false): String? {
+    private fun getOpeningTimesForDay(openingTimes: List<OpeningTime>?, day: String): String? {
         return if (openingTimes != null) {
             val todayOpeningTimes = openingTimes.find { it.day.equals(day) }
             val openingHour = todayOpeningTimes?.openingHour
@@ -83,8 +83,6 @@ class FoodMarketActivityPresenter(private val market: FoodMarket, private val to
 
             if (openingHour != null && closingHour != null) {
                 mvpView?.getFormattedOpeningHours(openingHour, closingHour)
-            } else if (isToday) {
-                mvpView?.getClosedToday()
             } else {
                 mvpView?.getClosed()
             }

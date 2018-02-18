@@ -5,7 +5,6 @@
     <string name="opening_hours_format">%1$s - %2$s</string>
     <string name="opening_hours_closed">Closed</string>
     <string name="opening_hours_today">Today: %1$s</string>
-    <string name="opening_hours_closed_today">Closed today</string>
     <string name="opening_hours_unknown">Unknown opening hours</string>
     <string name="description_unknown">Just another food market</string>
 
