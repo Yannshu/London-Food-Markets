@@ -41,10 +41,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clipToPadding="false"
-        android:paddingEnd="@dimen/content_padding_horizontal"
-        android:paddingLeft="@dimen/content_padding_horizontal"
-        android:paddingRight="@dimen/content_padding_horizontal"
-        android:paddingStart="@dimen/content_padding_horizontal"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
@@ -58,6 +54,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/food_market_description_spacing"
+                android:layout_marginEnd="@dimen/content_padding_horizontal"
+                android:layout_marginLeft="@dimen/content_padding_horizontal"
+                android:layout_marginRight="@dimen/content_padding_horizontal"
+                android:layout_marginStart="@dimen/content_padding_horizontal"
                 android:layout_marginTop="@dimen/food_market_description_spacing"
                 android:gravity="center_horizontal" />
 
@@ -67,6 +67,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/content_vertical_spacing"
+                android:layout_marginEnd="@dimen/content_padding_horizontal"
+                android:layout_marginLeft="@dimen/content_padding_horizontal"
+                android:layout_marginRight="@dimen/content_padding_horizontal"
+                android:layout_marginStart="@dimen/content_padding_horizontal"
                 android:layout_marginTop="@dimen/content_vertical_spacing"
                 android:drawableLeft="@drawable/ic_address"
                 android:drawablePadding="@dimen/food_market_content_drawable_padding"
@@ -78,6 +82,10 @@
                 android:layout_height="wrap_content"
                 android:foreground="?attr/selectableItemBackground"
                 android:paddingBottom="@dimen/content_vertical_spacing"
+                android:paddingEnd="@dimen/content_padding_horizontal"
+                android:paddingLeft="@dimen/content_padding_horizontal"
+                android:paddingRight="@dimen/content_padding_horizontal"
+                android:paddingStart="@dimen/content_padding_horizontal"
                 android:paddingTop="@dimen/content_vertical_spacing">
 
                 <TextView
@@ -106,6 +114,10 @@
                 android:id="@+id/openingHoursExpandableLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/content_padding_horizontal"
+                android:layout_marginLeft="@dimen/content_padding_horizontal"
+                android:layout_marginRight="@dimen/content_padding_horizontal"
+                android:layout_marginStart="@dimen/content_padding_horizontal"
                 android:foreground="?attr/selectableItemBackground"
                 android:paddingLeft="@dimen/food_market_day_opening_hours_padding"
                 android:paddingStart="@dimen/food_market_day_opening_hours_padding"
@@ -297,6 +309,10 @@
                 android:background="?attr/selectableItemBackground"
                 android:gravity="center_vertical"
                 android:paddingBottom="@dimen/content_vertical_spacing"
+                android:paddingEnd="@dimen/content_padding_horizontal"
+                android:paddingLeft="@dimen/content_padding_horizontal"
+                android:paddingRight="@dimen/content_padding_horizontal"
+                android:paddingStart="@dimen/content_padding_horizontal"
                 android:paddingTop="@dimen/content_vertical_spacing">
 
                 <TextView
@@ -329,6 +345,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/content_vertical_spacing"
+                android:layout_marginEnd="@dimen/content_padding_horizontal"
+                android:layout_marginLeft="@dimen/content_padding_horizontal"
+                android:layout_marginRight="@dimen/content_padding_horizontal"
+                android:layout_marginStart="@dimen/content_padding_horizontal"
                 android:layout_marginTop="@dimen/content_vertical_spacing"
                 android:orientation="vertical">
 
