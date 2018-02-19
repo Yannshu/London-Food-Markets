@@ -13,7 +13,6 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
@@ -35,6 +34,7 @@ import com.yannshu.londonfoodmarkets.utils.AdsWrapper
 import com.yannshu.londonfoodmarkets.utils.VectorDescriptorFactory
 import kotlinx.android.synthetic.main.activity_main.adView
 import kotlinx.android.synthetic.main.activity_main.foodMarketsRecyclerView
+import kotlinx.android.synthetic.main.activity_main.mapView
 import kotlinx.android.synthetic.main.activity_main.toolbar
 import javax.inject.Inject
 
@@ -49,8 +49,6 @@ class MainActivity : BaseActivity(), MainActivityContract.View {
     @Inject
     internal lateinit var adsWrapper: AdsWrapper
 
-    private var mapFragment: SupportMapFragment? = null
-
     private var map: GoogleMap? = null
 
     private var locationClient: FusedLocationProviderClient? = null
@@ -62,11 +60,11 @@ class MainActivity : BaseActivity(), MainActivityContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        mapView.onCreate(savedInstanceState)
         initToolbar()
+        initFoodMarketsRecyclerView()
         presenter.attachView(this)
-        presenter.loadData()
         requestLocationPermission()
-        initFoodMarketRecyclerView()
         initMap()
         initAds()
     }
@@ -79,8 +77,19 @@ class MainActivity : BaseActivity(), MainActivityContract.View {
                 .injectMembers(this)
     }
 
+    override fun onStart() {
+        super.onStart()
+        mapView.onStart()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mapView.onResume()
+    }
+
     override fun onPause() {
         super.onPause()
+        mapView.onPause()
         map?.let {
             val cameraPosition = it.cameraPosition
             presenter.saveMapCameraPosition(cameraPosition.target.latitude.toFloat(), cameraPosition.target.longitude.toFloat(),
@@ -88,11 +97,27 @@ class MainActivity : BaseActivity(), MainActivityContract.View {
         }
     }
 
+    override fun onStop() {
+        super.onStop()
+        mapView.onStop()
+    }
+
     override fun onDestroy() {
         super.onDestroy()
+        mapView.onDestroy()
         presenter.destroyData()
         presenter.detachView()
         destroyMap()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
+        mapView.onSaveInstanceState(outState)
+    }
+
+    override fun onLowMemory() {
+        super.onLowMemory()
+        mapView.onLowMemory()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -114,29 +139,16 @@ class MainActivity : BaseActivity(), MainActivityContract.View {
         setSupportActionBar(toolbar)
     }
 
-    private fun initFoodMarketRecyclerView() {
-        foodMarketAdapter.listener = object : FoodMarketsAdapter.Listener {
-            override fun onClick(foodMarket: FoodMarket) {
-                onFoodMarketClick(foodMarket)
-            }
-        }
-
-        foodMarketsRecyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
-        foodMarketsRecyclerView.setHasFixedSize(true)
-        foodMarketsRecyclerView.adapter = foodMarketAdapter
-    }
-
     private fun initMap() {
-        mapFragment = supportFragmentManager.findFragmentById(R.id.mapFragment) as SupportMapFragment
-        mapFragment?.getMapAsync { map: GoogleMap ->
+        mapView.getMapAsync { map: GoogleMap ->
             this.map = map
             map.setPadding(0, 0, 0, resources.getDimensionPixelSize(R.dimen.food_market_recycler_view_height))
             map.setOnMarkerClickListener { marker: Marker ->
                 onFoodMarketClick(marker.tag as FoodMarket)
                 true
             }
-            presenter.onMapLoaded()
-
+            presenter.positionMapCenter()
+            presenter.loadData()
             if (locationPermissionGranted) {
                 showUserLocationOnMap()
             }
@@ -144,7 +156,6 @@ class MainActivity : BaseActivity(), MainActivityContract.View {
     }
 
     private fun destroyMap() {
-        mapFragment = null
         map = null
     }
 
@@ -217,10 +228,22 @@ class MainActivity : BaseActivity(), MainActivityContract.View {
         marker?.tag = market
     }
 
-    override fun displayFoodMarketList(foodMarkets: List<FoodMarket>) {
+    private fun initFoodMarketsRecyclerView() {
+        foodMarketsRecyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
+        foodMarketsRecyclerView.setHasFixedSize(true)
+        foodMarketsRecyclerView.adapter = foodMarketAdapter
+
+        foodMarketAdapter.listener = object : FoodMarketsAdapter.Listener {
+            override fun onClick(foodMarket: FoodMarket) {
+                onFoodMarketClick(foodMarket)
+            }
+        }
+    }
+
+    override fun displayFoodMarketsRecyclerView(foodMarkets: List<FoodMarket>) {
+        foodMarketsRecyclerView.visibility = View.VISIBLE
         foodMarketAdapter.foodMarkets = foodMarkets
         foodMarketAdapter.notifyDataSetChanged()
-        foodMarketsRecyclerView.visibility = View.VISIBLE
     }
 
     private fun onFoodMarketClick(foodMarket: FoodMarket) {

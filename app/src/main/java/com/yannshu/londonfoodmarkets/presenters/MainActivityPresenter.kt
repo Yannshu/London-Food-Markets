@@ -16,8 +16,6 @@ class MainActivityPresenter(private val foodMarketDataSource: FoodMarketsDataSou
         private const val DEFAULT_ZOOM = 10.0f
     }
 
-    private var mapLoaded: Boolean = false
-
     private var foodMarkets: List<FoodMarket>? = null
 
     private var userLat: Double = LONDON_LAT
@@ -30,10 +28,8 @@ class MainActivityPresenter(private val foodMarketDataSource: FoodMarketsDataSou
 
         override fun onComplete(foodMarkets: List<FoodMarket>) {
             this@MainActivityPresenter.foodMarkets = sortFoodMarketByDistanceTo(foodMarkets, userLat, userLng)
-            if (mapLoaded) {
-                this@MainActivityPresenter.foodMarkets?.let {
-                    displayFoodMarkets(it)
-                }
+            this@MainActivityPresenter.foodMarkets?.let {
+                displayFoodMarkets(it)
             }
         }
     }
@@ -49,18 +45,9 @@ class MainActivityPresenter(private val foodMarketDataSource: FoodMarketsDataSou
 
     fun destroyData() {
         foodMarketDataSource.listener = null
-        mapLoaded = false
     }
 
-    fun onMapLoaded() {
-        mapLoaded = true
-        positionMapCenter()
-        foodMarkets?.let {
-            displayFoodMarkets(it)
-        }
-    }
-
-    private fun positionMapCenter() {
+    fun positionMapCenter() {
         if (mapCameraPositionSaver.hasCameraPositionBeenSavedRecently()) {
             mvpView?.moveMapCenterTo(mapCameraPositionSaver.getLatitude().toDouble(), mapCameraPositionSaver.getLongitude().toDouble(),
                     mapCameraPositionSaver.getZoom(), mapCameraPositionSaver.getBearing(), mapCameraPositionSaver.getTilt())
@@ -73,7 +60,7 @@ class MainActivityPresenter(private val foodMarketDataSource: FoodMarketsDataSou
         foodMarkets.forEach({ market: FoodMarket ->
             mvpView?.addMarket(market)
         })
-        mvpView?.displayFoodMarketList(foodMarkets)
+        mvpView?.displayFoodMarketsRecyclerView(foodMarkets)
     }
 
     fun onLocationLoaded(latitude: Double, longitude: Double) {
@@ -81,7 +68,7 @@ class MainActivityPresenter(private val foodMarketDataSource: FoodMarketsDataSou
         userLng = longitude
         foodMarkets?.let {
             val sortedFoodMarkets = sortFoodMarketByDistanceTo(it, userLat, userLng)
-            mvpView?.displayFoodMarketList(sortedFoodMarkets)
+            mvpView?.displayFoodMarketsRecyclerView(sortedFoodMarkets)
             foodMarkets = sortedFoodMarkets
         }
     }

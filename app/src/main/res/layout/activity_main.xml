@@ -16,9 +16,8 @@
         ads:adSize="SMART_BANNER"
         ads:adUnitId="@string/google_admob_ad_maps_id" />
 
-    <fragment
-        android:id="@+id/mapFragment"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/mapView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/adView" />
