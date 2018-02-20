@@ -66,7 +66,6 @@ class MainActivity : BaseActivity(), MainActivityContract.View {
         presenter.attachView(this)
         requestLocationPermission()
         initMap()
-        initAds()
     }
 
     override fun injectMembers(hasActivitySubComponentBuilders: HasActivitySubComponentBuilders) {
@@ -141,18 +140,23 @@ class MainActivity : BaseActivity(), MainActivityContract.View {
 
     private fun initMap() {
         mapView.getMapAsync { map: GoogleMap ->
-            this.map = map
-            map.setPadding(0, 0, 0, resources.getDimensionPixelSize(R.dimen.food_market_recycler_view_height))
-            map.setOnMarkerClickListener { marker: Marker ->
-                onFoodMarketClick(marker.tag as FoodMarket)
-                true
-            }
-            presenter.positionMapCenter()
-            presenter.loadData()
-            if (locationPermissionGranted) {
-                showUserLocationOnMap()
-            }
+            onMapLoaded(map)
         }
+    }
+
+    private fun onMapLoaded(map: GoogleMap) {
+        this.map = map
+
+        map.setOnMarkerClickListener { marker: Marker ->
+            onFoodMarketClick(marker.tag as FoodMarket)
+            true
+        }
+        presenter.positionMapCenter()
+        presenter.loadData()
+        if (locationPermissionGranted) {
+            showUserLocationOnMap()
+        }
+        initAds()
     }
 
     private fun destroyMap() {
@@ -241,7 +245,11 @@ class MainActivity : BaseActivity(), MainActivityContract.View {
     }
 
     override fun displayFoodMarketsRecyclerView(foodMarkets: List<FoodMarket>) {
-        foodMarketsRecyclerView.visibility = View.VISIBLE
+        if (foodMarketsRecyclerView.visibility != View.VISIBLE) {
+            map?.setPadding(0, 0, 0, resources.getDimensionPixelSize(R.dimen.food_market_recycler_view_height))
+            foodMarketsRecyclerView.visibility = View.VISIBLE
+        }
+
         foodMarketAdapter.foodMarkets = foodMarkets
         foodMarketAdapter.notifyDataSetChanged()
     }
