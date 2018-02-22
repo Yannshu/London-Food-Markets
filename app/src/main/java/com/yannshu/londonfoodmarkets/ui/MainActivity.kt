@@ -2,6 +2,8 @@ package com.yannshu.londonfoodmarkets.ui
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.support.v7.widget.LinearLayoutManager
@@ -39,6 +41,10 @@ import kotlinx.android.synthetic.main.activity_main.toolbar
 import javax.inject.Inject
 
 class MainActivity : BaseActivity(), MainActivityContract.View {
+
+    companion object {
+        fun getStartingIntent(context: Context) = Intent(context, MainActivity::class.java)
+    }
 
     @Inject
     internal lateinit var presenter: MainActivityPresenter
