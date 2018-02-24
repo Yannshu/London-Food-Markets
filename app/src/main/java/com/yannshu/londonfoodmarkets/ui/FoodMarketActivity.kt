@@ -3,8 +3,8 @@ package com.yannshu.londonfoodmarkets.ui
 import android.content.Context
 import android.content.Intent
 import android.graphics.Typeface
-import android.net.Uri
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v4.app.NavUtils
 import android.view.MenuItem
 import android.view.View
@@ -14,6 +14,7 @@ import com.yannshu.londonfoodmarkets.config.GlideApp
 import com.yannshu.londonfoodmarkets.contracts.FoodMarketActivityContract
 import com.yannshu.londonfoodmarkets.data.model.FoodMarket
 import com.yannshu.londonfoodmarkets.di.activity.HasActivitySubComponentBuilders
+import com.yannshu.londonfoodmarkets.extensions.safeStartActivityWithViewAction
 import com.yannshu.londonfoodmarkets.presenters.FoodMarketActivityPresenter
 import com.yannshu.londonfoodmarkets.ui.base.BaseActivity
 import com.yannshu.londonfoodmarkets.utils.FoodMarketPlaceholderProvider
@@ -29,6 +30,7 @@ import kotlinx.android.synthetic.main.activity_food_market.mondayDayTextView
 import kotlinx.android.synthetic.main.activity_food_market.mondayHoursTextView
 import kotlinx.android.synthetic.main.activity_food_market.openingHoursExpandableLayout
 import kotlinx.android.synthetic.main.activity_food_market.photoImageView
+import kotlinx.android.synthetic.main.activity_food_market.rootLayout
 import kotlinx.android.synthetic.main.activity_food_market.saturdayDayTextView
 import kotlinx.android.synthetic.main.activity_food_market.saturdayHoursTextView
 import kotlinx.android.synthetic.main.activity_food_market.sizeTextView
@@ -210,9 +212,9 @@ class FoodMarketActivity : BaseActivity(), FoodMarketActivityContract.View {
     }
 
     private fun openBrowser(url: String) {
-        val intent = Intent(Intent.ACTION_VIEW)
-        intent.data = Uri.parse(url)
-        startActivity(intent)
+        if (!safeStartActivityWithViewAction(url)) {
+            Snackbar.make(rootLayout, R.string.install_browser, Snackbar.LENGTH_LONG).show()
+        }
     }
 
     override fun showDetails() {
