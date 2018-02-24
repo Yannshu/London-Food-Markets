@@ -11,9 +11,9 @@ class MainActivityPresenter(private val foodMarketDataSource: FoodMarketsDataSou
         BasePresenter<MainActivityContract.View>() {
 
     companion object {
-        private const val LONDON_LAT = 51.507354
+        private const val LONDON_LAT = 51.480000
         private const val LONDON_LNG = -0.127758
-        private const val DEFAULT_ZOOM = 10.0f
+        private const val DEFAULT_ZOOM = 11.0f
     }
 
     private var foodMarkets: List<FoodMarket>? = null
