@@ -19,6 +19,7 @@
         android:layout_height="wrap_content"
         android:background="?attr/selectableItemBackground"
         android:orientation="vertical"
+        android:paddingBottom="@dimen/separator_line_vertical_spacing"
         android:paddingEnd="@dimen/content_padding_horizontal"
         android:paddingLeft="@dimen/content_padding_horizontal"
         android:paddingRight="@dimen/content_padding_horizontal"
@@ -51,13 +52,12 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/separator_line_thickness"
-        android:layout_marginBottom="@dimen/separator_line_vertical_spacing"
-        android:layout_marginTop="@dimen/separator_line_vertical_spacing"
         android:background="@android:color/darker_gray" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/separator_line_vertical_spacing"
         android:orientation="vertical"
         android:paddingEnd="@dimen/content_padding_horizontal"
         android:paddingLeft="@dimen/content_padding_horizontal"
