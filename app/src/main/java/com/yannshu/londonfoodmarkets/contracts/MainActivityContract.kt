@@ -6,6 +6,6 @@ interface MainActivityContract {
     interface View : MvpView {
         fun moveMapCenterTo(lat: Double, lng: Double, zoom: Float, bearing: Float = 0.0f, tilt: Float = 0.0f)
         fun addMarket(market: FoodMarket)
-        fun displayFoodMarketList(foodMarkets: List<FoodMarket>)
+        fun displayFoodMarketsRecyclerView(foodMarkets: List<FoodMarket>)
     }
 }

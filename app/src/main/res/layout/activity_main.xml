@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/rootLayout"
@@ -7,7 +8,7 @@
     android:layout_height="match_parent"
     tools:context="com.yannshu.londonfoodmarkets.ui.MainActivity">
 
-    <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+    <com.google.android.gms.ads.AdView
         android:id="@+id/adView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -16,12 +17,11 @@
         ads:adSize="SMART_BANNER"
         ads:adUnitId="@string/google_admob_ad_maps_id" />
 
-    <fragment
-        android:id="@+id/mapFragment"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/mapView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/adView" />
+        android:layout_below="@+id/adView" />
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
