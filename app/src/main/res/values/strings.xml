@@ -12,7 +12,7 @@
     <string name="permission_location_rationale_message">Location permission is needed to display your position on the map.</string>
     <string name="cancel">Cancel</string>
     <string name="ok">OK</string>
-    <string name="on_the_market">The market:</string>
+    <string name="featuring">Featuring:</string>
     <string name="farmers_stalls">Farmers stalls</string>
     <string name="street_food_stands">Street food stands</string>
     <string name="size_very_big">Over 100 traders, cafes and restaurants</string>

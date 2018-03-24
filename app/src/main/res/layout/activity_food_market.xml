@@ -47,20 +47,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/content_vertical_group_spacing"
+            android:layout_marginTop="@dimen/content_vertical_group_spacing"
             android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/descriptionTextView"
-                style="@style/Content.Italic"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/food_market_description_spacing"
-                android:layout_marginEnd="@dimen/content_padding_horizontal"
-                android:layout_marginLeft="@dimen/content_padding_horizontal"
-                android:layout_marginRight="@dimen/content_padding_horizontal"
-                android:layout_marginStart="@dimen/content_padding_horizontal"
-                android:layout_marginTop="@dimen/food_market_description_spacing"
-                android:gravity="center_horizontal" />
 
             <TextView
                 android:id="@+id/addressTextView"
@@ -72,7 +61,6 @@
                 android:layout_marginLeft="@dimen/content_padding_horizontal"
                 android:layout_marginRight="@dimen/content_padding_horizontal"
                 android:layout_marginStart="@dimen/content_padding_horizontal"
-                android:layout_marginTop="@dimen/content_vertical_spacing"
                 android:drawableLeft="@drawable/ic_address"
                 android:drawablePadding="@dimen/food_market_content_drawable_padding"
                 android:drawableStart="@drawable/ic_address" />
@@ -339,6 +327,27 @@
 
             </RelativeLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/separator_line_thickness"
+                android:layout_marginBottom="@dimen/content_vertical_group_spacing"
+                android:layout_marginEnd="@dimen/content_padding_horizontal"
+                android:layout_marginLeft="@dimen/content_padding_horizontal"
+                android:layout_marginRight="@dimen/content_padding_horizontal"
+                android:layout_marginStart="@dimen/content_padding_horizontal"
+                android:layout_marginTop="@dimen/content_vertical_group_spacing"
+                android:background="@color/separator_line" />
+
+            <TextView
+                android:id="@+id/descriptionTextView"
+                style="@style/Content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/content_padding_horizontal"
+                android:layout_marginLeft="@dimen/content_padding_horizontal"
+                android:layout_marginRight="@dimen/content_padding_horizontal"
+                android:layout_marginStart="@dimen/content_padding_horizontal" />
+
             <LinearLayout
                 android:id="@+id/detailsLayout"
                 android:layout_width="match_parent"
@@ -355,7 +364,7 @@
                     style="@style/Content"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/on_the_market" />
+                    android:text="@string/featuring" />
 
                 <TextView
                     android:id="@+id/sizeTextView"
