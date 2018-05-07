@@ -8,7 +8,7 @@ class SharedPreferencesWrapper(context: Context, name: String = APP_SHARED_PREFE
         private const val APP_SHARED_PREFERENCES = "london-food-markets"
     }
 
-    private val sharedPreferences = context.getSharedPreferences(APP_SHARED_PREFERENCES, Context.MODE_PRIVATE)
+    private val sharedPreferences = context.getSharedPreferences(name, Context.MODE_PRIVATE)
 
     fun saveFloat(key: String, value: Float) = sharedPreferences.edit().putFloat(key, value).apply()
 
