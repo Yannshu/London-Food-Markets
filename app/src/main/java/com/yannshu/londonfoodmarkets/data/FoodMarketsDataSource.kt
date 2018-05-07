@@ -8,12 +8,14 @@ class FoodMarketsDataSource(private val databases: FirebaseFirestore, private va
 
     companion object {
         const val FOOD_MARKETS = "food-markets"
+        const val FIELD_VERIFIED = "verified"
     }
 
     var listener: Listener? = null
 
     fun loadFoodMarkets() {
         databases.collection(FOOD_MARKETS)
+                .whereEqualTo(FIELD_VERIFIED, true)
                 .get()
                 .addOnFailureListener { listener?.onFailure() }
                 .addOnCompleteListener { task ->
