@@ -7,5 +7,7 @@ interface MainActivityContract {
         fun moveMapCenterTo(lat: Double, lng: Double, zoom: Float, bearing: Float = 0.0f, tilt: Float = 0.0f)
         fun addMarket(market: FoodMarket)
         fun displayFoodMarketsRecyclerView(foodMarkets: List<FoodMarket>)
+        fun setOpenTodayEnabled(enabled: Boolean)
+        fun clearMarkers()
     }
 }

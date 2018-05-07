@@ -6,8 +6,10 @@ import com.yannshu.londonfoodmarkets.data.model.FoodMarket
 import com.yannshu.londonfoodmarkets.utils.MapCameraPositionSaver
 import com.yannshu.londonfoodmarkets.utils.MapsUtils
 
-class MainActivityPresenter(private val foodMarketDataSource: FoodMarketsDataSource, private val mapsUtils: MapsUtils,
-                            private val mapCameraPositionSaver: MapCameraPositionSaver) :
+class MainActivityPresenter(private val foodMarketDataSource: FoodMarketsDataSource,
+                            private val mapsUtils: MapsUtils,
+                            private val mapCameraPositionSaver: MapCameraPositionSaver,
+                            private val today: String) :
         BasePresenter<MainActivityContract.View>() {
 
     companion object {
@@ -29,6 +31,7 @@ class MainActivityPresenter(private val foodMarketDataSource: FoodMarketsDataSou
         override fun onComplete(foodMarkets: List<FoodMarket>) {
             this@MainActivityPresenter.foodMarkets = sortFoodMarketByDistanceTo(foodMarkets, userLat, userLng)
             this@MainActivityPresenter.foodMarkets?.let {
+                mvpView?.setOpenTodayEnabled(true)
                 displayFoodMarkets(it)
             }
         }
@@ -56,11 +59,13 @@ class MainActivityPresenter(private val foodMarketDataSource: FoodMarketsDataSou
         }
     }
 
-    private fun displayFoodMarkets(foodMarkets: List<FoodMarket>) {
-        foodMarkets.forEach({ market: FoodMarket ->
-            mvpView?.addMarket(market)
-        })
-        mvpView?.displayFoodMarketsRecyclerView(foodMarkets)
+    private fun displayFoodMarkets(foodMarkets: List<FoodMarket>?) {
+        foodMarkets?.let {
+            it.forEach({ market: FoodMarket ->
+                mvpView?.addMarket(market)
+            })
+            mvpView?.displayFoodMarketsRecyclerView(it)
+        }
     }
 
     fun onLocationLoaded(latitude: Double, longitude: Double) {
@@ -78,4 +83,16 @@ class MainActivityPresenter(private val foodMarketDataSource: FoodMarketsDataSou
             mapsUtils.computeDistance(it.coordinates!!.latitude, it.coordinates!!.longitude, latitude, longitude)
         })))
     }
+
+    fun filterMarkets(openToday: Boolean) {
+        mvpView?.clearMarkers()
+        val filteredFoodMarkets = if (openToday) {
+            foodMarkets?.filter { it.openingTimes?.find { it.day == today } != null }
+        } else {
+            foodMarkets
+        }
+        displayFoodMarkets(filteredFoodMarkets)
+    }
+
+    fun foodMarketsLoaded() = foodMarkets != null
 }
