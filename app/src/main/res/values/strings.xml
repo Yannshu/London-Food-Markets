@@ -19,6 +19,7 @@
     <string name="size_big">Between 50 and 100 traders, cafes and restaurants</string>
     <string name="size_medium">Between 20 and 50 traders, cafes and restaurants</string>
     <string name="size_small">Less than 20 traders, cafes and restaurants</string>
+    <string name="open_today">Open today</string>
 
     <string name="about">About</string>
     <string name="author">Created by Yann Viens</string>

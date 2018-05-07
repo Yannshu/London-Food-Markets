@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#4CAF50</color>
     <color name="colorPrimaryDark">#388E3C</color>
-    <color name="colorAccent">#DE6461</color>
+    <color name="colorAccent">#FFFFFF</color>
 
     <color name="food_markets_recycler_view_background">#aaffffff</color>
     <color name="food_markets_recycler_view_item_name_background">#ccffffff</color>

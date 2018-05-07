@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.CheckBox
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -127,6 +128,8 @@ class MainActivity : BaseActivity(), MainActivityContract.View {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_activity_main, menu)
+        val openTodayCheckBox = menu?.findItem(R.id.open_today)?.actionView as CheckBox
+        openTodayCheckBox.setText(R.string.open_today)
         return true
     }
 
