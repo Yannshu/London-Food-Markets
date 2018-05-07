@@ -16,13 +16,13 @@ class IconsAdapter(context: Context, private val icons: List<Icon>) : RecyclerVi
 
     var listener: Listener? = null
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): IconViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IconViewHolder {
         val view = layoutInflater.inflate(R.layout.item_icon, parent, false)
         return IconViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: IconViewHolder?, position: Int) {
-        holder?.bind(icons[position], listener)
+    override fun onBindViewHolder(holder: IconViewHolder, position: Int) {
+        holder.bind(icons[position], listener)
     }
 
     override fun getItemCount(): Int = icons.size
