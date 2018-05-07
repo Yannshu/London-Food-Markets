@@ -21,13 +21,13 @@ class FoodMarketsAdapter(private val context: Context, private val foodMarketPla
 
     var listener: Listener? = null
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): FoodMarketViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FoodMarketViewHolder {
         val view = layoutInflater.inflate(R.layout.item_food_market, parent, false)
         return FoodMarketViewHolder(context, foodMarketPlaceholderProvider, view)
     }
 
-    override fun onBindViewHolder(holder: FoodMarketViewHolder?, position: Int) {
-        holder?.bind(foodMarkets!![position], listener)
+    override fun onBindViewHolder(holder: FoodMarketViewHolder, position: Int) {
+        holder.bind(foodMarkets!![position], listener)
     }
 
     override fun getItemCount(): Int {
