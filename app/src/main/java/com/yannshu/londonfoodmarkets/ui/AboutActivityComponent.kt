@@ -12,7 +12,7 @@ import dagger.Provides
 import dagger.Subcomponent
 
 @ActivityScope
-@Subcomponent(modules = arrayOf(AboutActivityComponent.AboutActivityModule::class))
+@Subcomponent(modules = [AboutActivityComponent.AboutActivityModule::class])
 interface AboutActivityComponent : ActivityComponent<AboutActivity> {
 
     @Subcomponent.Builder
