@@ -12,12 +12,12 @@ import org.parceler.ParcelConstructor
         value = GeoPoint::class,
         annotation = Parcel(converter = GeoPointParcelConverter::class)
 )
-class FoodMarket() {
+open class FoodMarket() {
 
     companion object {
-        val FIRST_PHOTO_INDEX = 0
-        val CATEGORY_FARMERS = "farmers"
-        val CATEGORY_STREET_FOOD = "street-food"
+        const val FIRST_PHOTO_INDEX = 0
+        const val CATEGORY_FARMERS = "farmers"
+        const val CATEGORY_STREET_FOOD = "street-food"
     }
 
     @JsonProperty("name")

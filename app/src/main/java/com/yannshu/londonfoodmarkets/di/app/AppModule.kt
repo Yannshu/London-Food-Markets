@@ -19,7 +19,7 @@ import javax.inject.Singleton
 class AppModule(private val application: Application) {
 
     companion object {
-        private val SHARED_PREF_NAME = "app_shared_preferences"
+        private const val SHARED_PREF_NAME = "app_shared_preferences"
     }
 
     @Provides

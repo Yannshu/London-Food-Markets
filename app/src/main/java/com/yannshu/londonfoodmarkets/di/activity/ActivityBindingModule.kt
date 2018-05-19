@@ -10,11 +10,11 @@ import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
 
-@Module(subcomponents = arrayOf(
-        MainActivityComponent::class,
-        FoodMarketActivityComponent::class,
-        AboutActivityComponent::class
-))
+@Module(subcomponents = [
+    MainActivityComponent::class,
+    FoodMarketActivityComponent::class,
+    AboutActivityComponent::class
+])
 abstract class ActivityBindingModule {
 
     @Binds
