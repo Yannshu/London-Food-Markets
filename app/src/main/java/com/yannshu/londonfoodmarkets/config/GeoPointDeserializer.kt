@@ -9,8 +9,8 @@ import com.google.firebase.firestore.GeoPoint
 class GeoPointDeserializer : StdDeserializer<GeoPoint>(GeoPoint::class.java) {
 
     companion object {
-        val ATTRIBUTE_LATITUDE = "latitude"
-        val ATTRIBUTE_LONGITUDE = "longitude"
+        const val ATTRIBUTE_LATITUDE = "latitude"
+        const val ATTRIBUTE_LONGITUDE = "longitude"
     }
 
     override fun deserialize(jsonParser: JsonParser?, context: DeserializationContext?): GeoPoint {
