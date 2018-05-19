@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.CheckBox
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -62,6 +63,8 @@ class MainActivity : BaseActivity(), MainActivityContract.View {
     private var locationPermissionGranted = false
 
     private var bitmapDescriptor: BitmapDescriptor? = null
+
+    private var openTodayCheckBox: CheckBox? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -127,6 +130,12 @@ class MainActivity : BaseActivity(), MainActivityContract.View {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_activity_main, menu)
+        openTodayCheckBox = menu?.findItem(R.id.open_today)?.actionView as CheckBox
+        openTodayCheckBox?.setText(R.string.open_today)
+        openTodayCheckBox?.setOnCheckedChangeListener { _, isChecked ->
+            presenter.filterMarkets(isChecked)
+        }
+        openTodayCheckBox?.isEnabled = presenter.foodMarketsLoaded()
         return true
     }
 
@@ -258,6 +267,14 @@ class MainActivity : BaseActivity(), MainActivityContract.View {
 
         foodMarketAdapter.foodMarkets = foodMarkets
         foodMarketAdapter.notifyDataSetChanged()
+    }
+
+    override fun setOpenTodayEnabled(enabled: Boolean) {
+        openTodayCheckBox?.isEnabled = enabled
+    }
+
+    override fun clearMarkers() {
+        map?.clear()
     }
 
     private fun onFoodMarketClick(foodMarket: FoodMarket) {
