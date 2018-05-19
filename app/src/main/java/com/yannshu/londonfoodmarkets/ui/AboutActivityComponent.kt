@@ -27,6 +27,7 @@ interface AboutActivityComponent : ActivityComponent<AboutActivity> {
         @Provides
         fun provideIcons(): List<Icon> {
             val icons = ArrayList<Icon>()
+            icons.add(Icon(R.string.credit_icon_big_ben_description, R.string.credit_icon_big_ben_url, R.drawable.ic_big_ben))
             icons.add(Icon(R.string.credit_icon_store_location_description, R.string.credit_icon_store_location_url, R.drawable.ic_market_marker))
             icons.add(Icon(R.string.credit_icon_cow_description, R.string.credit_icon_cow_url, R.drawable.ic_cow))
             icons.add(Icon(R.string.credit_icon_hot_dog_description, R.string.credit_icon_hot_dog_url, R.drawable.ic_hot_dog))

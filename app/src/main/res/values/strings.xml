@@ -51,6 +51,9 @@
     <string name="credit_icon_size_description">sizes by Arthur Shlain</string>
     <string name="credit_icon_size_url">https://thenounproject.com/icon/844736/</string>
 
+    <string name="credit_icon_big_ben_description">Big Ben from Smashicon</string>
+    <string name="credit_icon_big_ben_url">https://www.flaticon.com/free-icon/big-ben_226818</string>
+
     <string name="install_browser">Install a browser from your favorite app store to open this link.</string>
     <string name="install">Install</string>
 
