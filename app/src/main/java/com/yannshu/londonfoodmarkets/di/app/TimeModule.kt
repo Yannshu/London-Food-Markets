@@ -3,8 +3,7 @@ package com.yannshu.londonfoodmarkets.di.app
 import dagger.Module
 import dagger.Provides
 import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
+import java.util.*
 import javax.inject.Named
 
 @Module
@@ -18,13 +17,9 @@ class TimeModule {
 
     @Provides
     @Named(NAME_DAY_OF_WEEK_STRING)
-    fun provideDayOfWeek(@Named(NAME_DAY_OF_WEEK_FORMAT) format: SimpleDateFormat): String {
-        return format.format(Date()).toLowerCase()
-    }
+    fun provideDayOfWeek(@Named(NAME_DAY_OF_WEEK_FORMAT) format: SimpleDateFormat) = format.format(Date()).toLowerCase()
 
     @Provides
     @Named(NAME_DAY_OF_WEEK_FORMAT)
-    fun provideDayOfWeekDateFormat(): SimpleDateFormat {
-        return SimpleDateFormat(DAY_OF_WEEK_STRING, Locale.UK)
-    }
+    fun provideDayOfWeekDateFormat() = SimpleDateFormat(DAY_OF_WEEK_STRING, Locale.UK)
 }

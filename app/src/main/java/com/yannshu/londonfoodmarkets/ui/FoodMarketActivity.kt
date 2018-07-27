@@ -13,7 +13,6 @@ import com.yannshu.londonfoodmarkets.R
 import com.yannshu.londonfoodmarkets.config.GlideApp
 import com.yannshu.londonfoodmarkets.contracts.FoodMarketActivityContract
 import com.yannshu.londonfoodmarkets.data.model.FoodMarket
-import com.yannshu.londonfoodmarkets.di.activity.HasActivitySubComponentBuilders
 import com.yannshu.londonfoodmarkets.extensions.safeStartActivityWithViewAction
 import com.yannshu.londonfoodmarkets.presenters.FoodMarketActivityPresenter
 import com.yannshu.londonfoodmarkets.ui.base.BaseActivity
@@ -59,7 +58,7 @@ class FoodMarketActivity : BaseActivity(), FoodMarketActivityContract.View {
     @Inject
     internal lateinit var foodMarketPlaceholderProvider: FoodMarketPlaceholderProvider
 
-    private lateinit var market: FoodMarket
+    lateinit var market: FoodMarket
 
     private val dayOfWeekViews = HashMap<String, Pair<TextView, TextView>>()
 
@@ -81,14 +80,6 @@ class FoodMarketActivity : BaseActivity(), FoodMarketActivityContract.View {
         initDayOfWeekViews()
         presenter.attachView(this)
         presenter.displayMarket()
-    }
-
-    override fun injectMembers(hasActivitySubComponentBuilders: HasActivitySubComponentBuilders) {
-        (hasActivitySubComponentBuilders
-                .getActivityComponentBuilder(FoodMarketActivity::class.java) as FoodMarketActivityComponent.Builder)
-                .activityModule(FoodMarketActivityComponent.FoodMarketActivityModule(this, market))
-                .build()
-                .injectMembers(this)
     }
 
     override fun retrieveIntentBundle(extras: Bundle?) {
@@ -149,10 +140,10 @@ class FoodMarketActivity : BaseActivity(), FoodMarketActivityContract.View {
     override fun displayPhoto(url: String) {
         val placeholder = foodMarketPlaceholderProvider.getRandomPlaceHolder()
         GlideApp.with(this)
-                .load(url)
-                .placeholder(placeholder)
-                .error(placeholder)
-                .into(photoImageView)
+            .load(url)
+            .placeholder(placeholder)
+            .error(placeholder)
+            .into(photoImageView)
     }
 
     override fun displayPlaceholder() {

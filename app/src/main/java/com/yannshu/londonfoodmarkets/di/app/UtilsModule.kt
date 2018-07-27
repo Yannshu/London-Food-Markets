@@ -12,18 +12,17 @@ import javax.inject.Singleton
 
 @Module
 class UtilsModule {
-    @Provides
     @Singleton
-    fun provideMapsUtils(): MapsUtils = MapsUtils()
+    fun provideMapsUtils() = MapsUtils()
 
     @Provides
-    fun provideFoodMarketPlaceholder(): FoodMarketPlaceholderProvider = FoodMarketPlaceholderProvider()
+    fun provideFoodMarketPlaceholder() = FoodMarketPlaceholderProvider()
 
     @Provides
-    fun provideAdsWrapper(): AdsWrapper = AdsWrapper()
+    fun provideAdsWrapper() = AdsWrapper()
 
     @Provides
-    fun provideSharedPreferencesWrapper(context: Context): SharedPreferencesWrapper = SharedPreferencesWrapper(context)
+    fun provideSharedPreferencesWrapper(context: Context) = SharedPreferencesWrapper(context)
 
     @Provides
     fun provideMapCameraPositionSaver(sharedPreferencesWrapper: SharedPreferencesWrapper) = MapCameraPositionSaver(sharedPreferencesWrapper)

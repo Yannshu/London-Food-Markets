@@ -9,7 +9,6 @@ import dagger.Provides
 @Module
 class DataSourcesModule {
     @Provides
-    fun provideFoodMarketsDataSource(firestore: FirebaseFirestore, objectMapper: ObjectMapper): FoodMarketsDataSource {
-        return FoodMarketsDataSource(firestore, objectMapper)
-    }
+    fun provideFoodMarketsDataSource(firestore: FirebaseFirestore, objectMapper: ObjectMapper) =
+        FoodMarketsDataSource(firestore, objectMapper)
 }

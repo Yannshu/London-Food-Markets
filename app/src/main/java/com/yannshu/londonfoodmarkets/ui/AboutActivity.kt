@@ -10,7 +10,6 @@ import android.support.v7.widget.RecyclerView
 import android.view.MenuItem
 import com.yannshu.londonfoodmarkets.R
 import com.yannshu.londonfoodmarkets.data.model.Icon
-import com.yannshu.londonfoodmarkets.di.activity.HasActivitySubComponentBuilders
 import com.yannshu.londonfoodmarkets.extensions.safeStartActivityWithViewAction
 import com.yannshu.londonfoodmarkets.ui.adapters.IconsAdapter
 import com.yannshu.londonfoodmarkets.ui.base.BaseActivity
@@ -37,14 +36,6 @@ class AboutActivity : BaseActivity() {
         initToolbar()
         initAuthorLayout()
         initIconsRecyclerView()
-    }
-
-    override fun injectMembers(hasActivitySubComponentBuilders: HasActivitySubComponentBuilders) {
-        (hasActivitySubComponentBuilders
-                .getActivityComponentBuilder(AboutActivity::class.java) as AboutActivityComponent.Builder)
-                .activityModule(AboutActivityComponent.AboutActivityModule(this))
-                .build()
-                .injectMembers(this)
     }
 
     private fun initToolbar() {

@@ -29,7 +29,6 @@ import com.karumi.dexter.listener.single.BasePermissionListener
 import com.yannshu.londonfoodmarkets.R
 import com.yannshu.londonfoodmarkets.contracts.MainActivityContract
 import com.yannshu.londonfoodmarkets.data.model.FoodMarket
-import com.yannshu.londonfoodmarkets.di.activity.HasActivitySubComponentBuilders
 import com.yannshu.londonfoodmarkets.presenters.MainActivityPresenter
 import com.yannshu.londonfoodmarkets.ui.adapters.FoodMarketsAdapter
 import com.yannshu.londonfoodmarkets.ui.base.BaseActivity
@@ -77,14 +76,6 @@ class MainActivity : BaseActivity(), MainActivityContract.View {
         initMap()
     }
 
-    override fun injectMembers(hasActivitySubComponentBuilders: HasActivitySubComponentBuilders) {
-        (hasActivitySubComponentBuilders
-                .getActivityComponentBuilder(MainActivity::class.java) as MainActivityComponent.Builder)
-                .activityModule(MainActivityComponent.MainActivityModule(this))
-                .build()
-                .injectMembers(this)
-    }
-
     override fun onStart() {
         super.onStart()
         mapView.onStart()
@@ -101,7 +92,7 @@ class MainActivity : BaseActivity(), MainActivityContract.View {
         map?.let {
             val cameraPosition = it.cameraPosition
             presenter.saveMapCameraPosition(cameraPosition.target.latitude.toFloat(), cameraPosition.target.longitude.toFloat(),
-                    cameraPosition.zoom, cameraPosition.bearing, cameraPosition.tilt)
+                cameraPosition.zoom, cameraPosition.bearing, cameraPosition.tilt)
         }
     }
 
@@ -191,19 +182,19 @@ class MainActivity : BaseActivity(), MainActivityContract.View {
         }
 
         Dexter.withActivity(this)
-                .withPermission(Manifest.permission.ACCESS_FINE_LOCATION)
-                .withListener(permissionListener)
-                .check()
+            .withPermission(Manifest.permission.ACCESS_FINE_LOCATION)
+            .withListener(permissionListener)
+            .check()
     }
 
     private fun showLocationPermissionRationale(token: PermissionToken?) {
         AlertDialog.Builder(this)
-                .setTitle(R.string.permission_location_rationale_title)
-                .setMessage(R.string.permission_location_rationale_message)
-                .setOnDismissListener { _ -> token?.cancelPermissionRequest() }
-                .setNegativeButton(R.string.cancel, { _, _ -> token?.cancelPermissionRequest() })
-                .setPositiveButton(R.string.ok, { _, _ -> token?.continuePermissionRequest() })
-                .show()
+            .setTitle(R.string.permission_location_rationale_title)
+            .setMessage(R.string.permission_location_rationale_message)
+            .setOnDismissListener { _ -> token?.cancelPermissionRequest() }
+            .setNegativeButton(R.string.cancel, { _, _ -> token?.cancelPermissionRequest() })
+            .setPositiveButton(R.string.ok, { _, _ -> token?.continuePermissionRequest() })
+            .show()
     }
 
     @SuppressLint("MissingPermission")
@@ -226,11 +217,11 @@ class MainActivity : BaseActivity(), MainActivityContract.View {
 
     override fun moveMapCenterTo(lat: Double, lng: Double, zoom: Float, bearing: Float, tilt: Float) {
         val cameraPosition = CameraPosition.Builder()
-                .target(LatLng(lat, lng))
-                .zoom(zoom)
-                .bearing(bearing)
-                .tilt(tilt)
-                .build()
+            .target(LatLng(lat, lng))
+            .zoom(zoom)
+            .bearing(bearing)
+            .tilt(tilt)
+            .build()
         map?.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
     }
 
@@ -240,9 +231,9 @@ class MainActivity : BaseActivity(), MainActivityContract.View {
         }
 
         val markerOptions = MarkerOptions()
-                .title(market.name)
-                .position(LatLng(market.coordinates!!.latitude, market.coordinates!!.longitude))
-                .icon(bitmapDescriptor)
+            .title(market.name)
+            .position(LatLng(market.coordinates!!.latitude, market.coordinates!!.longitude))
+            .icon(bitmapDescriptor)
         val marker = map?.addMarker(markerOptions)
         marker?.tag = market
     }

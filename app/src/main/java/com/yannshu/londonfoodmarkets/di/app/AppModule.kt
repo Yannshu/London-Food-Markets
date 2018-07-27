@@ -1,6 +1,5 @@
 package com.yannshu.londonfoodmarkets.di.app
 
-import android.app.Application
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
@@ -10,26 +9,27 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.module.SimpleModule
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.GeoPoint
+import com.yannshu.londonfoodmarkets.LondonFoodMarketsApplication
 import com.yannshu.londonfoodmarkets.config.GeoPointDeserializer
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
 
 @Module
-class AppModule(private val application: Application) {
+class AppModule {
 
     companion object {
         private const val SHARED_PREF_NAME = "app_shared_preferences"
     }
 
     @Provides
-    fun provideSharedPreferences(): SharedPreferences = application.getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE)
+    fun provideSharedPreferences(application: LondonFoodMarketsApplication): SharedPreferences = application.getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE)
 
     @Provides
-    fun provideAppContext(): Context = application.applicationContext
+    fun provideAppContext(application: LondonFoodMarketsApplication): Context = application.applicationContext
 
     @Provides
-    fun provideResources(): Resources = application.resources
+    fun provideResources(application: LondonFoodMarketsApplication): Resources = application.resources
 
     @Provides
     fun provideFirestore(): FirebaseFirestore = FirebaseFirestore.getInstance()
