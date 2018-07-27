@@ -3,7 +3,8 @@ package com.yannshu.londonfoodmarkets.di.app
 import dagger.Module
 import dagger.Provides
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
+import java.util.Locale
 import javax.inject.Named
 
 @Module
