@@ -1,37 +1,23 @@
 package com.yannshu.londonfoodmarkets.di.activity
 
-import android.app.Activity
 import com.yannshu.londonfoodmarkets.ui.AboutActivity
-import com.yannshu.londonfoodmarkets.ui.AboutActivityComponent
+import com.yannshu.londonfoodmarkets.ui.AboutActivityModule
 import com.yannshu.londonfoodmarkets.ui.FoodMarketActivity
-import com.yannshu.londonfoodmarkets.ui.FoodMarketActivityComponent
+import com.yannshu.londonfoodmarkets.ui.FoodMarketActivityModule
 import com.yannshu.londonfoodmarkets.ui.MainActivity
-import com.yannshu.londonfoodmarkets.ui.MainActivityComponent
-import dagger.Binds
+import com.yannshu.londonfoodmarkets.ui.MainActivityModule
 import dagger.Module
-import dagger.android.ActivityKey
-import dagger.android.AndroidInjector
-import dagger.multibindings.IntoMap
+import dagger.android.ContributesAndroidInjector
 
-@Module(subcomponents = [
-    MainActivityComponent::class,
-    FoodMarketActivityComponent::class,
-    AboutActivityComponent::class
-])
+@Module
 abstract class ActivityBindingModule {
 
-    @Binds
-    @IntoMap
-    @ActivityKey(MainActivity::class)
-    abstract fun mainActivityInjectorFactory(impl: MainActivityComponent.Builder): AndroidInjector.Factory<out Activity>
+    @ContributesAndroidInjector(modules = [MainActivityModule::class])
+    internal abstract fun mainActivity(): MainActivity
 
-    @Binds
-    @IntoMap
-    @ActivityKey(FoodMarketActivity::class)
-    abstract fun foodMarketActivityInjectorFactory(impl: FoodMarketActivityComponent.Builder): AndroidInjector.Factory<out Activity>
+    @ContributesAndroidInjector(modules = [FoodMarketActivityModule::class])
+    internal abstract fun foodMarketActivity(): FoodMarketActivity
 
-    @Binds
-    @IntoMap
-    @ActivityKey(AboutActivity::class)
-    abstract fun aboutActivityInjectorFactory(impl: AboutActivityComponent.Builder): AndroidInjector.Factory<out Activity>
+    @ContributesAndroidInjector(modules = [AboutActivityModule::class])
+    internal abstract fun aboutActivity(): AboutActivity
 }
