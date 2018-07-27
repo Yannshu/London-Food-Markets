@@ -2,21 +2,17 @@ package com.yannshu.londonfoodmarkets
 
 import android.app.Activity
 import android.app.Application
-import com.yannshu.londonfoodmarkets.di.activity.ActivityComponentBuilder
-import com.yannshu.londonfoodmarkets.di.activity.HasActivitySubComponentBuilders
-import com.yannshu.londonfoodmarkets.di.app.AppComponent
-import com.yannshu.londonfoodmarkets.di.app.AppModule
 import com.yannshu.londonfoodmarkets.di.app.DaggerAppComponent
+import dagger.android.AndroidInjector
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.HasActivityInjector
 import timber.log.Timber
 import javax.inject.Inject
-import javax.inject.Provider
 
-class LondonFoodMarketsApplication : Application(), HasActivitySubComponentBuilders {
+class LondonFoodMarketsApplication : Application(), HasActivityInjector {
 
     @Inject
-    lateinit var mActivityComponentBuilders: Map<Class<out Activity>, @JvmSuppressWildcards Provider<ActivityComponentBuilder<*, *>>>
-
-    lateinit var mAppComponent: AppComponent
+    lateinit var dispatchingActivityInjector: DispatchingAndroidInjector<Activity>
 
     override fun onCreate() {
         super.onCreate()
@@ -27,13 +23,11 @@ class LondonFoodMarketsApplication : Application(), HasActivitySubComponentBuild
     }
 
     private fun initAppComponent() {
-        mAppComponent = DaggerAppComponent.builder()
-                .appModule(AppModule(this))
-                .build()
-        mAppComponent.inject(this)
+        DaggerAppComponent.builder()
+            .application(this)
+            .build()
+            .inject(this)
     }
 
-    override fun getActivityComponentBuilder(activityClass: Class<out Activity>): ActivityComponentBuilder<*, *>? {
-        return mActivityComponentBuilders[activityClass]?.get()
-    }
+    override fun activityInjector(): AndroidInjector<Activity> = dispatchingActivityInjector
 }

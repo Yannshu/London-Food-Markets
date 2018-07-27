@@ -2,27 +2,23 @@ package com.yannshu.londonfoodmarkets.ui
 
 import com.yannshu.londonfoodmarkets.R
 import com.yannshu.londonfoodmarkets.data.model.Icon
-import com.yannshu.londonfoodmarkets.di.activity.ActivityComponent
-import com.yannshu.londonfoodmarkets.di.activity.ActivityComponentBuilder
-import com.yannshu.londonfoodmarkets.di.activity.ActivityModule
-import com.yannshu.londonfoodmarkets.di.activity.ActivityScope
 import com.yannshu.londonfoodmarkets.ui.adapters.IconsAdapter
 import dagger.Module
 import dagger.Provides
 import dagger.Subcomponent
+import dagger.android.AndroidInjector
 
-@ActivityScope
 @Subcomponent(modules = [AboutActivityComponent.AboutActivityModule::class])
-interface AboutActivityComponent : ActivityComponent<AboutActivity> {
+interface AboutActivityComponent : AndroidInjector<AboutActivity> {
 
     @Subcomponent.Builder
-    interface Builder : ActivityComponentBuilder<AboutActivityModule, AboutActivityComponent>
+    abstract class Builder : AndroidInjector.Builder<AboutActivity>()
 
     @Module
-    class AboutActivityModule(activity: AboutActivity) : ActivityModule<AboutActivity>(activity) {
+    class AboutActivityModule {
 
         @Provides
-        fun provideIconsAdapter(icons: List<Icon>): IconsAdapter = IconsAdapter(activity, icons)
+        fun provideIconsAdapter(activity: AboutActivity, icons: List<Icon>): IconsAdapter = IconsAdapter(activity, icons)
 
         @Provides
         fun provideIcons(): List<Icon> {

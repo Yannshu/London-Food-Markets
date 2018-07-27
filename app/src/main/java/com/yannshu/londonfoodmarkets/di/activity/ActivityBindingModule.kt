@@ -1,5 +1,6 @@
 package com.yannshu.londonfoodmarkets.di.activity
 
+import android.app.Activity
 import com.yannshu.londonfoodmarkets.ui.AboutActivity
 import com.yannshu.londonfoodmarkets.ui.AboutActivityComponent
 import com.yannshu.londonfoodmarkets.ui.FoodMarketActivity
@@ -8,6 +9,8 @@ import com.yannshu.londonfoodmarkets.ui.MainActivity
 import com.yannshu.londonfoodmarkets.ui.MainActivityComponent
 import dagger.Binds
 import dagger.Module
+import dagger.android.ActivityKey
+import dagger.android.AndroidInjector
 import dagger.multibindings.IntoMap
 
 @Module(subcomponents = [
@@ -20,15 +23,15 @@ abstract class ActivityBindingModule {
     @Binds
     @IntoMap
     @ActivityKey(MainActivity::class)
-    abstract fun mainActivityComponentBuilder(impl: MainActivityComponent.Builder): ActivityComponentBuilder<*, *>
+    abstract fun mainActivityInjectorFactory(impl: MainActivityComponent.Builder): AndroidInjector.Factory<out Activity>
 
     @Binds
     @IntoMap
     @ActivityKey(FoodMarketActivity::class)
-    abstract fun foodMarketActivityComponentBuilder(impl: FoodMarketActivityComponent.Builder): ActivityComponentBuilder<*, *>
+    abstract fun foodMarketActivityInjectorFactory(impl: FoodMarketActivityComponent.Builder): AndroidInjector.Factory<out Activity>
 
     @Binds
     @IntoMap
     @ActivityKey(AboutActivity::class)
-    abstract fun aboutActivityComponentBuilder(impl: AboutActivityComponent.Builder): ActivityComponentBuilder<*, *>
+    abstract fun aboutActivityInjectorFactory(impl: AboutActivityComponent.Builder): AndroidInjector.Factory<out Activity>
 }
