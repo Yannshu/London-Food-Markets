@@ -3,14 +3,13 @@ package com.yannshu.londonfoodmarkets.ui
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.support.v4.app.NavUtils
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.MenuItem
 import com.yannshu.londonfoodmarkets.R
 import com.yannshu.londonfoodmarkets.data.model.Icon
-import com.yannshu.londonfoodmarkets.extensions.safeStartActivityWithViewAction
+import com.yannshu.londonfoodmarkets.extensions.safeStartActivityWithViewActionAndErrorDisplay
 import com.yannshu.londonfoodmarkets.ui.adapters.IconsAdapter
 import com.yannshu.londonfoodmarkets.ui.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_about.authorLayout
@@ -54,22 +53,16 @@ class AboutActivity : BaseActivity() {
     }
 
     private fun initAuthorLayout() {
-        authorLayout.setOnClickListener { openBrowser(getString(R.string.author_website)) }
+        authorLayout.setOnClickListener { safeStartActivityWithViewActionAndErrorDisplay(getString(R.string.author_website), rootLayout) }
     }
 
     private fun initIconsRecyclerView() {
         iconsAdapter.listener = object : IconsAdapter.Listener {
             override fun onClick(icon: Icon) {
-                openBrowser(getString(icon.url))
+                safeStartActivityWithViewActionAndErrorDisplay(getString(icon.url), rootLayout)
             }
         }
         iconsRecyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         iconsRecyclerView.adapter = iconsAdapter
-    }
-
-    private fun openBrowser(url: String) {
-        if (!safeStartActivityWithViewAction(url)) {
-            Snackbar.make(rootLayout, R.string.install_browser, Snackbar.LENGTH_LONG).show()
-        }
     }
 }
