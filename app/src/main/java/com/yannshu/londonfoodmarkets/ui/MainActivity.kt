@@ -198,8 +198,8 @@ class MainActivity : BaseActivity(), MainActivityContract.View {
             .setTitle(R.string.permission_location_rationale_title)
             .setMessage(R.string.permission_location_rationale_message)
             .setOnDismissListener { _ -> token?.cancelPermissionRequest() }
-            .setNegativeButton(R.string.cancel, { _, _ -> token?.cancelPermissionRequest() })
-            .setPositiveButton(R.string.ok, { _, _ -> token?.continuePermissionRequest() })
+            .setNegativeButton(R.string.cancel) { _, _ -> token?.cancelPermissionRequest() }
+            .setPositiveButton(R.string.ok) { _, _ -> token?.continuePermissionRequest() }
             .show()
     }
 
