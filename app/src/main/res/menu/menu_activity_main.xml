@@ -9,6 +9,11 @@
         app:showAsAction="ifRoom" />
 
     <item
+        android:id="@+id/suggest_market"
+        android:title="@string/suggest_market"
+        app:showAsAction="never" />
+
+    <item
         android:id="@+id/about"
         android:title="@string/about"
         app:showAsAction="never" />

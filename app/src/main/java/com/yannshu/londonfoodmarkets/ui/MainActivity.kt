@@ -29,6 +29,7 @@ import com.karumi.dexter.listener.single.BasePermissionListener
 import com.yannshu.londonfoodmarkets.R
 import com.yannshu.londonfoodmarkets.contracts.MainActivityContract
 import com.yannshu.londonfoodmarkets.data.model.FoodMarket
+import com.yannshu.londonfoodmarkets.extensions.safeStartActivityWithViewActionAndErrorDisplay
 import com.yannshu.londonfoodmarkets.presenters.MainActivityPresenter
 import com.yannshu.londonfoodmarkets.ui.adapters.FoodMarketsAdapter
 import com.yannshu.londonfoodmarkets.ui.base.BaseActivity
@@ -37,6 +38,7 @@ import com.yannshu.londonfoodmarkets.utils.VectorDescriptorFactory
 import kotlinx.android.synthetic.main.activity_main.adView
 import kotlinx.android.synthetic.main.activity_main.foodMarketsRecyclerView
 import kotlinx.android.synthetic.main.activity_main.mapView
+import kotlinx.android.synthetic.main.activity_main.rootLayout
 import kotlinx.android.synthetic.main.activity_main.toolbar
 import javax.inject.Inject
 
@@ -131,13 +133,17 @@ class MainActivity : BaseActivity(), MainActivityContract.View {
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when (item?.itemId) {
+        return when (item?.itemId) {
+            R.id.suggest_market -> {
+                safeStartActivityWithViewActionAndErrorDisplay(getString(R.string.suggest_market_google_form), rootLayout)
+                true
+            }
             R.id.about -> {
                 openAboutActivity()
-                return true
+                true
             }
+            else -> super.onOptionsItemSelected(item)
         }
-        return super.onOptionsItemSelected(item)
     }
 
     private fun initToolbar() {
