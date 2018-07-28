@@ -7,18 +7,18 @@ import com.yannshu.londonfoodmarkets.utils.MapCameraPositionSaver
 import com.yannshu.londonfoodmarkets.utils.MapsUtils
 
 class MainActivityPresenter(private val foodMarketDataSource: FoodMarketsDataSource,
-                            private val mapsUtils: MapsUtils,
-                            private val mapCameraPositionSaver: MapCameraPositionSaver,
-                            private val today: String) :
-        BasePresenter<MainActivityContract.View>() {
+    private val mapsUtils: MapsUtils,
+    private val mapCameraPositionSaver: MapCameraPositionSaver,
+    private val today: String) :
+    BasePresenter<MainActivityContract.View>() {
 
     companion object {
-        private const val LONDON_LAT = 51.480000
-        private const val LONDON_LNG = -0.127758
-        private const val DEFAULT_ZOOM = 11.0f
+        internal const val LONDON_LAT = 51.480000
+        internal const val LONDON_LNG = -0.127758
+        internal const val DEFAULT_ZOOM = 11.0f
     }
 
-    private var foodMarkets: List<FoodMarket>? = null
+    internal var foodMarkets: List<FoodMarket>? = null
 
     private var userLat: Double = LONDON_LAT
 
@@ -53,17 +53,17 @@ class MainActivityPresenter(private val foodMarketDataSource: FoodMarketsDataSou
     fun positionMapCenter() {
         if (mapCameraPositionSaver.hasCameraPositionBeenSavedRecently()) {
             mvpView?.moveMapCenterTo(mapCameraPositionSaver.getLatitude().toDouble(), mapCameraPositionSaver.getLongitude().toDouble(),
-                    mapCameraPositionSaver.getZoom(), mapCameraPositionSaver.getBearing(), mapCameraPositionSaver.getTilt())
+                mapCameraPositionSaver.getZoom(), mapCameraPositionSaver.getBearing(), mapCameraPositionSaver.getTilt())
         } else {
             mvpView?.moveMapCenterTo(LONDON_LAT, LONDON_LNG, DEFAULT_ZOOM)
         }
     }
 
-    private fun displayFoodMarkets(foodMarkets: List<FoodMarket>?) {
+    internal fun displayFoodMarkets(foodMarkets: List<FoodMarket>?) {
         foodMarkets?.let {
-            it.forEach({ market: FoodMarket ->
+            it.forEach { market: FoodMarket ->
                 mvpView?.addMarket(market)
-            })
+            }
             mvpView?.displayFoodMarketsRecyclerView(it)
         }
     }
@@ -78,11 +78,10 @@ class MainActivityPresenter(private val foodMarketDataSource: FoodMarketsDataSou
         }
     }
 
-    private fun sortFoodMarketByDistanceTo(foodMarkets: List<FoodMarket>, latitude: Double, longitude: Double): List<FoodMarket> {
-        return ArrayList(foodMarkets.sortedWith(compareBy({
+    internal fun sortFoodMarketByDistanceTo(foodMarkets: List<FoodMarket>, latitude: Double, longitude: Double) =
+        ArrayList(foodMarkets.sortedWith(compareBy {
             mapsUtils.computeDistance(it.coordinates!!.latitude, it.coordinates!!.longitude, latitude, longitude)
-        })))
-    }
+        }))
 
     fun filterMarkets(openToday: Boolean) {
         mvpView?.clearMarkers()
