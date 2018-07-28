@@ -17,7 +17,7 @@ class Address() {
     var postcode: String? = null
 
     @ParcelConstructor
-    constructor(street: String?, city: String?, postcode: String?) : this() {
+    constructor(street: String? = null, city: String? = null, postcode: String? = null) : this() {
         this.street = street
         this.city = city
         this.postcode = postcode
