@@ -154,13 +154,11 @@ class FoodMarketActivity : BaseActivity(), FoodMarketActivityContract.View {
         addressTextView.text = address
     }
 
-    override fun getFormattedAddress(street: String, city: String, postcode: String): String {
-        return getString(R.string.address_format, street, city, postcode)
-    }
+    override fun getFormattedAddress(street: String, city: String, postcode: String): String =
+        getString(R.string.address_format, street, city, postcode)
 
-    override fun getUnknownAddress(): String {
-        return getString(R.string.address_unknown)
-    }
+    override fun getUnknownAddress(): String =
+        getString(R.string.address_unknown)
 
     override fun displayOpeningHoursForToday(openingHours: String) {
         todayHoursTextView.text = getString(R.string.opening_hours_today, openingHours)
@@ -180,17 +178,14 @@ class FoodMarketActivity : BaseActivity(), FoodMarketActivityContract.View {
         }
     }
 
-    override fun getFormattedOpeningHours(openingHour: String, closingHour: String): String {
-        return getString(R.string.opening_hours_format, openingHour, closingHour)
-    }
+    override fun getFormattedOpeningHours(openingHour: String, closingHour: String): String =
+        getString(R.string.opening_hours_format, openingHour, closingHour)
 
-    override fun getClosed(): String {
-        return getString(R.string.opening_hours_closed)
-    }
+    override fun getClosed(): String =
+        getString(R.string.opening_hours_closed)
 
-    override fun getUnknownOpeningHours(): String {
-        return getString(R.string.opening_hours_unknown)
-    }
+    override fun getUnknownOpeningHours(): String =
+        getString(R.string.opening_hours_unknown)
 
     override fun displayWebsite(url: String) {
         websiteLayout.visibility = View.VISIBLE

@@ -26,12 +26,12 @@ class FoodMarketActivityPresenter(private val market: FoodMarket, private val to
         displayCategories()
     }
 
-    private fun displayDescription() {
+    internal fun displayDescription() {
         val description = market.description ?: mvpView?.getUnknownDescription()
         description?.let { mvpView?.displayDescription(it) }
     }
 
-    private fun displayPhoto() {
+    internal fun displayPhoto() {
         val photos = market.photos
         if (photos != null && !photos.isEmpty()) {
             mvpView?.displayPhoto(photos[FoodMarket.FIRST_PHOTO_INDEX])
@@ -40,7 +40,7 @@ class FoodMarketActivityPresenter(private val market: FoodMarket, private val to
         }
     }
 
-    private fun displayAddress() {
+    internal fun displayAddress() {
         var formattedAddress: String? = null
         val address = market.address
         if (address != null) {
@@ -60,7 +60,7 @@ class FoodMarketActivityPresenter(private val market: FoodMarket, private val to
         }
     }
 
-    private fun displayOpeningHours() {
+    internal fun displayOpeningHours() {
         val openingTimes = market.openingTimes
 
         getOpeningTimesForDay(openingTimes, today)?.let {
@@ -75,7 +75,7 @@ class FoodMarketActivityPresenter(private val market: FoodMarket, private val to
         }
     }
 
-    private fun getOpeningTimesForDay(openingTimes: List<OpeningTime>?, day: String): String? {
+    internal fun getOpeningTimesForDay(openingTimes: List<OpeningTime>?, day: String): String? {
         return if (openingTimes != null) {
             val todayOpeningTimes = openingTimes.find { it.day.equals(day) }
             val openingHour = todayOpeningTimes?.openingHour
@@ -91,16 +91,16 @@ class FoodMarketActivityPresenter(private val market: FoodMarket, private val to
         }
     }
 
-    private fun displayWebsite() {
+    internal fun displayWebsite() {
         val website = market.website
-        if (website != null) {
+        if (website != null && website.isNotEmpty()) {
             mvpView?.displayWebsite(website)
         } else {
             mvpView?.hideWebsite()
         }
     }
 
-    private fun displayDetailsLayout() {
+    internal fun displayDetailsLayout() {
         val size = market.size
         val categories = market.categories
 
@@ -111,7 +111,7 @@ class FoodMarketActivityPresenter(private val market: FoodMarket, private val to
         }
     }
 
-    private fun displaySize() {
+    internal fun displaySize() {
         val size = market.size
 
         if (size > 0) {
@@ -127,7 +127,7 @@ class FoodMarketActivityPresenter(private val market: FoodMarket, private val to
         }
     }
 
-    private fun displayCategories() {
+    internal fun displayCategories() {
         mvpView?.hideFarmersStalls()
         mvpView?.hideStreetFoodStands()
 
