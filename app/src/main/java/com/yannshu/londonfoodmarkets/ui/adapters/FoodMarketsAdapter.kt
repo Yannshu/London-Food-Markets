@@ -30,9 +30,7 @@ class FoodMarketsAdapter(private val context: Context, private val foodMarketPla
         holder.bind(foodMarkets!![position], listener)
     }
 
-    override fun getItemCount(): Int {
-        return foodMarkets?.size ?: 0
-    }
+    override fun getItemCount() = foodMarkets?.size ?: 0
 
     class FoodMarketViewHolder(private val context: Context, private val foodMarketPlaceholderProvider: FoodMarketPlaceholderProvider, view: View) :
             RecyclerView.ViewHolder(view) {
