@@ -1,14 +1,13 @@
 language: android
 android:
   components:
-    - android-27
-    - build-tools-27.0.3
-
+  - android-27
+  - build-tools-27.0.3
 env:
   global:
-   # install timeout in minutes (2 minutes by default)
-    - ADB_INSTALL_TIMEOUT=8
-
-# Run assemble and unit tests
+  - ADB_INSTALL_TIMEOUT=8
+before_install:
+  - openssl aes-256-cbc -K $encrypted_e3d572028762_key -iv $encrypted_e3d572028762_iv
+    -in app/google-services.json.enc -out app/google-services.json -d
 script:
-  - ./gradlew clean assembleDebug testDebug
+  - "./gradlew clean assembleDebug testDebug"
