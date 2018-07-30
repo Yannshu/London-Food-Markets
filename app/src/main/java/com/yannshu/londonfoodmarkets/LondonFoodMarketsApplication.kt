@@ -1,7 +1,7 @@
 package com.yannshu.londonfoodmarkets
 
 import android.app.Activity
-import android.app.Application
+import android.support.multidex.MultiDexApplication
 import com.yannshu.londonfoodmarkets.di.app.DaggerAppComponent
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
@@ -9,7 +9,7 @@ import dagger.android.HasActivityInjector
 import timber.log.Timber
 import javax.inject.Inject
 
-class LondonFoodMarketsApplication : Application(), HasActivityInjector {
+class LondonFoodMarketsApplication : MultiDexApplication(), HasActivityInjector {
 
     @Inject
     lateinit var dispatchingActivityInjector: DispatchingAndroidInjector<Activity>

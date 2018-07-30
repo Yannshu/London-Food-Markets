@@ -14,6 +14,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
 
         buildConfigField 'String', 'google_admob_app_id', "$google_admob_app_id"
     }
@@ -58,6 +59,7 @@ dependencies {
     implementation "com.android.support:design:$android_support_version"
     implementation "com.android.support:cardview-v7:$android_support_version"
     implementation "com.android.support:customtabs:$android_support_version"
+    implementation 'com.android.support:multidex:1.0.3'
 
     implementation 'com.jakewharton.timber:timber:4.7.0'
 

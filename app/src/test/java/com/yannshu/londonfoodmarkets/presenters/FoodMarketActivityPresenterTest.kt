@@ -11,8 +11,8 @@ import com.yannshu.londonfoodmarkets.data.model.Address
 import com.yannshu.londonfoodmarkets.data.model.FoodMarket
 import com.yannshu.londonfoodmarkets.data.model.OpeningTime
 import com.yannshu.londonfoodmarkets.utils.TimeConstants
-import junit.framework.Assert
 import org.junit.After
+import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 
