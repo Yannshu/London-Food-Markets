@@ -33,7 +33,8 @@ android {
             resValue 'string', 'google_maps_api_key', "$google_maps_api_key"
             resValue 'string', 'google_admob_ad_maps_id', "$google_admob_ad_maps_id"
 
-            minifyEnabled false
+            shrinkResources true
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
