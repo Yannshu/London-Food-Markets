@@ -35,6 +35,11 @@ import com.yannshu.londonfoodmarkets.ui.adapters.FoodMarketsAdapter
 import com.yannshu.londonfoodmarkets.ui.base.BaseActivity
 import com.yannshu.londonfoodmarkets.utils.AdsWrapper
 import com.yannshu.londonfoodmarkets.utils.VectorDescriptorFactory
+import com.yannshu.londonfoodmarkets.utils.analytics.AnalyticsEvent.ABOUT_VIEWED
+import com.yannshu.londonfoodmarkets.utils.analytics.AnalyticsEvent.ARG_NAME
+import com.yannshu.londonfoodmarkets.utils.analytics.AnalyticsEvent.MARKET_VIEWED
+import com.yannshu.londonfoodmarkets.utils.analytics.AnalyticsEvent.SUGGEST_MISSING_MARKET_VIEWED
+import com.yannshu.londonfoodmarkets.utils.analytics.AnalyticsWrapper
 import kotlinx.android.synthetic.main.activity_main.adView
 import kotlinx.android.synthetic.main.activity_main.foodMarketsRecyclerView
 import kotlinx.android.synthetic.main.activity_main.mapView
@@ -135,7 +140,7 @@ class MainActivity : BaseActivity(), MainActivityContract.View {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         return when (item?.itemId) {
             R.id.suggest_market -> {
-                safeStartActivityWithViewActionAndErrorDisplay(getString(R.string.suggest_market_google_form), rootLayout)
+                openSuggestMissingMarket()
                 true
             }
             R.id.about -> {
@@ -277,11 +282,21 @@ class MainActivity : BaseActivity(), MainActivityContract.View {
     private fun onFoodMarketClick(foodMarket: FoodMarket) {
         val intent = FoodMarketActivity.getStartingIntent(this, foodMarket)
         startActivity(intent)
+
+        AnalyticsWrapper.logEvent(this, MARKET_VIEWED, Bundle().apply { putString(ARG_NAME, foodMarket.name) })
+    }
+
+    private fun openSuggestMissingMarket() {
+        safeStartActivityWithViewActionAndErrorDisplay(getString(R.string.suggest_market_google_form), rootLayout)
+
+        AnalyticsWrapper.logEvent(this, SUGGEST_MISSING_MARKET_VIEWED)
     }
 
     private fun openAboutActivity() {
         val intent = AboutActivity.getStartingIntent(this)
         startActivity(intent)
+
+        AnalyticsWrapper.logEvent(this, ABOUT_VIEWED)
     }
 
     private fun initAds() {
