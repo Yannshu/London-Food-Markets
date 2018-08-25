@@ -43,11 +43,11 @@ android {
 ext {
     dagger_version = '2.16'
     android_support_version = '27.1.1'
-    firebase_version = '16.0.0'
+    firebase_version = '17.1.0'
     jackson_version = '2.7.2'
     google_play_services_version = '15.0.1'
     parceler_version = '1.1.9'
-    glide_version = '4.6.1'
+    glide_version = '4.7.1'
     dexter_version = '4.2.0'
     maps_utils_version = '0.5'
     expandable_layout_version = '2.9.2'
