@@ -19,3 +19,29 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+# Jackson
+-keepattributes *Annotation*,EnclosingMethod,Signature
+-keepnames class com.fasterxml.jackson.** {
+*;
+}
+-keepnames interface com.fasterxml.jackson.** {
+    *;
+}
+-dontwarn com.fasterxml.jackson.databind.**
+-keep class org.codehaus.** { *; }
+
+# Models
+-keep class com.yannshu.londonfoodmarkets.data.model.** { *; }
+-keep class com.google.firebase.firestore.GeoPoint { *; }
+-keep class com.yannshu.londonfoodmarkets.config.GeoPointDeserializer { *; }
+-keep class kotlin.Metadata { *; }
+
+# Glide
+-keep public class * implements com.bumptech.glide.module.GlideModule
+-keep public class * extends com.bumptech.glide.module.AppGlideModule
+-keep public enum com.bumptech.glide.load.ImageHeaderParser$** {
+  **[] $VALUES;
+  public *;
+}
+-dontwarn com.bumptech.glide.load.resource.bitmap.VideoDecoder

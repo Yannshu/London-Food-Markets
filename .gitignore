@@ -12,6 +12,7 @@
 bin/
 gen/
 out/
+app/release
 
 # Gradle files
 .gradle/
@@ -52,6 +53,7 @@ captures/
 # Google Services (e.g. APIs or Firebase)
 google-services.json
 config/secrets.gradle
+config/keystore.properties
 
 # Freeline
 freeline.py
