@@ -31,6 +31,12 @@
 -dontwarn com.fasterxml.jackson.databind.**
 -keep class org.codehaus.** { *; }
 
+# Models
+-keep class com.yannshu.londonfoodmarkets.data.model.** { *; }
+-keep class com.google.firebase.firestore.GeoPoint { *; }
+-keep class com.yannshu.londonfoodmarkets.config.GeoPointDeserializer { *; }
+-keep class kotlin.Metadata { *; }
+
 # Glide
 -keep public class * implements com.bumptech.glide.module.GlideModule
 -keep public class * extends com.bumptech.glide.module.AppGlideModule
