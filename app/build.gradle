@@ -5,6 +5,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'io.fabric'
+apply plugin: 'com.google.firebase.firebase-perf'
 
 android {
     compileSdkVersion 27
@@ -82,6 +83,7 @@ dependencies {
     kapt "org.parceler:parceler:$parceler_version"
 
     implementation "com.google.firebase:firebase-firestore:$firebase_version"
+    implementation 'com.google.firebase:firebase-perf:16.1.0'
     implementation "com.google.android.gms:play-services-maps:$google_play_services_version"
     implementation "com.google.android.gms:play-services-location:$google_play_services_version"
     implementation "com.google.android.gms:play-services-ads:$google_play_services_version"

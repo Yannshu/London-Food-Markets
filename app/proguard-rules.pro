@@ -45,3 +45,8 @@
   public *;
 }
 -dontwarn com.bumptech.glide.load.resource.bitmap.VideoDecoder
+
+# Crashlytics
+-keepattributes *Annotation*
+-keepattributes SourceFile,LineNumberTable
+-keep public class * extends java.lang.Exception
