@@ -1,11 +1,11 @@
 apply plugin: 'com.android.application'
-apply from: '../config/quality.gradle'
-apply from: '../config/secrets.gradle'
+apply from: 'quality.gradle'
+apply from: 'secrets.gradle'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'io.fabric'
 apply plugin: 'com.google.firebase.firebase-perf'
+apply plugin: 'io.fabric'
 
 android {
     compileSdkVersion 27
@@ -19,6 +19,7 @@ android {
         multiDexEnabled true
 
         buildConfigField 'String', 'google_admob_app_id', "$google_admob_app_id"
+        manifestPlaceholders = [fabric_api_key:"$fabric_api_key"]
     }
     buildTypes {
 
@@ -100,7 +101,9 @@ dependencies {
 
     implementation "net.cachapa.expandablelayout:expandablelayout:$expandable_layout_version"
 
-    implementation "com.crashlytics.sdk.android:crashlytics:$crashlytics_version"
+    implementation("com.crashlytics.sdk.android:crashlytics:$crashlytics_version") {
+        transitive = true;
+    }
 
     testImplementation "junit:junit:$junit_version"
     testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$mockito_kotlin_version"
