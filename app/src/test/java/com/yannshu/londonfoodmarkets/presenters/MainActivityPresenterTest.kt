@@ -112,7 +112,7 @@ class MainActivityPresenterTest : BasePresenterTest<MainActivityContract.View, M
     fun displayFoodMarkets() {
         val foodMarkets = createFakeFoodMarketsWithData()
         presenter.displayFoodMarkets(foodMarkets)
-        verify(view, times(DEFAULT_FOOD_MARKET_LIST_SIZE)).addMarket(any())
+        verify(view, times(DEFAULT_FOOD_MARKET_LIST_SIZE)).addMarket(any(), any())
         verify(view).displayFoodMarketsRecyclerView(foodMarkets)
         verifyNoMoreInteractions(view)
     }
@@ -142,7 +142,7 @@ class MainActivityPresenterTest : BasePresenterTest<MainActivityContract.View, M
         presenter.filterMarkets(true)
         verify(view).clearMarkers()
         argumentCaptor<FoodMarket> {
-            verify(view).addMarket(capture())
+            verify(view).addMarket(capture(), any())
             Assert.assertEquals(FILTERED_FOOD_MARKET_LIST_SIZE, allValues.size)
             Assert.assertEquals(FOOD_MARKET_0_NAME, firstValue.name)
         }
@@ -155,7 +155,7 @@ class MainActivityPresenterTest : BasePresenterTest<MainActivityContract.View, M
         presenter.foodMarkets = createFakeFoodMarketsWithData()
         presenter.filterMarkets(false)
         verify(view).clearMarkers()
-        verify(view, times(DEFAULT_FOOD_MARKET_LIST_SIZE)).addMarket(any())
+        verify(view, times(DEFAULT_FOOD_MARKET_LIST_SIZE)).addMarket(any(), any())
         verify(view).displayFoodMarketsRecyclerView(any())
         verifyNoMoreInteractions(view)
     }

@@ -23,7 +23,7 @@
 
     <string name="about">About</string>
     <string name="author">Created by Yann Viens</string>
-    <string name="author_website">http://yannshu.com</string>
+    <string name="author_website">https://yannshu.com</string>
     <string name="data_origin">Markets information come from the markets\' websites &amp; from Google searches. It may change according to the time of the year and bank holidays.</string>
     <string name="icons_credits">Credits: Icons from the Noun Project:</string>
 
@@ -50,6 +50,12 @@
 
     <string name="credit_icon_size_description">sizes by Arthur Shlain</string>
     <string name="credit_icon_size_url">https://thenounproject.com/icon/844736/</string>
+
+    <string name="credit_icon_farmer_description">Farmer by Ben Davis</string>
+    <string name="credit_icon_farmer_url">https://thenounproject.com/icon/651226/</string>
+
+    <string name="credit_icon_burger_description">Burger by Kaylen Yul Lee</string>
+    <string name="credit_icon_burger_url">https://thenounproject.com/icon/1896767/</string>
 
     <string name="credit_icon_big_ben_description">Big Ben from Smashicon</string>
     <string name="credit_icon_big_ben_url">https://www.flaticon.com/free-icon/big-ben_226818</string>
