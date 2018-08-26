@@ -5,9 +5,11 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.support.annotation.DrawableRes
 import android.support.v7.app.AlertDialog
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.SparseArray
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -68,7 +70,7 @@ class MainActivity : BaseActivity(), MainActivityContract.View {
 
     private var locationPermissionGranted = false
 
-    private var bitmapDescriptor: BitmapDescriptor? = null
+    private val bitmapDescriptors: SparseArray<BitmapDescriptor> = SparseArray()
 
     private var openTodayCheckBox: CheckBox? = null
 
@@ -236,15 +238,17 @@ class MainActivity : BaseActivity(), MainActivityContract.View {
         map?.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
     }
 
-    override fun addMarket(market: FoodMarket) {
-        if (bitmapDescriptor == null) {
-            bitmapDescriptor = VectorDescriptorFactory.fromVector(this, R.drawable.ic_market_marker)
+    override fun addMarket(market: FoodMarket, @DrawableRes drawableRes: Int) {
+        var imageDescriptor = bitmapDescriptors.get(drawableRes)
+        if (imageDescriptor == null) {
+            imageDescriptor = VectorDescriptorFactory.fromVector(this, drawableRes)
+            bitmapDescriptors.put(drawableRes, imageDescriptor)
         }
 
         val markerOptions = MarkerOptions()
             .title(market.name)
             .position(LatLng(market.coordinates!!.latitude, market.coordinates!!.longitude))
-            .icon(bitmapDescriptor)
+            .icon(imageDescriptor)
         val marker = map?.addMarker(markerOptions)
         marker?.tag = market
     }

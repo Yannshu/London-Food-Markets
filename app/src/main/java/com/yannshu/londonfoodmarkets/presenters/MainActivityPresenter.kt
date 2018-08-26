@@ -1,5 +1,6 @@
 package com.yannshu.londonfoodmarkets.presenters
 
+import com.yannshu.londonfoodmarkets.R
 import com.yannshu.londonfoodmarkets.contracts.MainActivityContract
 import com.yannshu.londonfoodmarkets.data.FoodMarketsDataSource
 import com.yannshu.londonfoodmarkets.data.model.FoodMarket
@@ -62,7 +63,24 @@ class MainActivityPresenter(private val foodMarketDataSource: FoodMarketsDataSou
     internal fun displayFoodMarkets(foodMarkets: List<FoodMarket>?) {
         foodMarkets?.let {
             it.forEach { market: FoodMarket ->
-                mvpView?.addMarket(market)
+                var marketAdded = false
+                market.categories?.let { categories ->
+                    if (categories.size == 1) {
+                        when (categories[0]) {
+                            FoodMarket.CATEGORY_FARMERS -> {
+                                mvpView?.addMarket(market, R.drawable.ic_farmer_marker)
+                                marketAdded = true
+                            }
+                            FoodMarket.CATEGORY_STREET_FOOD -> {
+                                mvpView?.addMarket(market, R.drawable.ic_street_food_marker)
+                                marketAdded = true
+                            }
+                        }
+                    }
+                }
+                if (!marketAdded) {
+                    mvpView?.addMarket(market, R.drawable.ic_market_marker)
+                }
             }
             mvpView?.displayFoodMarketsRecyclerView(it)
         }
