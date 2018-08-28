@@ -112,7 +112,9 @@ class MainActivityPresenterTest : BasePresenterTest<MainActivityContract.View, M
     fun displayFoodMarkets() {
         val foodMarkets = createFakeFoodMarketsWithData()
         presenter.displayFoodMarkets(foodMarkets)
-        verify(view, times(DEFAULT_FOOD_MARKET_LIST_SIZE)).addMarket(any(), any())
+        verify(view).clearMarkets()
+        verify(view, times(DEFAULT_FOOD_MARKET_LIST_SIZE)).addMarket(any())
+        verify(view).renderMarkets()
         verify(view).displayFoodMarketsRecyclerView(foodMarkets)
         verifyNoMoreInteractions(view)
     }
@@ -140,12 +142,13 @@ class MainActivityPresenterTest : BasePresenterTest<MainActivityContract.View, M
     fun filterMarketsOpenToday() {
         presenter.foodMarkets = createFakeFoodMarketsWithData()
         presenter.filterMarkets(true)
-        verify(view).clearMarkers()
+        verify(view).clearMarkets()
         argumentCaptor<FoodMarket> {
-            verify(view).addMarket(capture(), any())
+            verify(view).addMarket(capture())
             Assert.assertEquals(FILTERED_FOOD_MARKET_LIST_SIZE, allValues.size)
             Assert.assertEquals(FOOD_MARKET_0_NAME, firstValue.name)
         }
+        verify(view).renderMarkets()
         verify(view).displayFoodMarketsRecyclerView(any())
         verifyNoMoreInteractions(view)
     }
@@ -154,8 +157,9 @@ class MainActivityPresenterTest : BasePresenterTest<MainActivityContract.View, M
     fun filterMarketsNotOpenToday() {
         presenter.foodMarkets = createFakeFoodMarketsWithData()
         presenter.filterMarkets(false)
-        verify(view).clearMarkers()
-        verify(view, times(DEFAULT_FOOD_MARKET_LIST_SIZE)).addMarket(any(), any())
+        verify(view).clearMarkets()
+        verify(view, times(DEFAULT_FOOD_MARKET_LIST_SIZE)).addMarket(any())
+        verify(view).renderMarkets()
         verify(view).displayFoodMarketsRecyclerView(any())
         verifyNoMoreInteractions(view)
     }

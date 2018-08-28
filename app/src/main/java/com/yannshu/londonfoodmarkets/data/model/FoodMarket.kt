@@ -1,7 +1,9 @@
 package com.yannshu.londonfoodmarkets.data.model
 
+import android.support.annotation.DrawableRes
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.google.firebase.firestore.GeoPoint
+import com.yannshu.londonfoodmarkets.R
 import com.yannshu.londonfoodmarkets.config.GeoPointParcelConverter
 import org.parceler.Parcel
 import org.parceler.ParcelClass
@@ -46,6 +48,9 @@ open class FoodMarket() {
 
     @JsonProperty("size")
     var size: Int = 0
+
+    @DrawableRes
+    var drawableRes: Int = R.drawable.ic_market_marker
 
     @ParcelConstructor
     constructor(name: String?, address: Address?, categories: List<String>?, coordinates: GeoPoint?, description: String?, openingTimes: List<OpeningTime>?, website: String?, photos: List<String>?, size: Int) : this() {
