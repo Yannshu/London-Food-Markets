@@ -107,7 +107,7 @@ dependencies {
         transitive = true;
     }
 
-    compile "com.google.maps.android:android-maps-utils:$maps_utils_version"
+    implementation "com.google.maps.android:android-maps-utils:$maps_utils_version"
 
     testImplementation "junit:junit:$junit_version"
     testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$mockito_kotlin_version"
