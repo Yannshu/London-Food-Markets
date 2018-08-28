@@ -18,7 +18,6 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.Marker
 import com.google.maps.android.clustering.ClusterManager
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.PermissionToken
@@ -164,12 +163,19 @@ class MainActivity : BaseActivity(), MainActivityContract.View {
         this.map = map
         val localClusterManager = ClusterManager<FoodMarketClusterItem>(this, map)
         localClusterManager.renderer = MarketClusterRenderer(this, map, localClusterManager)
-        clusterManager = localClusterManager
-
-        map.setOnMarkerClickListener { marker: Marker ->
-            onFoodMarketClick(marker.tag as FoodMarket)
+        localClusterManager.setOnClusterClickListener {
+            map.animateCamera(CameraUpdateFactory.newLatLngZoom(map.cameraPosition.target, map.cameraPosition.zoom + 1.0f))
+            it.size > 0
+        }
+        localClusterManager.setOnClusterItemClickListener {
+            onFoodMarketClick(it.market)
             true
         }
+        map.setOnMarkerClickListener(localClusterManager)
+        map.setOnCameraIdleListener(localClusterManager)
+
+        clusterManager = localClusterManager
+
         presenter.positionMapCenter()
         presenter.loadData()
         if (locationPermissionGranted) {
