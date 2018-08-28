@@ -5,11 +5,9 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.support.annotation.DrawableRes
 import android.support.v7.app.AlertDialog
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.SparseArray
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -18,11 +16,9 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.Marker
-import com.google.android.gms.maps.model.MarkerOptions
+import com.google.maps.android.clustering.ClusterManager
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionGrantedResponse
@@ -31,12 +27,12 @@ import com.karumi.dexter.listener.single.BasePermissionListener
 import com.yannshu.londonfoodmarkets.R
 import com.yannshu.londonfoodmarkets.contracts.MainActivityContract
 import com.yannshu.londonfoodmarkets.data.model.FoodMarket
+import com.yannshu.londonfoodmarkets.data.model.FoodMarketClusterItem
 import com.yannshu.londonfoodmarkets.extensions.safeStartActivityWithViewActionAndErrorDisplay
 import com.yannshu.londonfoodmarkets.presenters.MainActivityPresenter
 import com.yannshu.londonfoodmarkets.ui.adapters.FoodMarketsAdapter
 import com.yannshu.londonfoodmarkets.ui.base.BaseActivity
 import com.yannshu.londonfoodmarkets.utils.AdsWrapper
-import com.yannshu.londonfoodmarkets.utils.VectorDescriptorFactory
 import com.yannshu.londonfoodmarkets.utils.analytics.AnalyticsEvent.ABOUT_VIEWED
 import com.yannshu.londonfoodmarkets.utils.analytics.AnalyticsEvent.ARG_NAME
 import com.yannshu.londonfoodmarkets.utils.analytics.AnalyticsEvent.MARKET_VIEWED
@@ -70,9 +66,9 @@ class MainActivity : BaseActivity(), MainActivityContract.View {
 
     private var locationPermissionGranted = false
 
-    private val bitmapDescriptors: SparseArray<BitmapDescriptor> = SparseArray()
-
     private var openTodayCheckBox: CheckBox? = null
+
+    private var clusterManager: ClusterManager<FoodMarketClusterItem>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -165,11 +161,21 @@ class MainActivity : BaseActivity(), MainActivityContract.View {
 
     private fun onMapLoaded(map: GoogleMap) {
         this.map = map
-
-        map.setOnMarkerClickListener { marker: Marker ->
-            onFoodMarketClick(marker.tag as FoodMarket)
+        val localClusterManager = ClusterManager<FoodMarketClusterItem>(this, map)
+        localClusterManager.renderer = MarketClusterRenderer(this, map, localClusterManager)
+        localClusterManager.setOnClusterClickListener {
+            map.animateCamera(CameraUpdateFactory.newLatLngZoom(map.cameraPosition.target, map.cameraPosition.zoom + 1.0f))
+            it.size > 0
+        }
+        localClusterManager.setOnClusterItemClickListener {
+            onFoodMarketClick(it.market)
             true
         }
+        map.setOnMarkerClickListener(localClusterManager)
+        map.setOnCameraIdleListener(localClusterManager)
+
+        clusterManager = localClusterManager
+
         presenter.positionMapCenter()
         presenter.loadData()
         if (locationPermissionGranted) {
@@ -238,19 +244,16 @@ class MainActivity : BaseActivity(), MainActivityContract.View {
         map?.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
     }
 
-    override fun addMarket(market: FoodMarket, @DrawableRes drawableRes: Int) {
-        var imageDescriptor = bitmapDescriptors.get(drawableRes)
-        if (imageDescriptor == null) {
-            imageDescriptor = VectorDescriptorFactory.fromVector(this, drawableRes)
-            bitmapDescriptors.put(drawableRes, imageDescriptor)
-        }
+    override fun clearMarkets() {
+        clusterManager?.clearItems()
+    }
 
-        val markerOptions = MarkerOptions()
-            .title(market.name)
-            .position(LatLng(market.coordinates!!.latitude, market.coordinates!!.longitude))
-            .icon(imageDescriptor)
-        val marker = map?.addMarker(markerOptions)
-        marker?.tag = market
+    override fun addMarket(market: FoodMarket) {
+        clusterManager?.addItem(FoodMarketClusterItem(market))
+    }
+
+    override fun renderMarkets() {
+        clusterManager?.cluster()
     }
 
     private fun initFoodMarketsRecyclerView() {
@@ -277,10 +280,6 @@ class MainActivity : BaseActivity(), MainActivityContract.View {
 
     override fun setOpenTodayEnabled(enabled: Boolean) {
         openTodayCheckBox?.isEnabled = enabled
-    }
-
-    override fun clearMarkers() {
-        map?.clear()
     }
 
     private fun onFoodMarketClick(foodMarket: FoodMarket) {

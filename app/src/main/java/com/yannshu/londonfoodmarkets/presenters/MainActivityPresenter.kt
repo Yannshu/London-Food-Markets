@@ -62,26 +62,21 @@ class MainActivityPresenter(private val foodMarketDataSource: FoodMarketsDataSou
 
     internal fun displayFoodMarkets(foodMarkets: List<FoodMarket>?) {
         foodMarkets?.let {
+            mvpView?.clearMarkets()
             it.forEach { market: FoodMarket ->
-                var marketAdded = false
+
                 market.categories?.let { categories ->
                     if (categories.size == 1) {
-                        when (categories[0]) {
-                            FoodMarket.CATEGORY_FARMERS -> {
-                                mvpView?.addMarket(market, R.drawable.ic_farmer_marker)
-                                marketAdded = true
-                            }
-                            FoodMarket.CATEGORY_STREET_FOOD -> {
-                                mvpView?.addMarket(market, R.drawable.ic_street_food_marker)
-                                marketAdded = true
-                            }
+                        market.drawableRes = when (categories[0]) {
+                            FoodMarket.CATEGORY_FARMERS -> R.drawable.ic_farmer_marker
+                            FoodMarket.CATEGORY_STREET_FOOD -> R.drawable.ic_street_food_marker
+                            else -> R.drawable.ic_market_marker
                         }
                     }
                 }
-                if (!marketAdded) {
-                    mvpView?.addMarket(market, R.drawable.ic_market_marker)
-                }
+                mvpView?.addMarket(market)
             }
+            mvpView?.renderMarkets()
             mvpView?.displayFoodMarketsRecyclerView(it)
         }
     }
@@ -102,7 +97,6 @@ class MainActivityPresenter(private val foodMarketDataSource: FoodMarketsDataSou
         }))
 
     fun filterMarkets(openToday: Boolean) {
-        mvpView?.clearMarkers()
         val filteredFoodMarkets = if (openToday) {
             foodMarkets?.filter { it.openingTimes?.find { it.day == today } != null }
         } else {
