@@ -12,6 +12,7 @@
 bin/
 gen/
 out/
+app/release
 
 # Gradle files
 .gradle/
@@ -39,6 +40,9 @@ captures/
 .idea/gradle.xml
 .idea/dictionaries
 .idea/libraries
+.idea/caches/
+.idea/codeStyles/
+.idea/assetWizardSettings.xml
 
 # Keystore files
 *.jks
@@ -46,8 +50,12 @@ captures/
 # External native build folder generated in Android Studio 2.2 and later
 .externalNativeBuild
 
-# Google Services (e.g. APIs or Firebase)
+# Conf files (Google services, Firebase, Fabric...)
 google-services.json
+config/
+app/fabric.properties
+app/config.tar
+app/secrets.gradle
 
 # Freeline
 freeline.py

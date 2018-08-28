@@ -1,0 +1,67 @@
+<resources>
+    <string name="app_name">London Food Markets</string>
+    <string name="address_format">%1$s\n%2$s %3$s</string>
+    <string name="address_unknown">Unknown address</string>
+    <string name="opening_hours_format">%1$s - %2$s</string>
+    <string name="opening_hours_closed">Closed</string>
+    <string name="opening_hours_today">Today: %1$s</string>
+    <string name="opening_hours_unknown">Unknown opening hours</string>
+    <string name="description_unknown">Just another food market</string>
+
+    <string name="permission_location_rationale_title">Location permission</string>
+    <string name="permission_location_rationale_message">Location permission is needed to display your position on the map.</string>
+    <string name="cancel">Cancel</string>
+    <string name="ok">OK</string>
+    <string name="featuring">Featuring:</string>
+    <string name="farmers_stalls">Farmers stalls</string>
+    <string name="street_food_stands">Street food stands</string>
+    <string name="size_very_big">Over 100 traders, cafes and restaurants</string>
+    <string name="size_big">Between 50 and 100 traders, cafes and restaurants</string>
+    <string name="size_medium">Between 20 and 50 traders, cafes and restaurants</string>
+    <string name="size_small">Less than 20 traders, cafes and restaurants</string>
+    <string name="open_today">Open today</string>
+
+    <string name="about">About</string>
+    <string name="author">Created by Yann Viens</string>
+    <string name="author_website">https://yannshu.com</string>
+    <string name="data_origin">Markets information come from the markets\' websites &amp; from Google searches. It may change according to the time of the year and bank holidays.</string>
+    <string name="icons_credits">Credits: Icons from the Noun Project:</string>
+
+    <string name="credit_icon_store_location_description">store location by icon 54</string>
+    <string name="credit_icon_store_location_url">https://thenounproject.com/icon/1542155/</string>
+
+    <string name="credit_icon_cow_description">Cow by icon 54</string>
+    <string name="credit_icon_cow_url">https://thenounproject.com/icon/357493/</string>
+
+    <string name="credit_icon_hot_dog_description">Hot Dog by icon 54</string>
+    <string name="credit_icon_hot_dog_url">https://thenounproject.com/icon/222423/</string>
+
+    <string name="credit_icon_fishes_description">seafood by Made</string>
+    <string name="credit_icon_fishes_url">https://thenounproject.com/icon/1530738/</string>
+
+    <string name="credit_icon_sausages_description">Meat Market by Made by Made</string>
+    <string name="credit_icon_sausages_url">https://thenounproject.com/icon/1497302/</string>
+
+    <string name="credit_icon_stall_description">Farmers Market by Made by Made</string>
+    <string name="credit_icon_stall_url">https://thenounproject.com/icon/725160/</string>
+
+    <string name="credit_icon_vegetables_description">vegetables by Chanut is Industries</string>
+    <string name="credit_icon_vegetables_url">https://thenounproject.com/icon/1519764/</string>
+
+    <string name="credit_icon_size_description">sizes by Arthur Shlain</string>
+    <string name="credit_icon_size_url">https://thenounproject.com/icon/844736/</string>
+
+    <string name="credit_icon_farmer_description">Farmer by Ben Davis</string>
+    <string name="credit_icon_farmer_url">https://thenounproject.com/icon/651226/</string>
+
+    <string name="credit_icon_burger_description">Burger by Kaylen Yul Lee</string>
+    <string name="credit_icon_burger_url">https://thenounproject.com/icon/1896767/</string>
+
+    <string name="credit_icon_big_ben_description">Big Ben from Smashicon</string>
+    <string name="credit_icon_big_ben_url">https://www.flaticon.com/free-icon/big-ben_226818</string>
+
+    <string name="install_browser">Install a browser from your favorite app store to open this link.</string>
+    <string name="suggest_market">Suggest missing market</string>
+    <string name="suggest_market_google_form" translatable="false">https://goo.gl/forms/CF00Dh9S6RMgC2AZ2</string>
+
+</resources>
