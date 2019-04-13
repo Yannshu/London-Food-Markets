@@ -21,5 +21,6 @@
 
     <dimen name="separator_line_thickness">1dp</dimen>
     <dimen name="separator_line_vertical_spacing">10dp</dimen>
+    <dimen name="privacy_policy_vertical_spacing">10dp</dimen>
 
 </resources>

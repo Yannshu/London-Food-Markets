@@ -19,26 +19,27 @@
         android:layout_height="wrap_content"
         android:background="?attr/selectableItemBackground"
         android:orientation="vertical"
-        android:paddingBottom="@dimen/separator_line_vertical_spacing"
-        android:paddingEnd="@dimen/content_padding_horizontal"
+        android:paddingStart="@dimen/content_padding_horizontal"
         android:paddingLeft="@dimen/content_padding_horizontal"
+        android:paddingTop="@dimen/content_vertical_spacing"
+        android:paddingEnd="@dimen/content_padding_horizontal"
         android:paddingRight="@dimen/content_padding_horizontal"
-        android:paddingStart="@dimen/content_padding_horizontal">
+        android:paddingBottom="@dimen/content_vertical_spacing">
 
         <TextView
             style="@style/Title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/content_vertical_spacing"
             android:layout_marginTop="@dimen/content_vertical_spacing"
+            android:layout_marginBottom="@dimen/content_vertical_spacing"
             android:text="@string/author" />
 
         <TextView
             style="@style/Content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/content_vertical_spacing"
             android:layout_marginTop="@dimen/content_vertical_spacing"
+            android:layout_marginBottom="@dimen/content_vertical_spacing"
             android:text="@string/author_website" />
 
         <TextView
@@ -54,15 +55,56 @@
         android:layout_height="@dimen/separator_line_thickness"
         android:background="@android:color/darker_gray" />
 
+    <RelativeLayout
+        android:id="@+id/privacyPolicyLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/content_padding_horizontal"
+        android:paddingLeft="@dimen/content_padding_horizontal"
+        android:paddingTop="@dimen/privacy_policy_vertical_spacing"
+        android:paddingEnd="@dimen/content_padding_horizontal"
+        android:paddingRight="@dimen/content_padding_horizontal"
+        android:paddingBottom="@dimen/privacy_policy_vertical_spacing">
+
+        <TextView
+            style="@style/Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@+id/chevronRightImageView"
+            android:layout_toLeftOf="@+id/chevronRightImageView"
+            android:text="@string/privacy_policy" />
+
+        <ImageView
+            android:id="@+id/chevronRightImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_chevron_right" />
+
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/separator_line_thickness"
+        android:background="@android:color/darker_gray" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/separator_line_vertical_spacing"
+        android:layout_marginTop="@dimen/content_vertical_spacing"
         android:orientation="vertical"
-        android:paddingEnd="@dimen/content_padding_horizontal"
+        android:paddingStart="@dimen/content_padding_horizontal"
         android:paddingLeft="@dimen/content_padding_horizontal"
-        android:paddingRight="@dimen/content_padding_horizontal"
-        android:paddingStart="@dimen/content_padding_horizontal">
+        android:paddingEnd="@dimen/content_padding_horizontal"
+        android:paddingRight="@dimen/content_padding_horizontal">
 
         <TextView
             style="@style/Title"
